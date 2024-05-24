@@ -7,6 +7,7 @@ export const Sidebar = () => {
   return (
     <div className=" w-1/6 h-full mt-10">
       <Tabs
+        className="max-w-full w-full"
         aria-label="Options"
         color="primary"
         variant="light"
@@ -15,7 +16,7 @@ export const Sidebar = () => {
         <Tab
           key="home"
           title={
-            <div className="flex items-center space-x-2">
+            <div className="flex space-x-5 items-center">
               <Home />
               <span>Home</span>
             </div>
@@ -24,7 +25,7 @@ export const Sidebar = () => {
         <Tab
           key="liked_videos"
           title={
-            <div className="flex items-center space-x-2">
+            <div className="flex space-x-5 items-center">
               <ThumbsUp />
               <span>Liked videos</span>
             </div>
@@ -33,7 +34,7 @@ export const Sidebar = () => {
         <Tab
           key="subscriptions"
           title={
-            <div className="flex items-center space-x-2">
+            <div className="flex space-x-5 items-center">
               <Podcast />
               <span>Subscriptions</span>
             </div>
@@ -42,7 +43,7 @@ export const Sidebar = () => {
         <Tab
           key="history"
           title={
-            <div className="flex items-center space-x-2">
+            <div className="flex space-x-10 items-center">
               <History />
               <span>History</span>
             </div>
