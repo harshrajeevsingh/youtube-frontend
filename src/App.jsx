@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
 import WatchPage from "./components/WatchPage";
+import SignUp from "./pages/SignUp";
 
 if (
   localStorage.theme === "dark" ||
@@ -28,6 +29,10 @@ export default function App() {
           element: <WatchPage />,
         },
       ],
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
     },
   ]);
   return (

@@ -1,11 +1,13 @@
 import { Tabs, Tab } from "@nextui-org/react";
 import { Home, ThumbsUp, Podcast, History } from "lucide-react";
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 export const Sidebar = () => {
-  const [placement, setPlacement] = useState("start");
+  // const tabRef = useRef(null);
+  const [placement, setPlacement] = useState("bottom");
+
   return (
-    <div className=" w-1/6 h-full mt-10">
+    <div className=" lg:w-1/6 w-auto h-full mt-10">
       <Tabs
         className="max-w-full w-full"
         aria-label="Options"
