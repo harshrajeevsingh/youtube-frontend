@@ -8,10 +8,10 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <NextUIProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <NextUIProvider>
         <App />
-      </QueryClientProvider>
-    </NextUIProvider>
+      </NextUIProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

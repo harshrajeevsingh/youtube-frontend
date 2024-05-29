@@ -1,13 +1,24 @@
 import { Tabs, Tab } from "@nextui-org/react";
 import { Home, ThumbsUp, Podcast, History } from "lucide-react";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Sidebar = () => {
-  // const tabRef = useRef(null);
-  const [placement, setPlacement] = useState("bottom");
+  const [placement, setPlacement] = useState("start");
+  const updatePlacement = () => {
+    if (window.innerWidth < 1024) {
+      setPlacement("bottom");
+    } else {
+      setPlacement("start");
+    }
+  };
 
+  useEffect(() => {
+    updatePlacement(); // Set initial placement
+    window.addEventListener("resize", updatePlacement); // Listen for resize events
+    return () => window.removeEventListener("resize", updatePlacement); // Clean up on unmount
+  }, []);
   return (
-    <div className=" lg:w-1/6 w-auto h-full mt-10">
+    <div className=" lg:w-1/6 w-auto h-full">
       <Tabs
         className="max-w-full w-full"
         aria-label="Options"
@@ -18,7 +29,7 @@ export const Sidebar = () => {
         <Tab
           key="home"
           title={
-            <div className="flex space-x-5 items-center">
+            <div className="flex space-x-2 items-center">
               <Home />
               <span>Home</span>
             </div>
@@ -27,7 +38,7 @@ export const Sidebar = () => {
         <Tab
           key="liked_videos"
           title={
-            <div className="flex space-x-5 items-center">
+            <div className="flex space-x-2 items-center">
               <ThumbsUp />
               <span>Liked videos</span>
             </div>
@@ -36,7 +47,7 @@ export const Sidebar = () => {
         <Tab
           key="subscriptions"
           title={
-            <div className="flex space-x-5 items-center">
+            <div className="flex space-x-2 items-center">
               <Podcast />
               <span>Subscriptions</span>
             </div>
@@ -45,7 +56,7 @@ export const Sidebar = () => {
         <Tab
           key="history"
           title={
-            <div className="flex space-x-10 items-center">
+            <div className="flex space-x-2 items-center">
               <History />
               <span>History</span>
             </div>
