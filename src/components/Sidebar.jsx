@@ -29,8 +29,8 @@ export const Sidebar = () => {
         <Tab
           key="home"
           title={
-            <div className="flex space-x-2 items-center">
-              <Home />
+            <div className="flex space-x-2 items-center ">
+              <Home className="mr-5" />
               <span>Home</span>
             </div>
           }
@@ -39,7 +39,7 @@ export const Sidebar = () => {
           key="liked_videos"
           title={
             <div className="flex space-x-2 items-center">
-              <ThumbsUp />
+              <ThumbsUp className="mr-5" />
               <span>Liked videos</span>
             </div>
           }

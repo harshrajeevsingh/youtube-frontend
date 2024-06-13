@@ -56,7 +56,7 @@ const SignupForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-20 md:w-2/4 lg:w-1/4 w-full mx-20 "
+      className="mt-20 md:w-2/4 lg:w-1/4 w-full mx-20 flex flex-col"
     >
       {/* Div for the avatar & cover input */}
       <div className="mb-5 relative">
@@ -173,7 +173,7 @@ const SignupForm = () => {
       {signupMutation.isLoading && <p>Loading...</p>}
       {signupMutation.isError && <p>Error signing up. Please try again.</p>}
 
-      <Button color="primary" type="submit">
+      <Button color="primary" type="submit" className="mt-8">
         Submit
       </Button>
     </form>
