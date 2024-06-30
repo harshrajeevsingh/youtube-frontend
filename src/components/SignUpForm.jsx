@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import useUserStore from "../store/userSlice";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Camera } from "lucide-react";
 import { Button } from "@nextui-org/react";
+import axiosInstance from "../helpers/axios";
 
 const SignupForm = () => {
   const {
@@ -20,17 +20,39 @@ const SignupForm = () => {
 
   const signupMutation = useMutation({
     mutationFn: async (formData) => {
-      const { data } = await axios.post("/api/signup", formData);
-      return data;
+      try {
+        const { data } = await axiosInstance.post("/users/register", formData);
+        return data;
+      } catch (error) {
+        console.error("Error during signup:", error);
+        if (error.response) {
+          // Server responded with a status other than 200 range
+          throw new Error(`Error: ${error.response.data.error}`);
+        } else if (error.request) {
+          // Request was made but no response received
+          throw new Error("Network error. Please try again.");
+        } else {
+          // Something happened in setting up the request
+          throw new Error("Error signing up. Please try again.");
+        }
+      }
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       const loginData = {
         username: data.username,
         password: data.password,
       };
-      const loginResponse = axios.post("/api/login", loginData);
-      setUser(loginResponse.data.user);
-      queryClient.invalidateQueries("user");
+      try {
+        const { data: loginResponse } = await axiosInstance.post(
+          "/users/login",
+          loginData
+        );
+        setUser(loginResponse.user);
+        queryClient.invalidateQueries("user");
+      } catch (error) {
+        console.error("Error during login:", error);
+        throw new Error("Error logging in. Please try again.");
+      }
     },
   });
 

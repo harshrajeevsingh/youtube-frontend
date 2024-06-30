@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 
 export const Body = () => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row">
+    <div className="flex gap-10 flex-col-reverse lg:flex-row mt-3">
       <Sidebar />
       <Outlet />
     </div>
