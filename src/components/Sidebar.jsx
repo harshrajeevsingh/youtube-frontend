@@ -18,7 +18,7 @@ export const Sidebar = () => {
     return () => window.removeEventListener("resize", updatePlacement); // Clean up on unmount
   }, []);
   return (
-    <div className=" lg:w-1/6 w-auto h-full">
+    <div className=" md:w-auto min-w-max h-full">
       <Tabs
         className="max-w-full w-full"
         aria-label="Options"
@@ -29,36 +29,36 @@ export const Sidebar = () => {
         <Tab
           key="home"
           title={
-            <div className="flex space-x-2 items-center">
+            <div>
               <Home />
-              <span>Home</span>
+              {/* <span>Home</span> */}
             </div>
           }
         />
         <Tab
           key="liked_videos"
           title={
-            <div className="flex space-x-2 items-center">
+            <div>
               <ThumbsUp />
-              <span>Liked videos</span>
+              {/* <span>Liked videos</span> */}
             </div>
           }
         />
         <Tab
           key="subscriptions"
           title={
-            <div className="flex space-x-2 items-center">
+            <div>
               <Podcast />
-              <span>Subscriptions</span>
+              {/* <span>Subscriptions</span> */}
             </div>
           }
         />
         <Tab
           key="history"
           title={
-            <div className="flex space-x-2 items-center">
+            <div>
               <History />
-              <span>History</span>
+              {/* <span>History</span> */}
             </div>
           }
         />
