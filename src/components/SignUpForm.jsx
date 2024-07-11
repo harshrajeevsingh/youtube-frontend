@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Camera } from "lucide-react";
 import { Button } from "@nextui-org/react";
 import axiosInstance from "../helpers/axios";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   const {
@@ -14,45 +15,28 @@ const SignupForm = () => {
   } = useForm();
   const { setUser } = useUserStore();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [coverPreview, setCoverPreview] = useState(null);
 
   const signupMutation = useMutation({
     mutationFn: async (formData) => {
-      try {
-        const { data } = await axiosInstance.post("/users/register", formData);
-        return data;
-      } catch (error) {
-        console.error("Error during signup:", error);
-        if (error.response) {
-          // Server responded with a status other than 200 range
-          throw new Error(`Error: ${error.response.data.error}`);
-        } else if (error.request) {
-          // Request was made but no response received
-          throw new Error("Network error. Please try again.");
-        } else {
-          // Something happened in setting up the request
-          throw new Error("Error signing up. Please try again.");
-        }
-      }
+      const { data } = await axiosInstance.post("/users/register", formData);
+      return data;
     },
-    onSuccess: async (data) => {
-      const loginData = {
-        username: data.username,
-        password: data.password,
-      };
-      try {
-        const { data: loginResponse } = await axiosInstance.post(
-          "/users/login",
-          loginData
-        );
-        setUser(loginResponse.user);
-        queryClient.invalidateQueries("user");
-      } catch (error) {
-        console.error("Error during login:", error);
-        throw new Error("Error logging in. Please try again.");
-      }
+    onError: (error) => {
+      console.error("Error during signup", error);
+    },
+  });
+
+  const loginMutation = useMutation({
+    mutationFn: async (loginData) => {
+      const { data } = await axiosInstance.post("/users/login", loginData);
+      return data;
+    },
+    onError: (error) => {
+      console.error("Error during login", error);
     },
   });
 
@@ -63,11 +47,26 @@ const SignupForm = () => {
     formData.append("email", data.email);
     formData.append("password", data.password);
     formData.append("fullName", data.fullName);
-    if (data.coverImage) {
-      formData.append("coverImage", data.coverImage[0]);
+    if (data.coverImg) {
+      formData.append("coverImg", data.coverImg[0]);
     }
 
-    signupMutation.mutate(formData);
+    signupMutation.mutate(formData, {
+      onSuccess: async () => {
+        const loginData = {
+          email: data.email,
+          password: data.password,
+        };
+        try {
+          const loginResposne = await loginMutation.mutate(loginData);
+          setUser(loginResposne?.data?.user);
+          queryClient.invalidateQueries("user");
+          navigate("/terms&conditions");
+        } catch (error) {
+          console.error("Error during login:", error);
+        }
+      },
+    });
   };
 
   const handleFileChange = (e, setPreview) => {
@@ -100,7 +99,7 @@ const SignupForm = () => {
           </label>
           <input
             type="file"
-            {...register("coverImage")}
+            {...register("coverImg")}
             onChange={(e) => handleFileChange(e, setCoverPreview)}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             id="cover-upload-input"
@@ -194,6 +193,7 @@ const SignupForm = () => {
 
       {signupMutation.isLoading && <p>Loading...</p>}
       {signupMutation.isError && <p>Error signing up. Please try again.</p>}
+      {loginMutation.isError && <p>Error login. Please try again.</p>}
 
       <Button color="primary" type="submit" className="mt-8">
         Submit
