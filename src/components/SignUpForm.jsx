@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import useUserStore from "../store/userSlice";
+import { useUserStoreSelectors } from "../store/userSlice";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Camera } from "lucide-react";
 import { Button } from "@nextui-org/react";
 import axiosInstance from "../helpers/axios";
 import { useNavigate } from "react-router-dom";
+import { useLoginUser, useRegisterUser } from "../api/authApi";
 
 const SignupForm = () => {
   const {
@@ -13,13 +14,16 @@ const SignupForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { setUser } = useUserStore();
+  const setUser = useUserStoreSelectors.use.setUser();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [coverPreview, setCoverPreview] = useState(null);
 
+  const signupMutation = useRegisterUser();
+  const loginMutation = useLoginUser();
+  /*
   const signupMutation = useMutation({
     mutationFn: async (formData) => {
       const { data } = await axiosInstance.post("/users/register", formData);
@@ -39,7 +43,7 @@ const SignupForm = () => {
       console.error("Error during login", error);
     },
   });
-
+*/
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append("avatar", data.avatar[0]);
@@ -58,10 +62,10 @@ const SignupForm = () => {
           password: data.password,
         };
         try {
-          const loginResposne = await loginMutation.mutate(loginData);
-          setUser(loginResposne?.data?.user);
+          const loginResposne = loginMutation.mutate(loginData);
+          setUser(loginResposne?.user);
           queryClient.invalidateQueries("user");
-          navigate("/terms&conditions");
+          navigate("/");
         } catch (error) {
           console.error("Error during login:", error);
         }

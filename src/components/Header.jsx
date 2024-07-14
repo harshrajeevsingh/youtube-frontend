@@ -3,16 +3,18 @@ import {
   NavbarBrand,
   NavbarContent,
   Input,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  Avatar,
+  Button,
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { Search } from "lucide-react";
-
+import LogoutButton from "./ui/logoutbtn.jsx";
+import Login from "./ui/loginbtn.jsx";
+import UserDropDown from "./ui/userDropDown.jsx";
+import { useUserStoreSelectors } from "../store/userSlice.js";
+import { NavLink } from "react-router-dom";
 export default function Header() {
+  const user = useUserStoreSelectors.use.user();
+
   return (
     <Navbar isBordered maxWidth="full">
       <NavbarContent justify="start" className="md:px-10">
@@ -39,8 +41,18 @@ export default function Header() {
           />
         </div>
       </NavbarContent>
-
-      <NavbarContent justify="end" className="md:px-10">
+      {user ? (
+        <UserDropDown />
+      ) : (
+        <NavbarContent justify="end" className="md:px-10">
+          <NavLink to="/signup">
+            <Button className="bg-transparent border-1">Register</Button>
+          </NavLink>
+          <Login />
+          <LogoutButton />
+        </NavbarContent>
+      )}
+      {/* <NavbarContent justify="end" className="md:px-10">
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
@@ -67,7 +79,7 @@ export default function Header() {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-      </NavbarContent>
+      </NavbarContent> */}
     </Navbar>
   );
 }
