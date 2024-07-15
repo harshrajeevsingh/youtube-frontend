@@ -4,7 +4,6 @@ import { useUserStoreSelectors } from "../store/userSlice";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Camera } from "lucide-react";
 import { Button } from "@nextui-org/react";
-import axiosInstance from "../helpers/axios";
 import { useNavigate } from "react-router-dom";
 import { useLoginUser, useRegisterUser } from "../api/authApi";
 
@@ -23,27 +22,7 @@ const SignupForm = () => {
 
   const signupMutation = useRegisterUser();
   const loginMutation = useLoginUser();
-  /*
-  const signupMutation = useMutation({
-    mutationFn: async (formData) => {
-      const { data } = await axiosInstance.post("/users/register", formData);
-      return data;
-    },
-    onError: (error) => {
-      console.error("Error during signup", error);
-    },
-  });
 
-  const loginMutation = useMutation({
-    mutationFn: async (loginData) => {
-      const { data } = await axiosInstance.post("/users/login", loginData);
-      return data;
-    },
-    onError: (error) => {
-      console.error("Error during login", error);
-    },
-  });
-*/
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append("avatar", data.avatar[0]);
@@ -63,6 +42,7 @@ const SignupForm = () => {
         };
         try {
           const loginResposne = loginMutation.mutate(loginData);
+          console.log("Login Resposne", loginResposne);
           setUser(loginResposne?.user);
           queryClient.invalidateQueries("user");
           navigate("/");
