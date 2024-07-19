@@ -40,6 +40,7 @@ export default function Header() {
             type="search"
           />
         </div>
+        <LogoutButton /> {/* Will remove this, just for testing purpose */}
       </NavbarContent>
       {user ? (
         <UserDropDown />
