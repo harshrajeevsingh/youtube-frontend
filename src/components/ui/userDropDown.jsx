@@ -1,4 +1,3 @@
-import React from "react";
 import {
   NavbarContent,
   DropdownItem,
@@ -7,9 +6,16 @@ import {
   DropdownMenu,
   Avatar,
 } from "@nextui-org/react";
+
+import { useLogoutUser } from "../../api/authApi";
 import { useUserStoreSelectors } from "../../store/userSlice";
+
 const UserDropDown = () => {
   const user = useUserStoreSelectors.use.user();
+  const logoutMutation = useLogoutUser();
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
   return (
     <NavbarContent justify="end" className="md:px-10">
       <Dropdown placement="bottom-end">
@@ -18,11 +24,9 @@ const UserDropDown = () => {
             isBordered
             as="button"
             className="transition-transform"
-            color="secondary"
-            // name="Jason Hughes"
+            color="default"
             name={user.fullName}
-            size="sm"
-            // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            size="md"
             src={user.avatar.url}
           />
         </DropdownTrigger>
@@ -35,7 +39,12 @@ const UserDropDown = () => {
           <DropdownItem key="dashboard">Dashboard</DropdownItem>
           <DropdownItem key="settings">Settings</DropdownItem>
           <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-          <DropdownItem key="logout" color="danger">
+          <DropdownItem
+            key="logout"
+            color="danger"
+            onClick={handleLogout}
+            isReadOnly={logoutMutation.isPending}
+          >
             Log Out
           </DropdownItem>
         </DropdownMenu>

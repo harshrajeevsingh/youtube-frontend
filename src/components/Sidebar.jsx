@@ -30,7 +30,7 @@ export const Sidebar = () => {
         <Tab
           key="home"
           title={
-            <div className="flex text-base gap-3 w-36  ">
+            <div className="flex text-base gap-3 w-36 ">
               <Home />
               <span>Home</span>
             </div>

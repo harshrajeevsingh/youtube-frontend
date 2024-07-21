@@ -8,7 +8,7 @@ export const MainContainer = () => {
   const count = useCountSelectors.use.count();
   const increment = useCountSelectors.use.increment();
   const decrement = useCountSelectors.use.decrement();
-  /*
+
   useEffect(() => {
     axiosInstance
       .get("/healthcheck")
@@ -20,7 +20,7 @@ export const MainContainer = () => {
         console.error(error);
       });
   }, []);
-*/
+
   if (!data) {
     return (
       <div className=" flex-col bg-slate-100 dark:bg-gray-950 w-full pt-5">

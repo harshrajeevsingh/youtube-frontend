@@ -14,30 +14,30 @@ export default {
   darkMode: "class",
   plugins: [
     nextui({
-      // themes: {
-      //   light: {
-      //     colors: {
-      //       background: "#FFFFFF",
-      //       foreground: "#11181C",
-      //       primary: {
-      //         background: "#FF7E3A", // #0466c8
-      //         foreground: "#FFFFFF", // #112A46
-      //         DEFAULT: "#F5A524", // #F5A524
-      //       },
-      //     },
-      //   },
-      //   dark: {
-      //     colors: {
-      //       background: "#11181C",
-      //       foreground: "#FFFFFF",
-      //       primary: {
-      //         background: "#FF7E3A",
-      //         foreground: "#FFFFFF",
-      //         DEFAULT: "#FF7E3A",
-      //       },
-      //     },
-      //   },
-      // },
+      themes: {
+        light: {
+          colors: {
+            background: "#EDEDED",
+            foreground: "#0a0a0a",
+            primary: {
+              background: "#F1F1F1", // #0466c8
+              foreground: "#F1F1F1", // #112A46
+              DEFAULT: "#006FEE", // #F5A524
+            },
+          },
+        },
+        dark: {
+          colors: {
+            background: "#0a0a0a",
+            foreground: "#EDEDED",
+            primary: {
+              background: "#0F0F0F",
+              foreground: "#F1F1F1",
+              DEFAULT: "#006FEE", //#272727 #006FEE
+            },
+          },
+        },
+      },
     }),
   ],
 };

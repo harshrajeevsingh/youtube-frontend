@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Modal,
   ModalContent,
@@ -13,7 +12,6 @@ import {
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useLoginUser } from "../../api/authApi";
-import useUserStore from "../../store/userSlice";
 import { useUserStoreSelectors } from "../../store/userSlice";
 import MailIcon from "../icons/mailIcon";
 import LockIcon from "../icons/lockIcon";
@@ -36,16 +34,14 @@ export default function Login() {
 
     loginMutation.mutate(loginData, {
       onSuccess: (response) => {
-        console.log("Login response:", response);
         setUser(response?.data?.user);
-        console.log("Updated State:", useUserStore.getState());
         onOpenChange(false);
       },
     });
   };
   return (
     <>
-      <Button onPress={onOpen} color="primary">
+      <Button onPress={onOpen} color="primary" radius="full">
         Login
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
@@ -88,12 +84,28 @@ export default function Login() {
                     Forgot password?
                   </Link>
                 </div> */}
+                {loginMutation.isError ? (
+                  <p className="text-danger-500 pl-1">
+                    You entered invalid credentials
+                  </p>
+                ) : (
+                  ""
+                )}
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="flat"
+                  onPress={onClose}
+                  isDisabled={loginMutation.isPending}
+                >
                   Close
                 </Button>
-                <Button color="primary" type="submit">
+                <Button
+                  color="primary"
+                  type="submit"
+                  isLoading={loginMutation.isPending}
+                >
                   Sign in
                 </Button>
               </ModalFooter>

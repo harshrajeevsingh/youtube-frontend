@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useUserStoreSelectors } from "../store/userSlice";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Camera } from "lucide-react";
-import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Button } from "@nextui-org/react";
+
+import { useUserStoreSelectors } from "../store/userSlice";
+import { Camera } from "lucide-react";
 import { useLoginUser, useRegisterUser } from "../api/authApi";
 
 const SignupForm = () => {
@@ -23,6 +24,9 @@ const SignupForm = () => {
   const signupMutation = useRegisterUser();
   const loginMutation = useLoginUser();
 
+  {
+    /*On Submit fn with mutation*/
+  }
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append("avatar", data.avatar[0]);
