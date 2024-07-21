@@ -31,7 +31,8 @@ export default function Header() {
             classNames={{
               base: "w-full h-10 drop-shadow-lg",
               mainWrapper: "h-full",
-              input: "text-small",
+              input:
+                "text-small placeholder:text-slate-600 dark:placeholder:text-gray-400",
               inputWrapper:
                 "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20 ",
             }}
