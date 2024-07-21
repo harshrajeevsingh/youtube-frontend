@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import useUserStore from "../store/userSlice";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Camera } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { Button } from "@nextui-org/react";
-import axiosInstance from "../helpers/axios";
+
+import { useUserStoreSelectors } from "../store/userSlice";
+import { Camera } from "lucide-react";
+import { useLoginUser, useRegisterUser } from "../api/authApi";
 
 const SignupForm = () => {
   const {
@@ -12,50 +14,19 @@ const SignupForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { setUser } = useUserStore();
+  const setUser = useUserStoreSelectors.use.setUser();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [coverPreview, setCoverPreview] = useState(null);
 
-  const signupMutation = useMutation({
-    mutationFn: async (formData) => {
-      try {
-        const { data } = await axiosInstance.post("/users/register", formData);
-        return data;
-      } catch (error) {
-        console.error("Error during signup:", error);
-        if (error.response) {
-          // Server responded with a status other than 200 range
-          throw new Error(`Error: ${error.response.data.error}`);
-        } else if (error.request) {
-          // Request was made but no response received
-          throw new Error("Network error. Please try again.");
-        } else {
-          // Something happened in setting up the request
-          throw new Error("Error signing up. Please try again.");
-        }
-      }
-    },
-    onSuccess: async (data) => {
-      const loginData = {
-        username: data.username,
-        password: data.password,
-      };
-      try {
-        const { data: loginResponse } = await axiosInstance.post(
-          "/users/login",
-          loginData
-        );
-        setUser(loginResponse.user);
-        queryClient.invalidateQueries("user");
-      } catch (error) {
-        console.error("Error during login:", error);
-        throw new Error("Error logging in. Please try again.");
-      }
-    },
-  });
+  const signupMutation = useRegisterUser();
+  const loginMutation = useLoginUser();
 
+  {
+    /*On Submit fn with mutation*/
+  }
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append("avatar", data.avatar[0]);
@@ -63,11 +34,27 @@ const SignupForm = () => {
     formData.append("email", data.email);
     formData.append("password", data.password);
     formData.append("fullName", data.fullName);
-    if (data.coverImage) {
-      formData.append("coverImage", data.coverImage[0]);
+    if (data.coverImg) {
+      formData.append("coverImg", data.coverImg[0]);
     }
 
-    signupMutation.mutate(formData);
+    signupMutation.mutate(formData, {
+      onSuccess: async () => {
+        const loginData = {
+          email: data.email,
+          password: data.password,
+        };
+        try {
+          const loginResposne = loginMutation.mutate(loginData);
+          console.log("Login Resposne", loginResposne);
+          setUser(loginResposne?.user);
+          queryClient.invalidateQueries("user");
+          navigate("/");
+        } catch (error) {
+          console.error("Error during login:", error);
+        }
+      },
+    });
   };
 
   const handleFileChange = (e, setPreview) => {
@@ -83,7 +70,7 @@ const SignupForm = () => {
       {/* Div for the avatar & cover input */}
       <div className="mb-5 relative">
         {/* Cover Image */}
-        <div className="relative w-full h-36 rounded-lg overflow-hidden flex items-center justify-center bg-slate-950 cursor-pointer border-2 border-gray-300">
+        <div className="relative w-full h-36 rounded-lg overflow-hidden flex items-center justify-center dark:bg-slate-950 bg-white cursor-pointer border-2 border-gray-300">
           <label
             htmlFor="cover-upload-input"
             className="flex items-center justify-center w-full h-full"
@@ -100,7 +87,7 @@ const SignupForm = () => {
           </label>
           <input
             type="file"
-            {...register("coverImage")}
+            {...register("coverImg")}
             onChange={(e) => handleFileChange(e, setCoverPreview)}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             id="cover-upload-input"
@@ -108,10 +95,10 @@ const SignupForm = () => {
         </div>
 
         {/* Avatar image */}
-        <div className="absolute top-1/4  transform -translate-x-1/2 -translate-y-2/3 w-24 h-24 rounded-full overflow-hidden flex items-center justify-center bg-gray-200 cursor-pointer border-2 border-dashed border-gray-300 z-10">
+        <div className="absolute top-1/4  transform -translate-x-1/2 -translate-y-2/3 w-24 h-24 rounded-full overflow-hidden flex items-center justify-center dark:bg-slate-950 bg-white cursor-pointer border-2 border-gray-300 z-10">
           <label
             htmlFor="avatar-upload-input"
-            className="flex items-center justify-center w-full h-full bg-slate-950"
+            className="flex items-center justify-center w-full h-full"
           >
             {avatarPreview ? (
               <img
@@ -194,8 +181,14 @@ const SignupForm = () => {
 
       {signupMutation.isLoading && <p>Loading...</p>}
       {signupMutation.isError && <p>Error signing up. Please try again.</p>}
+      {loginMutation.isError && <p>Error login. Please try again.</p>}
 
-      <Button color="primary" type="submit" className="mt-8">
+      <Button
+        color="primary"
+        type="submit"
+        className="mt-8"
+        isLoading={signupMutation.isPending || loginMutation.isPending}
+      >
         Submit
       </Button>
     </form>
