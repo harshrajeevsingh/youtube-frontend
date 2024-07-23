@@ -41,7 +41,12 @@ export default function Login() {
   };
   return (
     <>
-      <Button onPress={onOpen} color="primary" radius="full">
+      <Button
+        onPress={onOpen}
+        color="primary"
+        radius="full"
+        className="min-w-10 md:min-w-20"
+      >
         Login
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">

@@ -23,7 +23,7 @@ export const MainContainer = () => {
 
   if (!data) {
     return (
-      <div className=" flex-col bg-slate-100 dark:bg-gray-800 min-h-svh md:min-h-full w-full pt-5">
+      <div className=" flex-col bg-slate-100 dark:bg-gray-800 min-h-svh md:min-h-full w-full pt-5 px-3">
         <button
           onClick={increment}
           className="p-2 bg-cyan-600 text-lg rounded-full"
@@ -68,7 +68,7 @@ export const MainContainer = () => {
     );
   }
   return (
-    <div className=" bg-slate-100 dark:bg-gray-950 min-h-svh">
+    <div className=" bg-slate-100 dark:bg-gray-950 min-h-svh px-3 pt-5">
       <span className="text-gray-700 dark:text-white">
         Message: {data.message}
       </span>
