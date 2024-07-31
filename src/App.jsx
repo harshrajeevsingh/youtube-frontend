@@ -15,28 +15,6 @@ if (
   document.documentElement.classList.remove("dark");
 }
 export default function App() {
-  /*
-  const appRouter = createBrowserRouter([
-    {
-      path: "/",
-      element: <Body />,
-      children: [
-        {
-          path: "/",
-          element: <MainContainer />,
-        },
-        {
-          path: "watch",
-          element: <WatchPage />,
-        },
-      ],
-    },
-    {
-      path: "/signup",
-      element: <SignUpPage />,
-    },
-  ]);
-  */
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -62,7 +40,6 @@ export default function App() {
       path: "/signup",
       element: <SignUpPage />,
     },
-    // Add more routes here where Header should not be present
   ]);
   return (
     <div>

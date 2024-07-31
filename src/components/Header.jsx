@@ -8,7 +8,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { Search } from "lucide-react";
 
-import { AcmeLogo } from "./AcmeLogo.jsx";
+import { Logo } from "./icons/logo.jsx";
 import Login from "./ui/loginbtn.jsx";
 import UserDropDown from "./ui/userDropDown.jsx";
 import { useUserStoreSelectors } from "../store/userSlice.js";
@@ -20,8 +20,8 @@ export default function Header() {
     <Navbar isBordered maxWidth="full" className="gap-1 md:gap-4">
       <NavbarContent justify="start" className="md:px-10">
         <NavbarBrand className="md:mr-4 grow-0 md:grow">
-          <AcmeLogo />
-          <p className="hidden sm:block font-bold text-inherit">ACME</p>
+          <Logo />
+          <p className="hidden sm:block font-bold text-inherit">STREAMIFY</p>
         </NavbarBrand>
       </NavbarContent>
 

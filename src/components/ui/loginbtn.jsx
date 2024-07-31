@@ -13,8 +13,8 @@ import {
 import { useForm } from "react-hook-form";
 import { useLoginUser } from "../../api/authApi";
 import { useUserStoreSelectors } from "../../store/userSlice";
-import MailIcon from "../icons/mailIcon";
-import LockIcon from "../icons/lockIcon";
+import { MailIcon } from "../icons/mailIcon";
+import { LockIcon } from "../icons/lockIcon";
 
 export default function Login() {
   const {
@@ -89,6 +89,11 @@ export default function Login() {
                     Forgot password?
                   </Link>
                 </div> */}
+                <div className="flex py-2 px-1 justify-between">
+                  <Link color="primary" href="/signup" size="sm">
+                    Don&apos;t have an account? Sign up
+                  </Link>
+                </div>
                 {loginMutation.isError ? (
                   <p className="text-danger-500 pl-1">
                     You entered invalid credentials
