@@ -37,33 +37,6 @@ export const MainContainer = () => {
         >
           -
         </button>
-        {/* <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div> */}
       </div>
     );
   }

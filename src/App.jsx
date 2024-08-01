@@ -1,7 +1,7 @@
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
-import WatchPage from "./components/WatchPage";
+import WatchPage from "./pages/WatchPage";
 import SignUpPage from "./pages/SignUpPage";
 import Layout from "./components/Layout";
 
