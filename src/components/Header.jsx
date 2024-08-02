@@ -17,12 +17,19 @@ export default function Header() {
   const user = useUserStoreSelectors.use.user();
 
   return (
-    <Navbar isBordered maxWidth="full" className="gap-1 md:gap-4">
+    <Navbar
+      isBordered
+      isBlurred={false}
+      maxWidth="full"
+      className="gap-1 md:gap-4"
+    >
       <NavbarContent justify="start" className="md:px-10">
-        <NavbarBrand className="md:mr-4 grow-0 md:grow">
-          <Logo />
-          <p className="hidden sm:block font-bold text-inherit">STREAMIFY</p>
-        </NavbarBrand>
+        <NavLink to="/">
+          <NavbarBrand className="md:mr-4 grow-0 md:grow">
+            <Logo />
+            <p className="hidden sm:block font-bold text-inherit">STREAMIFY</p>
+          </NavbarBrand>
+        </NavLink>
       </NavbarContent>
 
       <NavbarContent className="flex-1 basis-32" justify="center">

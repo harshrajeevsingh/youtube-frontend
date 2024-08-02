@@ -70,7 +70,7 @@ const SignupForm = () => {
       {/* Div for the avatar & cover input */}
       <div className="mb-5 relative">
         {/* Cover Image */}
-        <div className="relative w-full h-36 rounded-lg overflow-hidden flex items-center justify-center dark:bg-slate-950 bg-white cursor-pointer border-2 border-gray-300">
+        <div className="relative w-full h-36 rounded-lg overflow-hidden flex items-center justify-center dark:bg-gray-700 bg-white cursor-pointer">
           <label
             htmlFor="cover-upload-input"
             className="flex items-center justify-center w-full h-full"
@@ -95,7 +95,7 @@ const SignupForm = () => {
         </div>
 
         {/* Avatar image */}
-        <div className="absolute top-1/4  transform -translate-x-1/2 -translate-y-2/3 w-24 h-24 rounded-full overflow-hidden flex items-center justify-center dark:bg-slate-950 bg-white cursor-pointer border-2 border-gray-300 z-10">
+        <div className="absolute top-1/4  transform -translate-x-1/2 -translate-y-2/3 w-24 h-24 rounded-full overflow-hidden flex items-center justify-center dark:bg-gray-700 bg-white cursor-pointer border-4 border-primary-background z-10">
           <label
             htmlFor="avatar-upload-input"
             className="flex items-center justify-center w-full h-full"

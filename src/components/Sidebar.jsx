@@ -13,12 +13,12 @@ export const Sidebar = () => {
   };
 
   useEffect(() => {
-    updatePlacement(); // Set initial placement
-    window.addEventListener("resize", updatePlacement); // Listen for resize events
-    return () => window.removeEventListener("resize", updatePlacement); // Clean up on unmount
+    updatePlacement();
+    window.addEventListener("resize", updatePlacement);
+    return () => window.removeEventListener("resize", updatePlacement);
   }, []);
   return (
-    <div className="lg:w-48 md:w-40 w-full sticky md:top-16  md:left-0 bottom-0 md:h-[calc(100vh_-_4rem)] md:pt-5 px-2 drop-shadow-lg">
+    <div className="lg:w-48 md:w-40 w-full sticky md:top-16 bg-background md:left-0 bottom-0 md:h-[calc(100vh_-_4rem)] md:pt-5 py-2 px-2 drop-shadow-lg">
       <Tabs
         fullWidth
         className="w-full h-full "

@@ -89,9 +89,10 @@ export default function Login() {
                     Forgot password?
                   </Link>
                 </div> */}
-                <div className="flex py-2 px-1 justify-between">
-                  <Link color="primary" href="/signup" size="sm">
-                    Don&apos;t have an account? Sign up
+                <div className="flex py-2 px-1 gap-1">
+                  Don&apos;t have an account?
+                  <Link color="primary" href="/signup" size="md">
+                    Sign up
                   </Link>
                 </div>
                 {loginMutation.isError ? (
