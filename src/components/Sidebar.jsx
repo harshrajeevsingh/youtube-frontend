@@ -18,16 +18,15 @@ export const Sidebar = () => {
     return () => window.removeEventListener("resize", updatePlacement); // Clean up on unmount
   }, []);
   return (
-    <div className="lg:w-48 md:w-40 w-full sticky  md:top-16  md:left-0 bottom-0 md:h-[calc(100vh_-_4rem)] md:pt-5 px-2 drop-shadow-lg">
+    <div className="lg:w-48 md:w-40 w-full sticky md:top-16  md:left-0 bottom-0 md:h-[calc(100vh_-_4rem)] md:pt-5 px-2 drop-shadow-lg">
       <Tabs
         fullWidth
-        className="w-full h-full"
+        className="w-full h-full "
         size="lg"
         aria-label="Options"
         color="primary"
         variant="light"
         placement={placement}
-        // isVertical={true}
       >
         <Tab
           key="home"

@@ -1,16 +1,16 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 
 export const useVideoBackground = () => {
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const canvasRef = useRef();
   const videoRef = useRef();
 
-  const init = () => {
+  const initCanvas = useCallback(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
     let step;
 
-    if (mediaQuery.matches) {
+    if (!canvas || !video || mediaQuery.matches) {
       return;
     }
 
@@ -47,12 +47,13 @@ export const useVideoBackground = () => {
       video.removeEventListener("pause", drawPause);
       video.removeEventListener("ended", drawPause);
     };
-  };
+  }, [mediaQuery]);
 
-  useEffect(init, []);
+  useEffect(initCanvas, [initCanvas]);
 
   return {
     canvasRef,
     videoRef,
+    initCanvas,
   };
 };

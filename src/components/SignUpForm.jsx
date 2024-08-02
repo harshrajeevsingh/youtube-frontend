@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Button } from "@nextui-org/react";
 
@@ -112,7 +112,7 @@ const SignupForm = () => {
           </label>
           <input
             type="file"
-            {...register("avatar", { required: true })}
+            {...register("avatar", { required: "Avatar image is required" })}
             onChange={(e) => handleFileChange(e, setAvatarPreview)}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             id="avatar-upload-input"
@@ -120,7 +120,7 @@ const SignupForm = () => {
         </div>
 
         {errors.avatar && (
-          <p className="text-red-500 text-sm mt-1">Avatar Image is required</p>
+          <p className="text-red-500 text-sm mt-1">{errors.avatar.message}</p>
         )}
       </div>
 
@@ -130,11 +130,11 @@ const SignupForm = () => {
           Name
         </label>
         <input
-          {...register("fullName", { required: true })}
+          {...register("fullName", { required: "Name is required" })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
         />
         {errors.fullName && (
-          <p className="text-red-500 text-sm mt-1">Name is required</p>
+          <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
         )}
       </div>
 
@@ -143,11 +143,21 @@ const SignupForm = () => {
           Username
         </label>
         <input
-          {...register("username", { required: true })}
+          {...register("username", {
+            required: "Username is required",
+            minLength: {
+              value: 3,
+              message: "Username must be at least 3 characters long",
+            },
+            maxLength: {
+              value: 20,
+              message: "Username must not be 20 characters long",
+            },
+          })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
         />
         {errors.username && (
-          <p className="text-red-500 text-sm mt-1">Username is required</p>
+          <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>
         )}
       </div>
 
@@ -157,11 +167,24 @@ const SignupForm = () => {
         </label>
         <input
           type="password"
-          {...register("password", { required: true })}
+          {...register("password", {
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters long",
+            },
+            maxLength: {
+              value: 15,
+              message: "Password should be no longer than 15 characters long",
+            },
+            validate: (value) =>
+              value.match(/^(?=.*[A-Z])(?=.*\d).+$/) ||
+              "Password must contain at least one uppercase letter and one number",
+          })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
         />
         {errors.password && (
-          <p className="text-red-500 text-sm mt-1">Password is required</p>
+          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
         )}
       </div>
 
@@ -171,11 +194,17 @@ const SignupForm = () => {
         </label>
         <input
           type="email"
-          {...register("email", { required: true })}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Please enter a valid email address",
+            },
+          })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
         />
         {errors.email && (
-          <p className="text-red-500 text-sm mt-1">Email is required</p>
+          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
         )}
       </div>
 
