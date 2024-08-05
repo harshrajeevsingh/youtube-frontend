@@ -18,7 +18,7 @@ export const Sidebar = () => {
     return () => window.removeEventListener("resize", updatePlacement);
   }, []);
   return (
-    <div className="lg:w-48 md:w-40 w-full sticky md:top-16 bg-background md:left-0 bottom-0 md:h-[calc(100vh_-_4rem)] md:pt-5 py-2 px-2 drop-shadow-lg">
+    <div className=" md:w-40 w-full sticky z-10 md:top-16 bg-background md:left-0 bottom-0 md:h-[calc(100vh_-_4rem)] md:pt-5 py-2 px-2 drop-shadow-lg">
       <Tabs
         fullWidth
         className="w-full h-full "
@@ -31,7 +31,7 @@ export const Sidebar = () => {
         <Tab
           key="home"
           title={
-            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3 lg:w-36 md:w-32 w-full">
+            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3  md:w-32 w-full">
               <Home />
               <span className="hidden sm:block">Home</span>
             </div>
@@ -40,7 +40,7 @@ export const Sidebar = () => {
         <Tab
           key="liked_videos"
           title={
-            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3 lg:w-36 md:w-32 w-full">
+            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3  md:w-32 w-full">
               <ThumbsUp />
               <span className="hidden sm:block">Liked videos</span>
             </div>
@@ -49,7 +49,7 @@ export const Sidebar = () => {
         <Tab
           key="subscriptions"
           title={
-            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3 lg:w-36 md:w-32 w-full ">
+            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3 md:w-32 w-full ">
               <Podcast />
               <span className="hidden sm:block">Subscription</span>
             </div>
@@ -58,7 +58,7 @@ export const Sidebar = () => {
         <Tab
           key="history"
           title={
-            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3 lg:w-36 md:w-32  w-full">
+            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3 md:w-32  w-full">
               <History />
               <span className="hidden sm:block">History</span>
             </div>
