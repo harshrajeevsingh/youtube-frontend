@@ -6,15 +6,14 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
-  Checkbox,
   Input,
   Link,
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useLoginUser } from "../../api/authApi";
 import { useUserStoreSelectors } from "../../store/userSlice";
-import MailIcon from "../icons/mailIcon";
-import LockIcon from "../icons/lockIcon";
+import { MailIcon } from "../icons/mailIcon";
+import { LockIcon } from "../icons/lockIcon";
 
 export default function Login() {
   const {
@@ -41,7 +40,12 @@ export default function Login() {
   };
   return (
     <>
-      <Button onPress={onOpen} color="primary" radius="full">
+      <Button
+        onPress={onOpen}
+        color="primary"
+        radius="full"
+        className="min-w-10 md:min-w-20"
+      >
         Login
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
@@ -84,6 +88,12 @@ export default function Login() {
                     Forgot password?
                   </Link>
                 </div> */}
+                <div className="flex py-2 px-1 gap-1">
+                  Don&apos;t have an account?
+                  <Link color="primary" href="/signup" size="md">
+                    Sign up
+                  </Link>
+                </div>
                 {loginMutation.isError ? (
                   <p className="text-danger-500 pl-1">
                     You entered invalid credentials

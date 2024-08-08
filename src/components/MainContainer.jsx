@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../helpers/axios";
-import { useCountSelectors } from "../store/useCountStore";
+import { SkeletonVideoCard } from "./ui/skeletonVideoCard";
 
 export const MainContainer = () => {
   const [data, setData] = useState(null);
 
-  const count = useCountSelectors.use.count();
-  const increment = useCountSelectors.use.increment();
-  const decrement = useCountSelectors.use.decrement();
+  const skeletonVideoArray = Array.from({ length: 10 });
 
   useEffect(() => {
     axiosInstance
@@ -23,52 +21,15 @@ export const MainContainer = () => {
 
   if (!data) {
     return (
-      <div className=" flex-col bg-slate-100 dark:bg-gray-950 w-full pt-5">
-        <button
-          onClick={increment}
-          className="p-2 bg-cyan-600 text-lg rounded-full"
-        >
-          +
-        </button>
-        <span> Count: {count}</span>
-        <button
-          onClick={decrement}
-          className="p-2 bg-cyan-600 text-lg rounded-full"
-        >
-          -
-        </button>
-        {/* <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div>
-        <div className="text-gray-700 dark:text-white h-96 bg-yellow-400 w-1/2">
-          Loading...
-        </div> */}
+      <div className="flex flex-wrap justify-center md:gap-5 gap-1 mt-7 mx-0 lg:mr-2">
+        {skeletonVideoArray.map((_, index) => (
+          <SkeletonVideoCard key={index} />
+        ))}
       </div>
     );
   }
   return (
-    <div className=" bg-slate-100 dark:bg-gray-950">
+    <div className=" bg-slate-100 dark:bg-gray-950 min-h-svh px-3 pt-5">
       <span className="text-gray-700 dark:text-white">
         Message: {data.message}
       </span>

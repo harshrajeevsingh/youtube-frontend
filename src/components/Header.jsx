@@ -8,7 +8,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { Search } from "lucide-react";
 
-import { AcmeLogo } from "./AcmeLogo.jsx";
+import { Logo } from "./icons/logo.jsx";
 import Login from "./ui/loginbtn.jsx";
 import UserDropDown from "./ui/userDropDown.jsx";
 import { useUserStoreSelectors } from "../store/userSlice.js";
@@ -17,15 +17,22 @@ export default function Header() {
   const user = useUserStoreSelectors.use.user();
 
   return (
-    <Navbar isBordered maxWidth="full">
+    <Navbar
+      isBordered
+      isBlurred={false}
+      maxWidth="full"
+      className="gap-1 md:gap-4"
+    >
       <NavbarContent justify="start" className="md:px-10">
-        <NavbarBrand className="md:mr-4">
-          <AcmeLogo />
-          <p className="hidden sm:block font-bold text-inherit">ACME</p>
-        </NavbarBrand>
+        <NavLink to="/">
+          <NavbarBrand className="md:mr-4 grow-0 md:grow">
+            <Logo />
+            <p className="hidden sm:block font-bold text-inherit">STREAMIFY</p>
+          </NavbarBrand>
+        </NavLink>
       </NavbarContent>
 
-      <NavbarContent className="flex-1 justify-center">
+      <NavbarContent className="flex-1 basis-32" justify="center">
         <div className="w-full max-w-full md:px-4 ">
           <Input
             classNames={{
@@ -47,9 +54,9 @@ export default function Header() {
       {user ? (
         <UserDropDown />
       ) : (
-        <NavbarContent justify="end" className="md:px-10">
-          <NavLink to="/signup">
-            <Button radius="full" variant="faded">
+        <NavbarContent justify="end" className="md:px-10 md:gap-4 gap-2">
+          <NavLink to="/signup" className="hidden sm:block">
+            <Button radius="full" variant="faded" className="px-0 md:px-4">
               Register
             </Button>
           </NavLink>

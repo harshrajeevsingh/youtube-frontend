@@ -1,4 +1,4 @@
-const MailIcon = (props) => (
+export const MailIcon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -16,4 +16,3 @@ const MailIcon = (props) => (
     />
   </svg>
 );
-export default MailIcon;

@@ -1,4 +1,4 @@
-const LockIcon = (props) => (
+export const LockIcon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -8,7 +8,6 @@ const LockIcon = (props) => (
     className="stroke-gray-600 dark:stroke-slate-200"
   >
     <path
-      // stroke="#fff"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1}
@@ -16,4 +15,3 @@ const LockIcon = (props) => (
     />
   </svg>
 );
-export default LockIcon;
