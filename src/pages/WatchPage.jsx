@@ -1,4 +1,4 @@
-import { VideoWithBackground } from "../components/VideoCard";
+import { VideoWithBackground } from "../components/VideoWithBg";
 
 export const WatchPage = () => {
   return (
