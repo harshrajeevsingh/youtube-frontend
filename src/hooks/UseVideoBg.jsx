@@ -16,7 +16,7 @@ export const useVideoBackground = () => {
 
     const ctx = canvas.getContext("2d");
 
-    ctx.filter = "blur(1px)";
+    ctx.filter = "blur(2px)";
 
     const draw = () => {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);

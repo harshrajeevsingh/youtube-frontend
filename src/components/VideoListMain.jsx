@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { fetchVideos } from "../api/videosApi";
 import { SkeletonVideoCard } from "./ui/skeletonVideoCard";
 import VideoCard from "./ui/videoCard";
+import { Link } from "react-router-dom";
 
 export const VideoListMain = () => {
   const { ref, inView } = useInView();
@@ -32,7 +33,11 @@ export const VideoListMain = () => {
   const renderVideoCards = () => {
     if (!data) return null;
     return data.pages.flatMap((page) =>
-      page.data.docs.map((video) => <VideoCard key={video._id} video={video} />)
+      page.data.docs.map((video) => (
+        <Link to={"/watch?v=" + video._id} key={video._id}>
+          <VideoCard key={video._id} video={video} />
+        </Link>
+      ))
     );
   };
 
@@ -51,7 +56,7 @@ export const VideoListMain = () => {
       {status === "success" && (
         <>
           {renderVideoCards()}
-          {renderVideoCards()}
+          {/* {renderVideoCards()} */}
           {isFetchingNextPage && renderSkeletons()}
         </>
       )}

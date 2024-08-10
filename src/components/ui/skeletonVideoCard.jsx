@@ -1,12 +1,7 @@
-import { Card, Skeleton } from "@nextui-org/react";
+import { Skeleton } from "@nextui-org/react";
 
 export const SkeletonVideoCard = () => {
   return (
-    // <Card
-    //   className="w-[400px] xl:w-[380px] lg:w-[320px] md:w-[280px] h-80 space-y-5  bg-transparent"
-    //   shadow="none"
-    //   radius="none"
-    // >
     <div className="w-[400px] xl:w-[380px] lg:w-[320px] md:w-[280px] h-80 space-y-5  bg-transparent">
       <Skeleton className="rounded-xl">
         <div className="aspect-video rounded-lg bg-default-300"></div>

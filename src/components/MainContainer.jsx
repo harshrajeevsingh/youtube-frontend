@@ -51,9 +51,6 @@ export const MainContainer = () => {
     <div className="min-h-svh">
       <VideoListMain />
     </div>
-    // <>
-    //   <VideoListMain />
-    // </>
   );
 };
 export default MainContainer;
