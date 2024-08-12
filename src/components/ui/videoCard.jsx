@@ -1,14 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { Card, CardBody, Avatar, CardHeader, Image } from "@nextui-org/react";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
 import ReactTimeAgo from "react-time-ago";
 import { Volume2, VolumeX } from "lucide-react";
 
 import { useMuteSelectors } from "../../store/muteSlice";
 import { formatDuration } from "../../helpers/formatVideoDuration";
-
-TimeAgo.addDefaultLocale(en);
 
 const VideoCard = ({ video }) => {
   const [hover, setHover] = useState(false);
