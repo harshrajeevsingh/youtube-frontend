@@ -1,17 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import {
-  Card,
-  CardBody,
-  Avatar,
-  CardHeader,
-  Image,
-  Button,
-} from "@nextui-org/react";
+import { Card, CardBody, Avatar, CardHeader, Image } from "@nextui-org/react";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import ReactTimeAgo from "react-time-ago";
 import { Volume2, VolumeX } from "lucide-react";
 
+import { useMuteSelectors } from "../../store/muteSlice";
 import { formatDuration } from "../../helpers/formatVideoDuration";
 
 TimeAgo.addDefaultLocale(en);
@@ -19,9 +13,10 @@ TimeAgo.addDefaultLocale(en);
 const VideoCard = ({ video }) => {
   const [hover, setHover] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
-
-  const [isMuted, setIsMuted] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
+
+  const isMuted = useMuteSelectors.use.isMute();
+  const toggleMuteState = useMuteSelectors.use.toggleMute();
 
   const videoRef = useRef(null);
 
@@ -56,8 +51,7 @@ const VideoCard = ({ video }) => {
 
   const toggleMute = () => {
     if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
+      toggleMuteState();
     }
   };
 
@@ -110,22 +104,28 @@ const VideoCard = ({ video }) => {
             : formatDuration(video?.duration)}
         </div>
         {hover && videoReady && (
-          <Button
-            isIconOnly
-            radius="full"
-            className="absolute top-2 right-2 bg-black/40 z-10"
+          <div
+            role="button"
+            aria-label={isMuted ? "Unmute" : "Mute"}
+            tabIndex={0}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
               toggleMute();
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                toggleMute();
+              }
+            }}
+            className="absolute top-2 right-2 bg-black/40 z-10 p-2 rounded-full"
           >
             {isMuted ? (
-              <VolumeX className="w-4 h-4 text-white" />
+              <VolumeX className="w-5 h-5 text-white" />
             ) : (
-              <Volume2 className="w-4 h-4 text-white" />
+              <Volume2 className="w-5 h-5 text-white" />
             )}
-          </Button>
+          </div>
         )}
       </CardHeader>
       <CardBody className="flex flex-row items-start px-1 py-2 gap-3">
