@@ -14,12 +14,15 @@
     "@tanstack/react-query": "^5.40.0",
     "axios": "^1.7.2",
     "framer-motion": "^11.2.5",
+    "javascript-time-ago": "^2.5.10",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.379.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.5",
+    "react-intersection-observer": "^9.13.0",
     "react-router-dom": "^6.23.1",
+    "react-time-ago": "^7.3.3",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

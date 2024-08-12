@@ -4,6 +4,7 @@ import MainContainer from "./components/MainContainer";
 import WatchPage from "./pages/WatchPage";
 import SignUpPage from "./pages/SignUpPage";
 import Layout from "./components/Layout";
+import "./timeAgoConfig";
 
 if (
   localStorage.theme === "dark" ||
