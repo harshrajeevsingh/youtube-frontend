@@ -93,7 +93,7 @@ const VideoCard = ({ video }) => {
           } aspect-video w-full rounded-lg object-cover`}
         />
         <div
-          className={`absolute bottom-2 right-2 px-1 bg-black/55 z-10 rounded-md`}
+          className={`absolute bottom-2 right-2 px-1 bg-black/55 z-10 rounded-md text-default dark:text-primary-foreground`}
         >
           {hover && videoReady
             ? formatDuration(remainingTime)

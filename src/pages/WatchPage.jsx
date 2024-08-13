@@ -1,8 +1,9 @@
+import { useSearchParams } from "react-router-dom";
 import { Spinner } from "@nextui-org/spinner";
 
 import { useVideoById } from "../api/videosApi";
 import { VideoWithBackground } from "../components/VideoWithBg";
-import { useSearchParams } from "react-router-dom";
+import VideoDetails from "../components/ui/videoDetails";
 
 export const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -27,6 +28,7 @@ export const WatchPage = () => {
 
       {/* This will contain video details + Comment section */}
       <div className="w-full xl:w-4/6">
+        <VideoDetails />
         <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
         <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
         <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
