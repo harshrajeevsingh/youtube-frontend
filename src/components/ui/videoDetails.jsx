@@ -5,68 +5,72 @@ import DescriptionBox from "./descriptionBox";
 import { ThumbsUpIcon } from "../icons/thumbsUpIcon";
 import { ShareIcon } from "../icons/shareIcon";
 import { DownloadIcon } from "../icons/downloadIcon";
-import { SaveIcon } from "../icons/saveIcon";
+import { BookmarkIcon } from "../icons/bookMarkIcon";
 
-function VideoDetails() {
-  const description =
-    "This is a long description that goes on for multiple lines. It contains lots of information about the video, its creator, and maybe some links or timestamps. This is a long description that goes on for multiple lines. It contains lots of information about the video, its creator, and maybe some links or timestamps. This is a long description that goes on for multiple lines. It contains lots of information about the video, its creator, and maybe some links or timestamps.This is a long description that goes on for multiple lines. It contains lots of information about the video, its creator, and maybe some links or timestamps";
+function VideoDetails({ video }) {
   return (
-    <div className="w-full pt-3 px-3">
-      <h3 className="text-2xl text-default-600 font-semibold line-clamp-2">
-        Cinematic Impact Trailer
+    <div className="w-full pt-3 px-2 md:px-0">
+      <h3 className="text-2xl text-default-700 font-semibold line-clamp-2">
+        {video?.title}
       </h3>
-      <div className="flex md:flex-row flex-col md:justify-between justify-normal md:items-center items-start mt-3">
-        <div className="flex gap-4 md:w-2/5 w-full items-center ">
-          <Avatar
-            src="https://res.cloudinary.com/dqcwf8nvt/image/upload/v1719723598/amoggajyh3cszz7aggpc.png"
-            className="-z-10"
-          />
+      <div className="flex lg:flex-row flex-col md:justify-between justify-normal md:items-center items-start mt-3">
+        <div className="flex gap-4 lg:w-2/5 w-full items-center">
+          <Avatar src={video?.ownerDetails?.avatar?.url} />
           <div className="flex flex-col">
-            <p className="text-lg">@harsh</p>
-            <p className="text-sm text-foreground/80">200 followers</p>
+            <p className="text-lg text-default-700">
+              @{video?.ownerDetails?.username}
+            </p>
+            <p className="text-sm text-default-700">
+              {video?.ownerDetails?.subscribersCount} {"subscribers"}
+            </p>
           </div>
           <Button
             color="primary"
             radius="full"
-            className="font-semibold px-7 lg:ml-5 ml-auto -z-10"
+            className={`font-semibold px-7 lg:ml-5 ml-auto ${
+              video?.ownerDetails?.isSubscribed ? "bg-default-100" : ""
+            }`}
           >
             Subscribe
           </Button>
         </div>
-        <div className="flex  items-center gap-2  md:mt-0 mt-3 ">
+        <div className="flex items-center md:gap-2 gap-1 md:mt-0 mt-3">
           <Button
             radius="full"
-            className="text-base -z-10"
+            variant="faded"
+            className="bg-default-100 text-default-700 "
             startContent={<ThumbsUpIcon />}
           >
-            10k
+            {video?.likesCount}
           </Button>
           <Button
             radius="full"
-            className="text-base -z-10"
+            variant="faded"
+            className="bg-default-100 text-default-700"
             startContent={<ShareIcon />}
           >
             Share
           </Button>
           <Button
             radius="full"
-            className="text-base -z-10"
+            variant="faded"
+            className="bg-default-100 text-default-700 "
             startContent={<DownloadIcon />}
           >
-            download
+            Download
           </Button>
-          {/* <Button
+          <Button
             radius="full"
-            className="text-base -z-10"
-            startContent={<SaveIcon />}
+            variant="faded"
+            color="primary"
+            className="bg-default-100 text-default-700 "
+            startContent={<BookmarkIcon />}
           >
             Save
-          </Button> */}
+          </Button>
         </div>
       </div>
-      {/* <div className="mt-5"> */}
-      <DescriptionBox text={description} />
-      {/* </div> */}
+      <DescriptionBox data={video} />
     </div>
   );
 }
