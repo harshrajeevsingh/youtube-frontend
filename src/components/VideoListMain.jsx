@@ -3,8 +3,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
 import { fetchVideos } from "../api/videosApi";
-import { SkeletonVideoCard } from "./ui/skeletonVideoCard";
-import VideoCard from "./ui/videoCard";
+import { SkeletonVideoCard } from "./ui/mainPageVideo/skeletonVideoCard";
+import VideoCard from "./ui/mainPageVideo/videoCard";
 import { Link } from "react-router-dom";
 
 export const VideoListMain = () => {

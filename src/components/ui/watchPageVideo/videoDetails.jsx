@@ -2,10 +2,10 @@ import { Avatar, Button } from "@nextui-org/react";
 
 import DescriptionBox from "./descriptionBox";
 
-import { ThumbsUpIcon } from "../icons/thumbsUpIcon";
-import { ShareIcon } from "../icons/shareIcon";
-import { DownloadIcon } from "../icons/downloadIcon";
-import { BookmarkIcon } from "../icons/bookMarkIcon";
+import { ThumbsUpIcon } from "../../icons/thumbsUpIcon";
+import { ShareIcon } from "../../icons/shareIcon";
+import { DownloadIcon } from "../../icons/downloadIcon";
+import { BookmarkIcon } from "../../icons/bookMarkIcon";
 
 function VideoDetails({ video }) {
   return (

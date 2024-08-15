@@ -3,8 +3,8 @@ import { Card, CardBody, Avatar, CardHeader, Image } from "@nextui-org/react";
 import ReactTimeAgo from "react-time-ago";
 import { Volume2, VolumeX } from "lucide-react";
 
-import { useMuteSelectors } from "../../store/muteSlice";
-import { formatDuration } from "../../helpers/formatVideoDuration";
+import { useMuteSelectors } from "../../../store/muteSlice";
+import { formatDuration } from "../../../helpers/formatVideoDuration";
 
 const VideoCard = ({ video }) => {
   const [hover, setHover] = useState(false);
