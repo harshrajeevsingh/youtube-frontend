@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from "react";
+import ReactTimeAgo from "react-time-ago";
 
 const DescriptionBox = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(false);
   const textRef = useRef(null);
 
-  const text = data?.description;
+  const { description, createdAt, views } = data;
+
   useEffect(() => {
     const checkTextOverflow = () => {
       if (textRef.current) {
@@ -23,7 +25,7 @@ const DescriptionBox = ({ data }) => {
     return () => {
       window.removeEventListener("resize", checkTextOverflow);
     };
-  }, [text]);
+  }, [description]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -31,9 +33,9 @@ const DescriptionBox = ({ data }) => {
 
   return (
     <div className=" w-full mt-3 p-3 rounded-xl dark:bg-neutral-800 bg-neutral-100">
-      <div className="flex gap-2 text-base font-semibold">
-        <span>{data?.views} views</span>
-        <span>2 years ago</span>
+      <div className="flex gap-2 text-default-700 text-base font-semibold">
+        <span>{views} views</span>
+        <ReactTimeAgo date={new Date(createdAt)} locale="en-US" />
       </div>
       <p
         ref={textRef}
@@ -41,7 +43,7 @@ const DescriptionBox = ({ data }) => {
           isExpanded ? "" : "line-clamp-3"
         }`}
       >
-        {text}
+        {description}
       </p>
       {showMoreButton && (
         <button

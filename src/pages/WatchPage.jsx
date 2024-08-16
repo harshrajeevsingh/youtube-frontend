@@ -12,7 +12,7 @@ export const WatchPage = () => {
 
   const { videoRef, canvasRef } = useVideoBackground();
 
-  const { data: video, isLoading, error, isPending } = useVideoById(videoId);
+  const { data: video, isLoading, error } = useVideoById(videoId);
 
   return (
     <div className="relative flex flex-wrap w-full min-h-svh">
@@ -51,7 +51,7 @@ export const WatchPage = () => {
 
       {/* This will contain video details + Comment section */}
       <div className="w-full xl:w-4/6 z-10">
-        <VideoDetails video={video?.data} />
+        {video && <VideoDetails video={video?.data} />}
         <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
         <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
         <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
