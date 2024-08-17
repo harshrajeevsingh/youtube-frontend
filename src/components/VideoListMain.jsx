@@ -34,7 +34,7 @@ export const VideoListMain = () => {
     if (!data) return null;
     return data.pages.flatMap((page) =>
       page.data.docs.map((video) => (
-        <Link to={"/watch?v=" + video._id} key={video._id}>
+        <Link to={`/watch?v=${video._id}`} key={video._id}>
           <VideoCard key={video._id} video={video} />
         </Link>
       ))

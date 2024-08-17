@@ -44,7 +44,7 @@ export const WatchPage = () => {
           <div className="pointer-events-none absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-10/12 w-full h-[900px]">
             <div className="absolute hidden lg:block right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent dark:from-background" />
             <div className="absolute  bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent dark:from-background" />
-            <div className="absolute left-0 top-0 w-full h-32 bg-gradient-to-b to-10% from-background to-transparent dark:from-background" />
+            {/* <div className="absolute left-0 top-0 w-full h-32 bg-gradient-to-b to-10% from-background to-transparent dark:from-background" /> */}
           </div>
         </>
       )}

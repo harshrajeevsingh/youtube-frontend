@@ -45,9 +45,9 @@ const SignupForm = () => {
           password: data.password,
         };
         try {
-          const loginResposne = loginMutation.mutate(loginData);
-          console.log("Login Resposne", loginResposne);
-          setUser(loginResposne?.user);
+          const loginResponse = await loginMutation.mutateAsync(loginData);
+          console.log("Login Response", loginResponse);
+          setUser(loginResponse?.data?.user);
           queryClient.invalidateQueries("user");
           navigate("/");
         } catch (error) {
@@ -177,9 +177,9 @@ const SignupForm = () => {
               value: 15,
               message: "Password should be no longer than 15 characters long",
             },
-            validate: (value) =>
-              value.match(/^(?=.*[A-Z])(?=.*\d).+$/) ||
-              "Password must contain at least one uppercase letter and one number",
+            // validate: (value) =>
+            //   value.match(/^(?=.*[A-Z])(?=.*\d).+$/) ||
+            //   "Password must contain at least one uppercase letter and one number",
           })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
         />

@@ -70,7 +70,7 @@ const VideoCard = ({ video }) => {
       disableAnimation
     >
       <CardHeader
-        className="relative rounded-xl z-0 p-0 "
+        className="relative w-full aspect-video rounded-xl z-0 p-0 "
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

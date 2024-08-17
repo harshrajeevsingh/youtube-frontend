@@ -1,8 +1,10 @@
 import { Tabs, Tab } from "@nextui-org/react";
+import { Link, useLocation } from "react-router-dom";
 import { Home, ThumbsUp, Podcast, History } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const Sidebar = () => {
+  const location = useLocation();
   const [placement, setPlacement] = useState("start");
   const updatePlacement = () => {
     if (window.innerWidth < 768) {
@@ -27,14 +29,18 @@ export const Sidebar = () => {
         color="primary"
         variant="light"
         placement={placement}
+        selectedKey={location.pathname}
       >
         <Tab
-          key="home"
+          key="/"
           title={
-            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3  md:w-32 w-full">
+            <Link
+              to="/"
+              className="flex justify-center md:justify-normal md:text-base sm:gap-3 md:w-32 w-full"
+            >
               <Home />
               <span className="hidden sm:block">Home</span>
-            </div>
+            </Link>
           }
         />
         <Tab
