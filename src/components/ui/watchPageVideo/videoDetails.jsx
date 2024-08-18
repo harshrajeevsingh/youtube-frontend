@@ -1,7 +1,8 @@
 import { Avatar, Button } from "@nextui-org/react";
 
 import DescriptionBox from "./descriptionBox";
-
+import { SubscribeBtn } from "./subscribeBtn";
+import { VideoLikeBtn } from "./VideoLikeBtn";
 import { ThumbsUpIcon } from "../../icons/thumbsUpIcon";
 import { ShareIcon } from "../../icons/shareIcon";
 import { DownloadIcon } from "../../icons/downloadIcon";
@@ -24,25 +25,10 @@ function VideoDetails({ video }) {
               {video?.ownerDetails?.subscribersCount} {"subscribers"}
             </p>
           </div>
-          <Button
-            color="primary"
-            radius="full"
-            className={`font-semibold px-7 lg:ml-5 ml-auto ${
-              video?.ownerDetails?.isSubscribed ? "bg-default-100" : ""
-            }`}
-          >
-            Subscribe
-          </Button>
+          <SubscribeBtn data={video} />
         </div>
         <div className="flex items-center md:gap-2 gap-1 md:mt-0 mt-3">
-          <Button
-            radius="full"
-            variant="faded"
-            className="bg-default-100 text-default-700 "
-            startContent={<ThumbsUpIcon />}
-          >
-            {video?.likesCount}
-          </Button>
+          <VideoLikeBtn data={video} />
           <Button
             radius="full"
             variant="faded"

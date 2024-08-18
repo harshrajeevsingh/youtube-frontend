@@ -19,6 +19,7 @@ export const useRegisterUser = () => {
 
 // Login User Mutation
 export const useLoginUser = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (loginData) => {
       const { data } = await axiosInstance.post("/users/login", loginData);
@@ -26,6 +27,9 @@ export const useLoginUser = () => {
     },
     onError: (error) => {
       console.error("Error during login", error);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("user");
     },
   });
 };
