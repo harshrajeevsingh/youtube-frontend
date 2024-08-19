@@ -1,53 +1,15 @@
 import axiosInstance from "../helpers/axios";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-/* Fetch All Videos for HomePage */
-
-export const fetchVideos = async ({
-  pageParam = 1,
-  userId,
-  query,
-  sortBy = "createdAt",
-  sortType = "desc",
-}) => {
-  const params = {
-    page: pageParam,
-    limit: 10,
-    ...(userId && { userId }),
-    ...(query && { query }),
-    sortBy,
-    sortType,
-  };
-
-  const { data } = await axiosInstance.get("/videos", { params });
-  return data;
-};
-
-/* Fetch a Particular Video */
-
-const fetchVideoById = async (videoId) => {
-  const response = await axiosInstance.get(`/videos/${videoId}`);
-  return response.data;
-};
-
-export const useVideoById = (videoId) => {
-  return useQuery({
-    queryKey: ["video", { videoId }],
-    queryFn: () => fetchVideoById(videoId),
-    enabled: !!videoId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
-};
-
-/* Toggle Video Like */
-
-export const useVideoLike = (videoId) => {
+export const useSubscribeToCreator = (videoId) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (creatorId) => {
       console.log("API call started for creator:", creatorId);
-      const { data } = await axiosInstance.post(`/likes/toggle/v/${videoId}`);
+      const { data } = await axiosInstance.post(
+        `/subscriptions/c/${creatorId}`
+      );
       console.log("API call completed, response:", data);
       return data;
     },
@@ -69,10 +31,13 @@ export const useVideoLike = (videoId) => {
           ...old,
           data: {
             ...old.data,
-            isLiked: !old.data.isLiked,
-            likesCount: old.data.isLiked
-              ? Math.max((old.data.likesCount || 0) - 1, 0)
-              : (old.data.ownerDetails.likesCount || 0) + 1,
+            ownerDetails: {
+              ...old.data.ownerDetails,
+              isSubscribed: !old.data.ownerDetails.isSubscribed,
+              subscribersCount: old.data.ownerDetails.isSubscribed
+                ? (old.data.ownerDetails.subscribersCount || 0) - 1
+                : (old.data.ownerDetails.subscribersCount || 0) + 1,
+            },
           },
         };
         console.log("Updated video data:", newData);

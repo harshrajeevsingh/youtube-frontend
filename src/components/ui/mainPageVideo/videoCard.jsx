@@ -3,8 +3,8 @@ import { Card, CardBody, Avatar, CardHeader, Image } from "@nextui-org/react";
 import ReactTimeAgo from "react-time-ago";
 import { Volume2, VolumeX } from "lucide-react";
 
-import { useMuteSelectors } from "../../store/muteSlice";
-import { formatDuration } from "../../helpers/formatVideoDuration";
+import { useMuteSelectors } from "../../../store/muteSlice";
+import { formatDuration } from "../../../helpers/formatVideoDuration";
 
 const VideoCard = ({ video }) => {
   const [hover, setHover] = useState(false);
@@ -70,7 +70,7 @@ const VideoCard = ({ video }) => {
       disableAnimation
     >
       <CardHeader
-        className="relative rounded-xl z-0 p-0 "
+        className="relative w-full aspect-video rounded-xl z-0 p-0 "
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -93,7 +93,7 @@ const VideoCard = ({ video }) => {
           } aspect-video w-full rounded-lg object-cover`}
         />
         <div
-          className={`absolute bottom-2 right-2 px-1 bg-black/55 z-10 rounded-md`}
+          className={`absolute bottom-2 right-2 px-1 bg-black/55 z-10 rounded-md text-default dark:text-primary-foreground`}
         >
           {hover && videoReady
             ? formatDuration(remainingTime)
