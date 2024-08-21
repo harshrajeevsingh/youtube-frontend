@@ -2,11 +2,8 @@ import { Avatar, Button } from "@nextui-org/react";
 
 import DescriptionBox from "./descriptionBox";
 import { SubscribeBtn } from "./subscribeBtn";
-import { VideoLikeBtn } from "./VideoLikeBtn";
-import { ThumbsUpIcon } from "../../icons/thumbsUpIcon";
-import { ShareIcon } from "../../icons/shareIcon";
-import { DownloadIcon } from "../../icons/downloadIcon";
-import { BookmarkIcon } from "../../icons/bookMarkIcon";
+import { VideoLikeBtn } from "./videoLikeBtn";
+import { Bookmark, ArrowDownToLine, Forward } from "lucide-react";
 
 function VideoDetails({ video }) {
   return (
@@ -33,7 +30,7 @@ function VideoDetails({ video }) {
             radius="full"
             variant="faded"
             className="bg-default-100 text-default-700"
-            startContent={<ShareIcon />}
+            startContent={<Forward strokeWidth={1} />}
           >
             Share
           </Button>
@@ -41,7 +38,7 @@ function VideoDetails({ video }) {
             radius="full"
             variant="faded"
             className="bg-default-100 text-default-700 "
-            startContent={<DownloadIcon />}
+            startContent={<ArrowDownToLine strokeWidth={1} />}
           >
             Download
           </Button>
@@ -50,7 +47,7 @@ function VideoDetails({ video }) {
             variant="faded"
             color="primary"
             className="bg-default-100 text-default-700 "
-            startContent={<BookmarkIcon />}
+            startContent={<Bookmark strokeWidth={1} />}
           >
             Save
           </Button>
