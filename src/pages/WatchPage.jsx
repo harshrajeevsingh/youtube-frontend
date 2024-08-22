@@ -1,3 +1,4 @@
+import { useEffect, memo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Spinner } from "@nextui-org/spinner";
 
@@ -14,9 +15,14 @@ export const WatchPage = () => {
 
   const { data: video, isLoading, error } = useVideoById(videoId);
 
+  useEffect(() => {
+    console.log("Watch Page rendered");
+  }, []);
+
   return (
     <div className="relative flex flex-wrap w-full min-h-svh">
       {/* This will contain video */}
+
       {!video && (
         <div className="sticky lg:static w-full xl:w-4/6 top-16 grid place-content-center aspect-video">
           {isLoading && <Spinner size="lg" />}
@@ -44,7 +50,6 @@ export const WatchPage = () => {
           <div className="pointer-events-none absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-10/12 w-full h-[900px]">
             <div className="absolute hidden lg:block right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent dark:from-background" />
             <div className="absolute  bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent dark:from-background" />
-            {/* <div className="absolute left-0 top-0 w-full h-32 bg-gradient-to-b to-10% from-background to-transparent dark:from-background" /> */}
           </div>
         </>
       )}

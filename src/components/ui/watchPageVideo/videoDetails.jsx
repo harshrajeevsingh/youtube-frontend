@@ -4,7 +4,6 @@ import DescriptionBox from "./descriptionBox";
 import { SubscribeBtn } from "./subscribeBtn";
 import { VideoLikeBtn } from "./videoLikeBtn";
 import { Bookmark, ArrowDownToLine, Forward } from "lucide-react";
-
 function VideoDetails({ video }) {
   return (
     <div className="w-full pt-3 px-2 md:px-0">
