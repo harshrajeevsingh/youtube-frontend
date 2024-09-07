@@ -1,11 +1,11 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
 import { fetchVideos } from "../api/videosApi";
-import { SkeletonVideoCard } from "./ui/mainPageVideo/skeletonVideoCard";
-import VideoCard from "./ui/mainPageVideo/videoCard";
-import { Link } from "react-router-dom";
+import { SkeletonVideoCard } from "./ui/main-page-video/skeletonVideoCard";
+import VideoCard from "./ui/main-page-video/videoCard";
 
 export const VideoListMain = () => {
   const { ref, inView } = useInView();
@@ -42,7 +42,7 @@ export const VideoListMain = () => {
   };
 
   const renderSkeletons = () => {
-    return Array.from({ length: 10 }).map((_, index) => (
+    return Array.from({ length: 9 }).map((_, index) => (
       <SkeletonVideoCard key={index} />
     ));
   };
@@ -56,7 +56,6 @@ export const VideoListMain = () => {
       {status === "success" && (
         <>
           {renderVideoCards()}
-          {/* {renderVideoCards()} */}
           {isFetchingNextPage && renderSkeletons()}
         </>
       )}

@@ -5,6 +5,7 @@ import WatchPage from "./pages/WatchPage";
 import SignUpPage from "./pages/SignUpPage";
 import Layout from "./components/Layout";
 import "./timeAgoConfig";
+import VideoUploadPage from "./pages/VideoUploadPage";
 
 if (
   localStorage.theme === "dark" ||
@@ -32,6 +33,10 @@ export default function App() {
             {
               path: "watch",
               element: <WatchPage />,
+            },
+            {
+              path: "videoupload",
+              element: <VideoUploadPage />,
             },
           ],
         },

@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import { Avatar, Button } from "@nextui-org/react";
 
 import DescriptionBox from "./descriptionBox";
 import { SubscribeBtn } from "./subscribeBtn";
 import { VideoLikeBtn } from "./videoLikeBtn";
 import { Bookmark, ArrowDownToLine, Forward } from "lucide-react";
+
 function VideoDetails({ video }) {
+  useEffect(() => {
+    console.log("VideoDetails rendered");
+  }, []);
+
   return (
     <div className="w-full pt-3 px-2 md:px-0">
       <h3 className="text-2xl text-default-700 font-semibold line-clamp-2">

@@ -7,7 +7,7 @@ import {
   Avatar,
   Button,
 } from "@nextui-org/react";
-
+import { Link } from "react-router-dom";
 import { Upload, MonitorUp, PencilLine } from "lucide-react";
 import { useLogoutUser } from "../../api/authApi";
 import { useUserStoreSelectors } from "../../store/userSlice";
@@ -30,6 +30,7 @@ const UserDropDown = () => {
           <DropdownItem
             key="new"
             startContent={<Upload strokeWidth={1} size={20} />}
+            href="/videoupload"
           >
             Upload Video
           </DropdownItem>

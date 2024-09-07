@@ -5,7 +5,7 @@ import { Spinner } from "@nextui-org/spinner";
 import { useVideoBackground } from "../hooks/UseVideoBg";
 
 import { useVideoById } from "../api/videosApi";
-import VideoDetails from "../components/ui/watchPageVideo/videoDetails";
+import VideoDetails from "../components/ui/watch-page-video/videoDetails";
 
 export const WatchPage = () => {
   const [searchParams] = useSearchParams();

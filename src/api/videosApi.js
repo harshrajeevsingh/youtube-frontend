@@ -12,7 +12,7 @@ export const fetchVideos = async ({
 }) => {
   const params = {
     page: pageParam,
-    limit: 10,
+    limit: 9,
     ...(userId && { userId }),
     ...(query && { query }),
     sortBy,
