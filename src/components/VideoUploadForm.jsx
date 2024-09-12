@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Upload, PlayCircle, Camera } from "lucide-react";
+import { Upload, Camera } from "lucide-react";
 
 const VideoUploadForm = () => {
   const {
@@ -9,13 +9,49 @@ const VideoUploadForm = () => {
     formState: { errors },
   } = useForm();
   const [videoPreview, setVideoPreview] = useState(null);
-  const [thumbnails, setThumbnails] = useState([]);
+  const [generatedThumbnail, setGeneratedThumbnail] = useState(null);
+  const [uploadedThumbnailFile, setUploadedThumbnailFile] = useState(null); // Store the actual file
+  const [uploadedThumbnailPreview, setUploadedThumbnailPreview] =
+    useState(null); // For preview
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
   const videoRef = useRef(null);
 
   const onSubmit = (data) => {
-    console.log({ ...data, selectedThumbnail });
-    // Handle form submission here
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("video", data.video[0]);
+
+    // Check which thumbnail is selected (uploaded or generated)
+    if (selectedThumbnail === generatedThumbnail) {
+      const thumbnailFile = base64ToFile(
+        generatedThumbnail,
+        "generated-thumbnail.jpg"
+      );
+      formData.append("thumbnail", thumbnailFile);
+    } else if (uploadedThumbnailFile) {
+      formData.append("thumbnail", uploadedThumbnailFile);
+    }
+
+    // Handle form submission logic
+    console.log(
+      formData.get("title"),
+      formData.get("description"),
+      formData.get("video"),
+      formData.get("thumbnail")
+    );
+  };
+
+  const base64ToFile = (base64String, filename) => {
+    const arr = base64String.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
   };
 
   const handleVideoChange = (e) => {
@@ -23,39 +59,35 @@ const VideoUploadForm = () => {
     if (file) {
       const videoUrl = URL.createObjectURL(file);
       setVideoPreview(videoUrl);
-      generateThumbnails(file);
+      generateThumbnail(file);
     }
   };
 
-  const generateThumbnails = (file) => {
+  const generateThumbnail = (file) => {
     const video = document.createElement("video");
     video.src = URL.createObjectURL(file);
+
     video.addEventListener("loadedmetadata", () => {
       const duration = video.duration;
-      const thumbnailTimes = [duration * 0.25, duration * 0.5, duration * 0.75];
+      const captureTime = duration / 2;
 
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      canvas.width = 320; // Set a fixed width for thumbnails
-      canvas.height = 180; // Maintain 16:9 aspect ratio
+      canvas.width = 320;
+      canvas.height = 180;
 
-      const generateThumbnail = (time) => {
-        return new Promise((resolve) => {
-          video.currentTime = time;
-          video.onseeked = () => {
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            resolve(canvas.toDataURL());
-          };
-        });
+      video.currentTime = captureTime;
+      video.onseeked = () => {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const thumbnail = canvas.toDataURL();
+        setGeneratedThumbnail(thumbnail);
+        setSelectedThumbnail(thumbnail); // Set generated thumbnail as default
       };
-
-      Promise.all(thumbnailTimes.map(generateThumbnail)).then(
-        (generatedThumbnails) => {
-          setThumbnails(generatedThumbnails);
-          setSelectedThumbnail(generatedThumbnails[0]);
-        }
-      );
     });
+
+    video.onerror = (e) => {
+      console.error("Error loading video:", e);
+    };
   };
 
   const handleThumbnailUpload = (e) => {
@@ -63,7 +95,10 @@ const VideoUploadForm = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setSelectedThumbnail(e.target.result);
+        const uploadedThumbPreview = e.target.result;
+        setUploadedThumbnailPreview(uploadedThumbPreview);
+        setUploadedThumbnailFile(file); // Store the actual file
+        setSelectedThumbnail(uploadedThumbPreview); // Set uploaded thumbnail as default
       };
       reader.readAsDataURL(file);
     }
@@ -139,7 +174,7 @@ const VideoUploadForm = () => {
                   />
                 </div>
               ) : (
-                <div className="py-12">
+                <div className="py-12 aspect-video flex flex-col items-center justify-center">
                   <Upload className="mx-auto h-12 w-12 text-gray-400" />
                   <p className="mt-2 text-sm text-gray-600">
                     Drag and drop your video here or click to select
@@ -160,29 +195,48 @@ const VideoUploadForm = () => {
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Thumbnail
         </label>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {thumbnails.map((thumbnail, index) => (
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Generated Thumbnail */}
+          {generatedThumbnail && (
             <div
-              key={index}
               className={`relative cursor-pointer ${
-                selectedThumbnail === thumbnail ? "ring-2 ring-blue-500" : ""
+                selectedThumbnail === generatedThumbnail
+                  ? "ring-2 ring-blue-500"
+                  : ""
               }`}
-              onClick={() => setSelectedThumbnail(thumbnail)}
+              onClick={() => setSelectedThumbnail(generatedThumbnail)}
             >
               <img
-                src={thumbnail}
-                alt={`Thumbnail ${index + 1}`}
+                src={generatedThumbnail}
+                alt="Generated Thumbnail"
                 className="w-full h-auto rounded-lg"
               />
             </div>
-          ))}
-          <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+          )}
+          {/* Uploaded Thumbnail */}
+          {uploadedThumbnailPreview && (
+            <div
+              className={`relative cursor-pointer ${
+                selectedThumbnail === uploadedThumbnailPreview
+                  ? "ring-2 ring-blue-500"
+                  : ""
+              }`}
+              onClick={() => setSelectedThumbnail(uploadedThumbnailPreview)}
+            >
+              <img
+                src={uploadedThumbnailPreview}
+                alt="Uploaded Thumbnail"
+                className="w-full h-auto rounded-lg"
+              />
+            </div>
+          )}
+          <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors aspect-video flex flex-col items-center justify-center">
             <input
               type="file"
               id="customThumbnail"
               accept="image/*"
               onChange={handleThumbnailUpload}
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer "
             />
             <Camera className="mx-auto h-8 w-8 text-gray-400" />
             <p className="mt-2 text-xs text-gray-600">
