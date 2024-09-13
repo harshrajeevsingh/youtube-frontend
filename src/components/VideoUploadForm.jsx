@@ -1,13 +1,25 @@
 import { useState, useRef } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { Upload, Camera } from "lucide-react";
+import { Button, Textarea, Input } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
+
+import { usePublishVideo } from "../api/videosApi";
 
 const VideoUploadForm = () => {
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    register,
+  } = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+    },
+  });
+  const navigate = useNavigate();
+  const publishMutation = usePublishVideo();
   const [videoPreview, setVideoPreview] = useState(null);
   const [generatedThumbnail, setGeneratedThumbnail] = useState(null);
   const [uploadedThumbnailFile, setUploadedThumbnailFile] = useState(null); // Store the actual file
@@ -20,7 +32,7 @@ const VideoUploadForm = () => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
-    formData.append("video", data.video[0]);
+    formData.append("videoFile", data.videoFile[0]);
 
     // Check which thumbnail is selected (uploaded or generated)
     if (selectedThumbnail === generatedThumbnail) {
@@ -34,12 +46,11 @@ const VideoUploadForm = () => {
     }
 
     // Handle form submission logic
-    console.log(
-      formData.get("title"),
-      formData.get("description"),
-      formData.get("video"),
-      formData.get("thumbnail")
-    );
+    publishMutation.mutate(formData, {
+      onSuccess: () => {
+        navigate("/");
+      },
+    });
   };
 
   const base64ToFile = (base64String, filename) => {
@@ -107,60 +118,63 @@ const VideoUploadForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md"
+      className="w-full dark:bg-neutral-900 bg-transparent lg:px-20 lg:py-7 p-5"
     >
       <div className="flex flex-col lg:flex-row gap-6">
+        {/* Title & Description Input */}
         <div className="lg:w-1/2">
           <div className="mb-6">
-            <label
-              htmlFor="title"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Title
-            </label>
-            <input
-              id="title"
-              {...register("title", { required: "Title is required" })}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter video title"
+            <Controller
+              name="title"
+              control={control}
+              rules={{ required: "Title is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type="text"
+                  label="Title"
+                  labelPlacement="outside"
+                  placeholder="Enter video title"
+                  isInvalid={!!errors.title}
+                  errorMessage={errors.title?.message}
+                />
+              )}
             />
-            {errors.title && (
-              <span className="text-red-500 text-xs italic">
-                {errors.title.message}
-              </span>
-            )}
           </div>
 
           <div className="mb-6">
-            <label
-              htmlFor="description"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Description
-            </label>
-            <textarea
-              id="description"
-              {...register("description")}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32"
-              placeholder="Enter video description"
+            <Controller
+              name="description"
+              control={control}
+              rules={{ required: "Description is required" }}
+              render={({ field }) => (
+                <Textarea
+                  {...field}
+                  minRows={6}
+                  variant="flat"
+                  label="Description"
+                  labelPlacement="outside"
+                  placeholder="Enter video description"
+                  isInvalid={!!errors.description}
+                  errorMessage={errors.description?.message}
+                />
+              )}
             />
           </div>
         </div>
 
+        {/* Video Section */}
         <div className="lg:w-1/2">
           <div className="mb-6">
-            <label
-              htmlFor="video"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
+            <label htmlFor="videoFile" className="block text-sm mb-2">
               Video
             </label>
-            <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+            <div className="relative border-2 border-dashed border-gray-400 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
               <input
                 type="file"
-                id="video"
+                id="videoFile"
                 accept="video/*"
-                {...register("video", { required: "Video is required" })}
+                {...register("videoFile", { required: "Video is required" })}
                 onChange={handleVideoChange}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
@@ -182,19 +196,18 @@ const VideoUploadForm = () => {
                 </div>
               )}
             </div>
-            {errors.video && (
-              <span className="text-red-500 text-xs italic">
-                {errors.video.message}
-              </span>
+            {errors.videoFile && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.videoFile.message}
+              </p>
             )}
           </div>
         </div>
       </div>
 
+      {/* Thumbnail Section */}
       <div className="mb-6">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Thumbnail
-        </label>
+        <label className="block text-sm  mb-2">Thumbnail</label>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Generated Thumbnail */}
           {generatedThumbnail && (
@@ -230,10 +243,10 @@ const VideoUploadForm = () => {
               />
             </div>
           )}
-          <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors aspect-video flex flex-col items-center justify-center">
+          <div className="relative border-2 border-dashed border-gray-400 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors aspect-video flex flex-col items-center justify-center">
             <input
               type="file"
-              id="customThumbnail"
+              id="thumbnail"
               accept="image/*"
               onChange={handleThumbnailUpload}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer "
@@ -246,13 +259,17 @@ const VideoUploadForm = () => {
         </div>
       </div>
 
+      {/* Button to submit  */}
       <div className="flex items-center justify-end">
-        <button
+        <Button
+          color="primary"
+          variant="shadow"
+          size="lg"
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          isLoading={publishMutation.isPending}
         >
-          Upload Video
-        </button>
+          {publishMutation.isPending ? "Uploading" : "Upload Video"}
+        </Button>
       </div>
     </form>
   );

@@ -92,3 +92,19 @@ export const useVideoLike = (videoId) => {
     },
   });
 };
+
+export const usePublishVideo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axiosInstance.post("/videos/", formData);
+      return data;
+    },
+    onError: (error) => {
+      console.error("Error during publishing video", error);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("videos");
+    },
+  });
+};
