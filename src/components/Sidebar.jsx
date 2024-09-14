@@ -44,30 +44,39 @@ export const Sidebar = () => {
           }
         />
         <Tab
-          key="liked_videos"
+          key="/likedVideo"
           title={
-            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3  md:w-32 w-full">
+            <Link
+              to="/likedVideo"
+              className="flex justify-center md:justify-normal md:text-base sm:gap-3  md:w-32 w-full"
+            >
               <ThumbsUp />
               <span className="hidden sm:block">Liked videos</span>
-            </div>
+            </Link>
           }
         />
         <Tab
-          key="subscriptions"
+          key="/subscription"
           title={
-            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3 md:w-32 w-full ">
+            <Link
+              to="/subscription"
+              className="flex justify-center md:justify-normal md:text-base sm:gap-3 md:w-32 w-full "
+            >
               <Podcast />
               <span className="hidden sm:block">Subscription</span>
-            </div>
+            </Link>
           }
         />
         <Tab
-          key="history"
+          key="/history"
           title={
-            <div className="flex justify-center md:justify-normal md:text-base sm:gap-3 md:w-32  w-full">
+            <Link
+              to="/history"
+              className="flex justify-center md:justify-normal md:text-base sm:gap-3 md:w-32  w-full"
+            >
               <History />
               <span className="hidden sm:block">History</span>
-            </div>
+            </Link>
           }
         />
       </Tabs>
