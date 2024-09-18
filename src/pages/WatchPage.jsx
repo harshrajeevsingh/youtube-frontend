@@ -6,7 +6,7 @@ import { useVideoBackground } from "../hooks/UseVideoBg";
 
 import { useVideoById } from "../api/videosApi";
 import VideoDetails from "../components/ui/watch-page-video/videoDetails";
-
+import RecommendVideo from "../components/ui/watch-page-video/recommendVideo";
 export const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
@@ -64,10 +64,11 @@ export const WatchPage = () => {
 
       {/* This will contain recommended videos*/}
       <div className="static xl:absolute top-0 right-0 w-full xl:w-2/6 lg:mt-4  ">
-        <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div>
-        <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div>
-        <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div>
-        <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div>
+        {video && <RecommendVideo excludeVideoId={videoId} />}
+        {/* <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div> */}
+        {/* <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div> */}
+        {/* <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div> */}
+        {/* <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div> */}
       </div>
     </div>
   );
