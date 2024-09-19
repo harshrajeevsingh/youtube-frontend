@@ -132,7 +132,7 @@ const VideoCard = ({ video }) => {
           className="flex-shrink-0 mt-2"
         />
         <div className="flex flex-col w-full min-w-0">
-          <h4 className="text-large font-semibold text-default-600 line-clamp-2">
+          <h4 className="text-large font-semibold text-default-600 line-clamp-2 mt-1">
             {video?.title}
           </h4>
           <div className="flex lg:flex-col gap-1">

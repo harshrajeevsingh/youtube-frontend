@@ -7,7 +7,7 @@ const SideCard = ({ video }) => {
   return (
     <Card
       className={`w-full bg-transparent 
-        flex sm:flex-row  flex-col mb-3 px-2 gap-1
+        flex sm:flex-row  flex-col mb-4 md:pl-4 md:pr-1 px-2 gap-1
       `}
       shadow="none"
       radius="none"
@@ -17,7 +17,7 @@ const SideCard = ({ video }) => {
       disableAnimation
     >
       <CardHeader
-        className={`w-full sm:w-2/5 aspect-video relative rounded-xl z-0 p-0 `}
+        className={`w-full sm:w-2/5 aspect-video relative rounded-xl z-0 p-0`}
       >
         <Image
           src={video?.thumbnail?.url}
@@ -32,7 +32,7 @@ const SideCard = ({ video }) => {
       </CardHeader>
       <CardBody
         className={`
-         sm:w-3/5 w-full flex flex-row items-start px-1 py-2 gap-3`}
+         sm:w-3/5 w-full flex flex-row items-center p-0 pl-1 gap-3`}
       >
         <Avatar
           radius="full"
@@ -43,7 +43,7 @@ const SideCard = ({ video }) => {
 
         <div className="flex flex-col w-full min-w-0">
           <h4
-            className={`text-large font-medium text-default-600 line-clamp-2`}
+            className={`text-large md:text-medium font-medium text-default-600 leading-tight line-clamp-2 mt-1 mb-1 md:mt-0`}
           >
             {video?.title}
           </h4>

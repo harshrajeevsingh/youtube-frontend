@@ -7,6 +7,7 @@ import { useVideoBackground } from "../hooks/UseVideoBg";
 import { useVideoById } from "../api/videosApi";
 import VideoDetails from "../components/ui/watch-page-video/videoDetails";
 import RecommendVideo from "../components/ui/watch-page-video/recommendVideo";
+
 export const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
@@ -37,6 +38,7 @@ export const WatchPage = () => {
           <video
             ref={videoRef}
             controls
+            autoPlay={true}
             className="sticky lg:static w-full xl:w-4/6 top-16 aspect-video lg:rounded-xl lg:mt-4  z-20"
             src={video.data.videoFile.url}
           />
