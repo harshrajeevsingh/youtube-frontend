@@ -12,7 +12,7 @@ export const fetchVideos = async ({
 }) => {
   const params = {
     page: pageParam,
-    limit: 10,
+    limit: 9,
     ...(userId && { userId }),
     ...(query && { query }),
     sortBy,
@@ -89,6 +89,22 @@ export const useVideoLike = (videoId) => {
     onSettled: () => {
       console.log("Mutation settled, invalidating queries");
       queryClient.invalidateQueries(["video", { videoId }]);
+    },
+  });
+};
+
+export const usePublishVideo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axiosInstance.post("/videos/", formData);
+      return data;
+    },
+    onError: (error) => {
+      console.error("Error during publishing video", error);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("videos");
     },
   });
 };

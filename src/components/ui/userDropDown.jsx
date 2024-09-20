@@ -5,8 +5,10 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
+  Button,
 } from "@nextui-org/react";
-
+import { Link } from "react-router-dom";
+import { Upload, MonitorUp, PencilLine } from "lucide-react";
 import { useLogoutUser } from "../../api/authApi";
 import { useUserStoreSelectors } from "../../store/userSlice";
 
@@ -18,6 +20,29 @@ const UserDropDown = () => {
   };
   return (
     <NavbarContent justify="end" className="md:px-10">
+      <Dropdown>
+        <DropdownTrigger>
+          <Button isIconOnly variant="light">
+            <MonitorUp strokeWidth={1} />
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
+          <DropdownItem
+            key="new"
+            startContent={<Upload strokeWidth={1} size={20} />}
+            href="/videoupload"
+          >
+            Upload Video
+          </DropdownItem>
+          <DropdownItem
+            key="copy"
+            startContent={<PencilLine strokeWidth={1} size={20} />}
+          >
+            Create Post
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
           <Avatar

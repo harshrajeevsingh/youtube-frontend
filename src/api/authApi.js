@@ -6,6 +6,7 @@ import useUserStore from "../store/userSlice";
 
 // Register User Mutation
 export const useRegisterUser = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axiosInstance.post("/users/register", formData);
@@ -13,6 +14,9 @@ export const useRegisterUser = () => {
     },
     onError: (error) => {
       console.error("Error during signup", error);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("user");
     },
   });
 };

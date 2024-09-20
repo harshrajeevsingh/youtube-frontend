@@ -5,6 +5,12 @@ import WatchPage from "./pages/WatchPage";
 import SignUpPage from "./pages/SignUpPage";
 import Layout from "./components/Layout";
 import "./timeAgoConfig";
+import VideoUploadPage from "./pages/VideoUploadPage";
+import LoginPage from "./pages/LoginPage";
+import LikedVideosPage from "./pages/LikedVideosPage";
+import PrivateRoute from "./components/PrivateRoute";
+import SubscriptionPage from "./pages/SubscriptionPage";
+import HistoryPage from "./pages/HistoryPage";
 
 if (
   localStorage.theme === "dark" ||
@@ -32,6 +38,38 @@ export default function App() {
             {
               path: "watch",
               element: <WatchPage />,
+            },
+            {
+              path: "videoupload",
+              element: <VideoUploadPage />,
+            },
+            {
+              path: "likedVideo",
+              element: (
+                <PrivateRoute>
+                  <LikedVideosPage />
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: "subscription",
+              element: (
+                <PrivateRoute>
+                  <SubscriptionPage />
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: "history",
+              element: (
+                <PrivateRoute>
+                  <HistoryPage />
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: "login",
+              element: <LoginPage />,
             },
           ],
         },
