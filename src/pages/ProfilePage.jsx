@@ -14,7 +14,7 @@ const ProfilePage = () => {
   return (
     <div className="w-full min-h-svh flex flex-col md:px-10  px-1">
       {/* Cover Image */}
-      <div className="w-full h-20 md:h-28 lg:h-40 xl:h-48 mt-2 rounded-xl relative">
+      <div className="w-full h-24 md:h-28 lg:h-40 xl:h-48 mt-2 rounded-xl md:px-4 px-2 relative">
         <img
           src={data?.data?.coverImg?.url}
           alt="Cover"
@@ -31,10 +31,8 @@ const ProfilePage = () => {
           <h2 className="text-xl md:text-3xl font-bold">
             {data?.data?.fullName}
           </h2>
-          <p className="text-base md:text-lg font-semibold">
-            @{data?.data?.username}
-          </p>
-          <p className="text-sm md:text-base font-semibold">
+          <p className="text-base md:text-lg ">@{data?.data?.username}</p>
+          <p className="text-sm md:text-base ">
             {data?.data?.subscribersCount} Subsribers
           </p>
         </div>

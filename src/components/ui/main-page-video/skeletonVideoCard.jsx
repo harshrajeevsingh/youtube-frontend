@@ -7,11 +7,11 @@ export const SkeletonVideoCard = () => {
       <Skeleton className="rounded-xl">
         <div className="aspect-video rounded-lg bg-default-300"></div>
       </Skeleton>
-      <div className="max-w-[300px] w-full flex items-center gap-3">
+      <div className="w-full flex items-center gap-3">
         <div>
           <Skeleton
             disableAnimation={true}
-            className="flex rounded-full w-12 h-12"
+            className="w-12 h-12 flex rounded-full "
           />
         </div>
         <div className="w-full flex flex-col gap-2">

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardBody, Avatar, CardHeader, Image } from "@nextui-org/react";
 import ReactTimeAgo from "react-time-ago";
 import { Volume2, VolumeX } from "lucide-react";
@@ -125,20 +126,24 @@ const VideoCard = ({ video }) => {
         )}
       </CardHeader>
       <CardBody className="flex flex-row items-start px-1 py-2 gap-3">
-        <Avatar
-          radius="full"
-          size="md"
-          src={video?.ownerDetails?.avatar.url}
-          className="flex-shrink-0 mt-2"
-        />
+        <Link to={`/c/${video?.ownerDetails?.username}`}>
+          <Avatar
+            radius="full"
+            size="md"
+            src={video?.ownerDetails?.avatar.url}
+            className="flex-shrink-0 mt-2"
+          />
+        </Link>
         <div className="flex flex-col w-full min-w-0">
           <h4 className="text-large font-semibold text-default-600 line-clamp-2 mt-1">
             {video?.title}
           </h4>
           <div className="flex lg:flex-col gap-1">
-            <h5 className="text-sm text-default-500 truncate">
-              {video?.ownerDetails?.username}
-            </h5>
+            <Link to={`/c/${video?.ownerDetails?.username}`}>
+              <h5 className="text-sm text-default-500 truncate">
+                {video?.ownerDetails?.username}
+              </h5>
+            </Link>
             <span className="lg:hidden block text-sm text-default-500">•</span>
             <h5 className="text-sm text-default-500 flex items-center gap-1">
               <span className="truncate">

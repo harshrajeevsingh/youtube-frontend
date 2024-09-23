@@ -48,7 +48,7 @@ export const VideoListMain = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-7 mx-3">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-7 px-3">
       {status === "pending" && renderSkeletons()}
       {status === "error" && (
         <p className="text-red-500">Error: {error.message}</p>
