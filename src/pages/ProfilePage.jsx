@@ -1,7 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { Image, Spinner, Button, Tabs, Tab } from "@nextui-org/react";
+
 import { useUserById } from "../api/userApi";
-import { Image, Spinner, Button } from "@nextui-org/react";
+import VideoTab from "../components/ui/profile-channel/videoTab";
+import { SubscribeBtn } from "../components/ui/watch-page-video/subscribeBtn";
 
 const ProfilePage = () => {
   const { profileId } = useParams();
@@ -28,7 +31,7 @@ const ProfilePage = () => {
           <Image src={data?.data?.avatar?.url} radius="full" />
         </div>
         <div>
-          <h2 className="text-xl md:text-3xl font-bold">
+          <h2 className="text-xl md:text-3xl font-semibold">
             {data?.data?.fullName}
           </h2>
           <p className="text-base md:text-lg ">@{data?.data?.username}</p>
@@ -36,14 +39,25 @@ const ProfilePage = () => {
             {data?.data?.subscribersCount} Subsribers
           </p>
         </div>
-        <Button
-          color="primary"
-          radius="full"
-          size="lg"
-          className="self-center "
-        >
-          {data?.data?.isSubscribed ? "Unsubscribe" : "Subsribe"}
-        </Button>
+        <div className="self-center">
+          <SubscribeBtn
+            getCreatorId={() => data?.data?._id}
+            getIsSubscribed={() => data?.data?.isSubscribed}
+            getSubscribeButtonId={() => data?.data?._id}
+          />
+        </div>
+      </div>
+
+      {/* Tabs: Video & Posts */}
+      <div className="flex w-full flex-col">
+        <Tabs aria-label="Options" variant="underlined" size="lg">
+          <Tab key="videos" title="Videos">
+            <VideoTab userId={data?.data?._id} />
+          </Tab>
+          <Tab key="posts" title="Posts">
+            <p>This feature is under development. Wait for few days.</p>
+          </Tab>
+        </Tabs>
       </div>
     </div>
   );

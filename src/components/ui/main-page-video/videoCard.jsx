@@ -7,7 +7,7 @@ import { Volume2, VolumeX } from "lucide-react";
 import { useMuteSelectors } from "../../../store/muteSlice";
 import { formatDuration } from "../../../helpers/formatVideoDuration";
 
-const VideoCard = ({ video }) => {
+const VideoCard = ({ video, layout = "mainPage" }) => {
   const [hover, setHover] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -62,7 +62,10 @@ const VideoCard = ({ video }) => {
 
   return (
     <Card
-      className="w-full bg-transparent"
+      // className="w-full bg-transparent"
+      className={`w-full bg-transparent ${
+        layout === "channelPage" ? "flex flex-row md:flex-col gap-1" : ""
+      }`}
       shadow="none"
       radius="none"
       fullWidth
@@ -71,7 +74,10 @@ const VideoCard = ({ video }) => {
       disableAnimation
     >
       <CardHeader
-        className="relative w-full aspect-video rounded-xl z-0 p-0 "
+        // className="relative w-full aspect-video rounded-xl z-0 p-0 "
+        className={`relative  ${
+          layout === "channelPage" ? "w-2/6 md:w-full" : "w-full"
+        } aspect-video rounded-xl z-0 p-0`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -126,14 +132,16 @@ const VideoCard = ({ video }) => {
         )}
       </CardHeader>
       <CardBody className="flex flex-row items-start px-1 py-2 gap-3">
-        <Link to={`/c/${video?.ownerDetails?.username}`}>
-          <Avatar
-            radius="full"
-            size="md"
-            src={video?.ownerDetails?.avatar.url}
-            className="flex-shrink-0 mt-2"
-          />
-        </Link>
+        {layout === "mainPage" && (
+          <Link to={`/c/${video?.ownerDetails?.username}`}>
+            <Avatar
+              radius="full"
+              size="md"
+              src={video?.ownerDetails?.avatar.url}
+              className="flex-shrink-0 mt-2"
+            />
+          </Link>
+        )}
         <div className="flex flex-col w-full min-w-0">
           <h4 className="text-large font-semibold text-default-600 line-clamp-2 mt-1">
             {video?.title}
