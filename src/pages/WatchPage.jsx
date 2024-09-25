@@ -7,6 +7,7 @@ import { useVideoBackground } from "../hooks/UseVideoBg";
 import { useVideoById } from "../api/videosApi";
 import VideoDetails from "../components/ui/watch-page-video/videoDetails";
 import RecommendVideo from "../components/ui/watch-page-video/recommendVideo";
+import CommentSection from "../components/ui/watch-page-video/comments/commentSection";
 
 export const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -59,9 +60,9 @@ export const WatchPage = () => {
       {/* This will contain video details + Comment section */}
       <div className="w-full xl:w-4/6 z-10">
         {video && <VideoDetails video={video?.data} />}
-        <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
-        <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
-        <div className="bg-transparent border-5 border-red-400 w-full h-96"></div>
+        {video && <CommentSection videoId={video?.data?._id} />}
+        {/* <div className="bg-transparent border-5 border-red-400 w-full h-96"></div> */}
+        {/* <div className="bg-transparent border-5 border-red-400 w-full h-96"></div> */}
       </div>
 
       {/* This will contain recommended videos*/}

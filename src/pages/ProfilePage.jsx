@@ -36,7 +36,8 @@ const ProfilePage = () => {
           </h2>
           <p className="text-base md:text-lg ">@{data?.data?.username}</p>
           <p className="text-sm md:text-base ">
-            {data?.data?.subscribersCount} Subsribers
+            {data?.data?.subscribersCount}{" "}
+            {data?.data?.subscribersCount > 1 ? "Subscribers" : "Subscriber"}
           </p>
         </div>
         <div className="self-center">

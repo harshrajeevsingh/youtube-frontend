@@ -42,7 +42,7 @@ const VideoTab = ({ userId }) => {
   };
 
   const renderSkeletons = () => {
-    return Array.from({ length: 4 }).map((_, index) => (
+    return Array.from({ length: 10 }).map((_, index) => (
       <SkeletonVideoCard key={index} />
     ));
   };
