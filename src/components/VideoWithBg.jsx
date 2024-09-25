@@ -1,28 +1,29 @@
 import { useVideoBackground } from "../hooks/UseVideoBg";
 
-export const VideoWithBackground = (props) => {
+export const VideoWithBackground = ({ src }) => {
   const { videoRef, canvasRef } = useVideoBackground();
 
   return (
-    <section className="top-16 w-full h-max">
+    <>
+      {" "}
       <video
         ref={videoRef}
         controls
-        className="w-full aspect-video lg:rounded-xl xl:mt-7"
-        {...props}
+        autoPlay={true}
+        className="sticky lg:static w-full xl:w-4/6 top-16 aspect-video lg:rounded-xl lg:mt-4  z-20"
+        src={src}
       />
       <canvas
         width="10"
         height="6"
         aria-hidden="true"
-        className="absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-10/12 w-full h-[900px]  dark:opacity-20 opacity-15"
+        className="absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-11/12 w-full h-[900px]  dark:opacity-20 opacity-15"
         ref={canvasRef}
       />
-      <div className="pointer-events-none absolute -top-16 lg:-left-4 left-0 -z-10 lg:w-10/12 w-full h-[900px]">
+      <div className="pointer-events-none absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-11/12 w-full h-[900px]">
         <div className="absolute hidden lg:block right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent dark:from-background" />
-        <div className="absolute hidden lg:block bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent dark:from-background" />
-        <div className="absolute left-0 top-0 w-full h-32 bg-gradient-to-b to-10% from-background to-transparent dark:from-background" />
+        <div className="absolute  bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent dark:from-background" />
       </div>
-    </section>
+    </>
   );
 };

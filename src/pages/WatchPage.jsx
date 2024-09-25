@@ -1,19 +1,16 @@
-import { useEffect, memo } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Spinner } from "@nextui-org/spinner";
-
-import { useVideoBackground } from "../hooks/UseVideoBg";
 
 import { useVideoById } from "../api/videosApi";
 import VideoDetails from "../components/ui/watch-page-video/videoDetails";
 import RecommendVideo from "../components/ui/watch-page-video/recommendVideo";
 import CommentSection from "../components/ui/watch-page-video/comments/commentSection";
+import { VideoWithBackground } from "../components/VideoWithBg";
 
 export const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
-
-  const { videoRef, canvasRef } = useVideoBackground();
 
   const { data: video, isLoading, error } = useVideoById(videoId);
 
@@ -22,7 +19,7 @@ export const WatchPage = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-wrap w-full min-h-svh">
+    <div className="relative flex flex-wrap w-full min-h-svh md:mb-10 mb-0">
       {/* This will contain video */}
 
       {!video && (
@@ -33,29 +30,7 @@ export const WatchPage = () => {
           )}
         </div>
       )}
-      {video && (
-        <>
-          {" "}
-          <video
-            ref={videoRef}
-            controls
-            autoPlay={true}
-            className="sticky lg:static w-full xl:w-4/6 top-16 aspect-video lg:rounded-xl lg:mt-4  z-20"
-            src={video.data.videoFile.url}
-          />
-          <canvas
-            width="10"
-            height="6"
-            aria-hidden="true"
-            className="absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-11/12 w-full h-[900px]  dark:opacity-20 opacity-15"
-            ref={canvasRef}
-          />
-          <div className="pointer-events-none absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-11/12 w-full h-[900px]">
-            <div className="absolute hidden lg:block right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent dark:from-background" />
-            <div className="absolute  bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent dark:from-background" />
-          </div>
-        </>
-      )}
+      {video && <VideoWithBackground src={video?.data?.videoFile?.url} />}
 
       {/* This will contain video details + Comment section */}
       <div className="w-full xl:w-4/6 z-10">
