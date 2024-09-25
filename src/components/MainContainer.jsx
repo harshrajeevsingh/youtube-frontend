@@ -48,7 +48,7 @@ import VideoListMain from "./VideoListMain";
 
 export const MainContainer = () => {
   return (
-    <div className="min-h-svh">
+    <div className="w-full min-h-svh">
       <VideoListMain />
     </div>
   );

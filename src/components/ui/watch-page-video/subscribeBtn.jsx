@@ -5,18 +5,19 @@ import { LoginModal } from "../loginModal";
 import { useSubscribeToCreator } from "../../../api/subscribeApi";
 import { useUserStoreSelectors } from "../../../store/userSlice";
 
-export const SubscribeBtn = ({ data: video }) => {
+/*
+export const SubscribeBtn = ({ data }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const user = useUserStoreSelectors.use.user();
 
   const { mutate: subscribeToCreator, isLoading } = useSubscribeToCreator(
-    video?._id
+    data?._id
   );
 
   const handleSubscribe = () => {
     if (user) {
-      subscribeToCreator(video.ownerDetails._id);
+      subscribeToCreator(data.ownerDetails._id);
     } else {
       setIsLoginModalOpen(true);
     }
@@ -30,13 +31,57 @@ export const SubscribeBtn = ({ data: video }) => {
         onClick={handleSubscribe}
         isLoading={isLoading}
         className={`font-semibold px-7 lg:ml-5 ml-auto ${
-          video?.ownerDetails?.isSubscribed
+          data?.ownerDetails?.isSubscribed
             ? "bg-default-100 text-foreground/65"
             : ""
         }`}
       >
-        {video?.ownerDetails?.isSubscribed ? "Unsubscribe" : "Subscribe"}
+        {data?.ownerDetails?.isSubscribed ? "Unsubscribe" : "Subscribe"}
         {console.log("Subscribe btn re-rendered")}
+      </Button>
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onOpenChange={setIsLoginModalOpen}
+      />
+    </>
+  );
+};
+*/
+
+export const SubscribeBtn = ({
+  getCreatorId,
+  getIsSubscribed,
+  getSubscribeButtonId,
+}) => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const user = useUserStoreSelectors.use.user();
+  const isSubscribed = getIsSubscribed();
+  const creatorId = getCreatorId();
+  const subscribeButtonId = getSubscribeButtonId();
+
+  const { mutate: subscribeToCreator, isLoading } =
+    useSubscribeToCreator(subscribeButtonId);
+
+  const handleSubscribe = () => {
+    if (user) {
+      subscribeToCreator(creatorId);
+    } else {
+      setIsLoginModalOpen(true);
+    }
+  };
+
+  return (
+    <>
+      <Button
+        color="primary"
+        radius="full"
+        onClick={handleSubscribe}
+        isLoading={isLoading}
+        className={`font-semibold px-7 lg:ml-5 ml-auto ${
+          isSubscribed ? "bg-default-100 text-foreground/65" : ""
+        }`}
+      >
+        {isSubscribed ? "Unsubscribe" : "Subscribe"}
       </Button>
       <LoginModal
         isOpen={isLoginModalOpen}

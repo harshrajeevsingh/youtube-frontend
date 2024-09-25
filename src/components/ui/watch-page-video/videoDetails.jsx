@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Avatar, Button } from "@nextui-org/react";
+import { Link } from "react-router-dom";
+import { Bookmark, ArrowDownToLine, Forward } from "lucide-react";
 
 import DescriptionBox from "./descriptionBox";
 import { SubscribeBtn } from "./subscribeBtn";
 import { VideoLikeBtn } from "./videoLikeBtn";
-import { Bookmark, ArrowDownToLine, Forward } from "lucide-react";
 
 function VideoDetails({ video }) {
   useEffect(() => {
@@ -18,16 +19,24 @@ function VideoDetails({ video }) {
       </h3>
       <div className="flex lg:flex-row flex-col md:justify-between justify-normal md:items-center items-start mt-3">
         <div className="flex gap-4 lg:w-2/5 w-full items-center px-2 md:px-0">
-          <Avatar src={video?.ownerDetails?.avatar?.url} />
+          <Link to={`/c/${video?.ownerDetails?.username}`}>
+            <Avatar src={video?.ownerDetails?.avatar?.url} />
+          </Link>
           <div className="flex flex-col">
-            <p className="text-lg text-default-700">
-              @{video?.ownerDetails?.username}
-            </p>
+            <Link to={`/c/${video?.ownerDetails?.username}`}>
+              <p className="text-lg text-default-700">
+                @{video?.ownerDetails?.username}
+              </p>
+            </Link>
             <p className="text-sm text-default-700">
               {video?.ownerDetails?.subscribersCount} {"subscribers"}
             </p>
           </div>
-          <SubscribeBtn data={video} />
+          <SubscribeBtn
+            getCreatorId={() => video?.ownerDetails?._id}
+            getIsSubscribed={() => video?.ownerDetails?.isSubscribed}
+            getSubscribeButtonId={() => video?._id}
+          />
         </div>
         {/* Other Buttons */}
         <div className="relative w-full lg:w-auto pl-2 md:pl-0">

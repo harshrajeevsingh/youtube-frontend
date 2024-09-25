@@ -3,7 +3,7 @@ import ReactTimeAgo from "react-time-ago";
 
 import { formatDuration } from "../../../helpers/formatVideoDuration";
 
-const SideCard = ({ video }) => {
+const SideCard = ({ video, layout = "watchPage" }) => {
   return (
     <Card
       className={`w-full bg-transparent 

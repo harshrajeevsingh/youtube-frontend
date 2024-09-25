@@ -11,6 +11,7 @@ import LikedVideosPage from "./pages/LikedVideosPage";
 import PrivateRoute from "./components/PrivateRoute";
 import SubscriptionPage from "./pages/SubscriptionPage";
 import HistoryPage from "./pages/HistoryPage";
+import ProfilePage from "./pages/ProfilePage";
 
 if (
   localStorage.theme === "dark" ||
@@ -42,6 +43,10 @@ export default function App() {
             {
               path: "videoupload",
               element: <VideoUploadPage />,
+            },
+            {
+              path: "c/:profileId",
+              element: <ProfilePage />,
             },
             {
               path: "likedVideo",
