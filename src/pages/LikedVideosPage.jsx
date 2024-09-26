@@ -8,7 +8,12 @@ const LikedVideosPage = () => {
   const { data, isLoading, error } = useFetchLikedVideos();
   const user = useUserStoreSelectors.use.user();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className="w-full grid place-content-center">
+        <Spinner />
+      </div>
+    );
   if (error) return <p>{error}</p>;
 
   return (

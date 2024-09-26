@@ -124,3 +124,17 @@ export const useFetchLikedVideos = () => {
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
+
+/* Fetch Watch History */
+
+const fetchHistory = async () => {
+  const response = await axiosInstance.get(`users/history`);
+  return response.data;
+};
+
+export const useFetchWatchHistory = () => {
+  return useQuery({
+    queryKey: ["history"],
+    queryFn: () => fetchHistory(),
+  });
+};
