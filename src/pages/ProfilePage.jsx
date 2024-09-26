@@ -11,8 +11,19 @@ const ProfilePage = () => {
 
   const { data, isLoading, error } = useUserById(profileId);
 
-  if (isLoading) return <Spinner />;
-  if (error) return <p>Error loading profile</p>;
+  if (isLoading)
+    return (
+      <div className="w-full grid place-content-center">
+        {" "}
+        <Spinner />{" "}
+      </div>
+    );
+  if (error)
+    return (
+      <div className="w-full grid place-content-center">
+        <p className="text-red-500">Error loading profile</p>
+      </div>
+    );
 
   return (
     <div className="w-full min-h-svh flex flex-col md:px-10  px-1">
