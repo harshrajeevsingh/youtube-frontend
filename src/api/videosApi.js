@@ -93,6 +93,7 @@ export const useVideoLike = (videoId) => {
   });
 };
 
+/* Upload Video */
 export const usePublishVideo = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -106,5 +107,20 @@ export const usePublishVideo = () => {
     onSuccess: () => {
       queryClient.invalidateQueries("videos");
     },
+  });
+};
+
+/* fetch Liked Videos */
+
+const fetchLikedVideos = async () => {
+  const response = await axiosInstance.get(`likes/videos`);
+  return response.data;
+};
+
+export const useFetchLikedVideos = () => {
+  return useQuery({
+    queryKey: ["video"],
+    queryFn: () => fetchLikedVideos(),
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
