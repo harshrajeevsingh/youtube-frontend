@@ -49,6 +49,10 @@ export default function App() {
               element: <ProfilePage />,
             },
             {
+              path: "c/:profileId/posts",
+              element: <ProfilePage />,
+            },
+            {
               path: "likedVideo",
               element: (
                 <PrivateRoute>

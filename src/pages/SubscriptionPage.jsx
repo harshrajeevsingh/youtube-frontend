@@ -2,8 +2,8 @@ import React from "react";
 
 const SubscriptionPage = () => {
   return (
-    <div>
-      <p className="text-green-500">This is Susbcriptions Page</p>
+    <div className="w-full min-h-svh p-5">
+      <p>This Subscription Page is under development</p>
     </div>
   );
 };

@@ -3,8 +3,6 @@ import ReactTimeAgo from "react-time-ago";
 import { Avatar } from "@nextui-org/react";
 
 const CommentCard = ({ comment }) => {
-  let description =
-    "Hello there chc uyhsi isyhaskchdg asudgasuiudg aushuagdf asiduiafj dvghyjdgjhgas gdgyfdyfyuj fdfsf gyuhgyvdyuf fdfyuaf dyutsyudf sfdygsyfdyf sdgsuif dyfysf ";
   return (
     <div className="w-full inline-flex gap-3 my-3">
       <Link to={`/c/${comment?.owner?.username}`} className="pt-2">
@@ -28,7 +26,6 @@ const CommentCard = ({ comment }) => {
           />
         </div>
         <p className="text-sm font-medium">{comment?.content}</p>
-        {/* <p className="text-sm font-medium">{description}</p> */}
       </div>
     </div>
   );

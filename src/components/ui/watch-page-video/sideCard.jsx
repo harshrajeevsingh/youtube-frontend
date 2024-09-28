@@ -3,7 +3,7 @@ import ReactTimeAgo from "react-time-ago";
 
 import { formatDuration } from "../../../helpers/formatVideoDuration";
 
-const SideCard = ({ video, layout = "watchPage" }) => {
+const SideCard = ({ video }) => {
   return (
     <Card
       className={`w-full bg-transparent 
@@ -31,8 +31,10 @@ const SideCard = ({ video, layout = "watchPage" }) => {
         </div>
       </CardHeader>
       <CardBody
+        // className={`
+        //  sm:w-3/5 w-full flex flex-row items-center p-0 pl-1 gap-3`}
         className={`
-         sm:w-3/5 w-full flex flex-row items-center p-0 pl-1 gap-3`}
+         sm:w-3/5 w-full flex flex-row items-start  p-0 pl-1 gap-3`}
       >
         <Avatar
           radius="full"

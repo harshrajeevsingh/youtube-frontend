@@ -7,17 +7,31 @@ import {
   Avatar,
   Button,
 } from "@nextui-org/react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Upload, MonitorUp, PencilLine } from "lucide-react";
 import { useLogoutUser } from "../../api/authApi";
 import { useUserStoreSelectors } from "../../store/userSlice";
 
 const UserDropDown = () => {
+  const navigate = useNavigate();
   const user = useUserStoreSelectors.use.user();
   const logoutMutation = useLogoutUser();
   const handleLogout = () => {
     logoutMutation.mutate();
   };
+
+  const handleCreatePost = () => {
+    if (user) {
+      navigate(`/c/${user.username}/posts`, {
+        state: { createPost: true },
+        replace: true,
+      });
+    } else {
+      // Handle the case when the user is not logged in
+      console.log("User must be logged in to create a post");
+    }
+  };
+
   return (
     <NavbarContent justify="end" className="md:px-10">
       <Dropdown>
@@ -37,6 +51,7 @@ const UserDropDown = () => {
           <DropdownItem
             key="copy"
             startContent={<PencilLine strokeWidth={1} size={20} />}
+            onPress={handleCreatePost}
           >
             Create Post
           </DropdownItem>
