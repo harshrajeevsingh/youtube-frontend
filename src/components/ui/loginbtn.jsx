@@ -8,12 +8,12 @@ import {
   useDisclosure,
   Input,
   Link,
-} from "@nextui-org/react";
-import { useForm } from "react-hook-form";
-import { useLoginUser } from "../../api/authApi";
-import { useUserStoreSelectors } from "../../store/userSlice";
-import { MailIcon } from "../icons/mailIcon";
-import { LockIcon } from "../icons/lockIcon";
+} from '@nextui-org/react';
+import { useForm } from 'react-hook-form';
+import { useLoginUser } from '../../api/authApi';
+import { useUserStoreSelectors } from '../../store/userSlice';
+import { MailIcon } from '../icons/mailIcon';
+import { LockIcon } from '../icons/lockIcon';
 
 export default function Login() {
   const {
@@ -56,7 +56,7 @@ export default function Login() {
               <ModalBody>
                 <Input
                   type="email"
-                  {...register("email", { required: true })}
+                  {...register('email', { required: true })}
                   autoFocus
                   endContent={
                     <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -70,7 +70,7 @@ export default function Login() {
                 )}
                 <Input
                   type="password"
-                  {...register("password", { required: true })}
+                  {...register('password', { required: true })}
                   endContent={
                     <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                   }
@@ -94,7 +94,7 @@ export default function Login() {
                     You entered invalid credentials
                   </p>
                 ) : (
-                  ""
+                  ''
                 )}
               </ModalBody>
               <ModalFooter>

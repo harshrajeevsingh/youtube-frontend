@@ -1,11 +1,11 @@
-import axiosInstance from "../helpers/axios";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import axiosInstance from '../helpers/axios';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const fetchCommentByVideoId = async ({
   pageParam = 1,
   videoId,
-  sortBy = "createdAt",
-  sortType = "desc",
+  sortBy = 'createdAt',
+  sortType = 'desc',
 }) => {
   const params = {
     page: pageParam,
@@ -29,10 +29,10 @@ export const useAddComment = (videoId) => {
       return data;
     },
     onError: (error) => {
-      console.error("Error adding comment", error);
+      console.error('Error adding comment', error);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("comments");
+      queryClient.invalidateQueries('comments');
     },
   });
 };

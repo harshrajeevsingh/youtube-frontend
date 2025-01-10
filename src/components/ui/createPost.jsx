@@ -1,5 +1,7 @@
-import { useRef, useEffect, useState } from "react";
-import { Input, Button } from "@nextui-org/react";
+import { useRef, useEffect, useState } from 'react';
+import { Textarea, Button } from '@nextui-org/react';
+import { SendHorizontal } from 'lucide-react';
+
 /*
 const CreatePost = ({ userId, autoFocus }) => {
   const inputRef = useRef(null);
@@ -88,7 +90,7 @@ const CreatePost = ({ userId, autoFocus, onPostCreated }) => {
 
 // The autoFocus on input isn't working now. It works if we change tab and again open posts tab. Will fix later
 const CreatePost = ({ userId, autoFocus, onPostCreated }) => {
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState('');
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -105,33 +107,40 @@ const CreatePost = ({ userId, autoFocus, onPostCreated }) => {
       // Implement your post creation logic here
       // For example:
       // await createPost(userId, postContent);
-      console.log("Creating post for user:", userId, "Content:", postContent);
+      console.log('Creating post for user:', userId, 'Content:', postContent);
 
       // Clear the input
-      setPostContent("");
+      setPostContent('');
 
       // Notify parent component that a post was created
       if (onPostCreated) {
         onPostCreated();
       }
     } catch (error) {
-      console.error("Error creating post:", error);
+      console.error('Error creating post:', error);
       // Handle error (e.g., show error message to user)
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
-      <Input
+    <form onSubmit={handleSubmit} className="relative mb-4 w-1/2">
+      <Textarea
         ref={inputRef}
         value={postContent}
         onChange={(e) => setPostContent(e.target.value)}
+        minRows={6}
         placeholder="What's on your mind?"
-        className="mb-2 "
         autoFocus={autoFocus}
       />
-      <Button type="submit" color="primary" isDisabled={!postContent.trim()}>
-        Post
+      <Button
+        isIconOnly
+        type="submit"
+        color="default"
+        variant="light"
+        className="absolute bottom-0 right-0 m-2"
+        isDisabled={!postContent.trim()}
+      >
+        <SendHorizontal />
       </Button>
     </form>
   );

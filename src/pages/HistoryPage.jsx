@@ -1,9 +1,9 @@
-import React from "react";
-import { useFetchWatchHistory } from "../api/videosApi";
-import { Image, Spinner } from "@nextui-org/react";
-import { Link } from "react-router-dom";
-import WatchHistoryCard from "../components/ui/watch-history/watchHistoryCard";
-import { useUserStoreSelectors } from "../store/userSlice";
+import React from 'react';
+import { useFetchWatchHistory } from '../api/videosApi';
+import { Image, Spinner } from '@nextui-org/react';
+import { Link } from 'react-router-dom';
+import WatchHistoryCard from '../components/ui/watch-history/watchHistoryCard';
+import { useUserStoreSelectors } from '../store/userSlice';
 
 const HistoryPage = () => {
   const { data, isLoading, error } = useFetchWatchHistory();

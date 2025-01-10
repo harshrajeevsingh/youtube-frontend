@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useInView } from "react-intersection-observer";
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
 
-import { fetchVideos } from "../api/videosApi";
-import { SkeletonVideoCard } from "./ui/main-page-video/skeletonVideoCard";
-import VideoCard from "./ui/main-page-video/videoCard";
+import { fetchVideos } from '../api/videosApi';
+import { SkeletonVideoCard } from './ui/main-page-video/skeletonVideoCard';
+import VideoCard from './ui/main-page-video/videoCard';
 
 export const VideoListMain = () => {
   const { ref, inView } = useInView();
@@ -18,7 +18,7 @@ export const VideoListMain = () => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["videos"],
+    queryKey: ['videos'],
     queryFn: ({ pageParam }) => fetchVideos({ pageParam }),
     getNextPageParam: (lastPage) =>
       lastPage.data.hasNextPage ? lastPage.data.nextPage : undefined,
@@ -49,11 +49,11 @@ export const VideoListMain = () => {
 
   return (
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-7 px-3">
-      {status === "pending" && renderSkeletons()}
-      {status === "error" && (
+      {status === 'pending' && renderSkeletons()}
+      {status === 'error' && (
         <p className="text-red-500">Error: {error.message}</p>
       )}
-      {status === "success" && (
+      {status === 'success' && (
         <>
           {renderVideoCards()}
           {isFetchingNextPage && renderSkeletons()}

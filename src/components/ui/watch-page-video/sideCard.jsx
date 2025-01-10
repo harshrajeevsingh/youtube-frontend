@@ -1,7 +1,7 @@
-import { Card, CardBody, Avatar, CardHeader, Image } from "@nextui-org/react";
-import ReactTimeAgo from "react-time-ago";
+import { Card, CardBody, Avatar, CardHeader, Image } from '@nextui-org/react';
+import ReactTimeAgo from 'react-time-ago';
 
-import { formatDuration } from "../../../helpers/formatVideoDuration";
+import { formatDuration } from '../../../helpers/formatVideoDuration';
 
 const SideCard = ({ video }) => {
   return (
@@ -56,7 +56,7 @@ const SideCard = ({ video }) => {
             <span className="lg:hidden block text-sm text-default-500">•</span>
             <h5 className="text-sm text-default-500 flex items-center gap-1">
               <span className="truncate">
-                {video?.views} {video?.views > 1 ? "views" : "view"}
+                {video?.views} {video?.views > 1 ? 'views' : 'view'}
               </span>
               <span>•</span>
               <ReactTimeAgo date={new Date(video?.createdAt)} locale="en-US" />

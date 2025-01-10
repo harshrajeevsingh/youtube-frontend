@@ -1,8 +1,8 @@
-import { Spinner, Image } from "@nextui-org/react";
-import { useFetchLikedVideos } from "../api/videosApi";
-import LikedVideoCard from "../components/ui/likedVideo-page/likedVideoCard";
-import { useUserStoreSelectors } from "../store/userSlice";
-import { Link } from "react-router-dom";
+import { Spinner, Image } from '@nextui-org/react';
+import { useFetchLikedVideos } from '../api/videosApi';
+import LikedVideoCard from '../components/ui/likedVideo-page/likedVideoCard';
+import { useUserStoreSelectors } from '../store/userSlice';
+import { Link } from 'react-router-dom';
 
 const LikedVideosPage = () => {
   const { data, isLoading, error } = useFetchLikedVideos();

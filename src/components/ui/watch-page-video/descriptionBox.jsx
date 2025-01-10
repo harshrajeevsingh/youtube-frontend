@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import ReactTimeAgo from "react-time-ago";
+import { useState, useRef, useEffect } from 'react';
+import ReactTimeAgo from 'react-time-ago';
 
 const DescriptionBox = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -20,10 +20,10 @@ const DescriptionBox = ({ data }) => {
     };
 
     checkTextOverflow();
-    window.addEventListener("resize", checkTextOverflow);
+    window.addEventListener('resize', checkTextOverflow);
 
     return () => {
-      window.removeEventListener("resize", checkTextOverflow);
+      window.removeEventListener('resize', checkTextOverflow);
     };
   }, [description]);
 
@@ -40,7 +40,7 @@ const DescriptionBox = ({ data }) => {
       <p
         ref={textRef}
         className={`font-medium text-base text-default-700 tracking-tight my-2 ${
-          isExpanded ? "" : "line-clamp-3"
+          isExpanded ? '' : 'line-clamp-3'
         }`}
       >
         {description}
@@ -50,7 +50,7 @@ const DescriptionBox = ({ data }) => {
           onClick={toggleExpand}
           className="text-blue-600 text-sm cursor-pointer"
         >
-          {isExpanded ? "Show less" : "...more"}
+          {isExpanded ? 'Show less' : '...more'}
         </button>
       )}
     </div>

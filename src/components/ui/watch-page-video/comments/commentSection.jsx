@@ -1,13 +1,13 @@
-import CommentList from "./commentList";
-import AddComment from "./addComment";
-import { useEffect } from "react";
+import CommentList from './commentList';
+import AddComment from './addComment';
+import { useEffect } from 'react';
 
 const CommentSection = ({ videoId }) => {
   useEffect(() => {
-    console.log("CommentSection is rendered");
+    console.log('CommentSection is rendered');
   });
   return (
-    <div className="w-full mt-10">
+    <div className="w-full mt-2 md:mt-10">
       <AddComment videoId={videoId} />
       <CommentList videoId={videoId} />
     </div>

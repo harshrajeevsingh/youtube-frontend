@@ -1,4 +1,4 @@
-import { Skeleton } from "@nextui-org/react";
+import { Skeleton } from '@nextui-org/react';
 
 export const SkeletonVideoCard = () => {
   return (

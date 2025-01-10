@@ -1,21 +1,21 @@
-import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Spinner } from "@nextui-org/spinner";
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Spinner } from '@nextui-org/spinner';
 
-import { useVideoById } from "../api/videosApi";
-import VideoDetails from "../components/ui/watch-page-video/videoDetails";
-import RecommendVideo from "../components/ui/watch-page-video/recommendVideo";
-import CommentSection from "../components/ui/watch-page-video/comments/commentSection";
-import { VideoWithBackground } from "../components/VideoWithBg";
+import { useVideoById } from '../api/videosApi';
+import VideoDetails from '../components/ui/watch-page-video/videoDetails';
+import RecommendVideo from '../components/ui/watch-page-video/recommendVideo';
+import CommentSection from '../components/ui/watch-page-video/comments/commentSection';
+import { VideoWithBackground } from '../components/VideoWithBg';
 
 export const WatchPage = () => {
   const [searchParams] = useSearchParams();
-  const videoId = searchParams.get("v");
+  const videoId = searchParams.get('v');
 
   const { data: video, isLoading, error } = useVideoById(videoId);
 
   useEffect(() => {
-    console.log("Watch Page rendered");
+    console.log('Watch Page rendered');
   }, []);
 
   return (

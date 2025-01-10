@@ -1,23 +1,35 @@
-import { useEffect } from "react";
-import { Avatar, Button } from "@nextui-org/react";
-import { Link } from "react-router-dom";
-import { Bookmark, ArrowDownToLine, Forward } from "lucide-react";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Avatar, Button } from '@nextui-org/react';
+import { Bookmark, ArrowDownToLine, Forward } from 'lucide-react';
 
-import DescriptionBox from "./descriptionBox";
-import { SubscribeBtn } from "./subscribeBtn";
-import { VideoLikeBtn } from "./videoLikeBtn";
+import useMediaQuery from '../../../hooks/useMediaQuery';
+
+import DescriptionBox from './descriptionBox';
+import { SubscribeBtn } from './subscribeBtn';
+import { VideoLikeBtn } from './videoLikeBtn';
+import DrawerDescriptionBox from './drawerDescriptionBox';
 
 function VideoDetails({ video }) {
-  useEffect(() => {
-    console.log("VideoDetails rendered");
-  }, []);
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  return (
-    <div className="w-full md:pt-3 pt-2 ">
+  const Title = ({ title }) => {
+    return (
       <h3 className="text-2xl text-default-700 font-semibold line-clamp-2 px-2 md:px-0">
-        {video?.title}
+        {title}
       </h3>
-      <div className="flex lg:flex-row flex-col md:justify-between justify-normal md:items-center items-start mt-3">
+    );
+  };
+  return (
+    <div className="w-full">
+      <div className="md:pt-3 pt-2 pb-3">
+        {isDesktop ? (
+          <Title title={video?.title} />
+        ) : (
+          <DrawerDescriptionBox data={video} />
+        )}
+      </div>
+      <div className="flex lg:flex-row flex-col md:justify-between justify-normal md:items-center items-start">
         <div className="flex gap-4 lg:w-2/5 w-full items-center px-2 md:px-0">
           <Link to={`/c/${video?.ownerDetails?.username}`}>
             <Avatar src={video?.ownerDetails?.avatar?.url} />
@@ -29,7 +41,7 @@ function VideoDetails({ video }) {
               </p>
             </Link>
             <p className="text-sm text-default-700">
-              {video?.ownerDetails?.subscribersCount} {"subscribers"}
+              {video?.ownerDetails?.subscribersCount} {'subscribers'}
             </p>
           </div>
           <SubscribeBtn
@@ -72,7 +84,7 @@ function VideoDetails({ video }) {
           </div>
         </div>
       </div>
-      <DescriptionBox data={video} />
+      {isDesktop && <DescriptionBox data={video} />}
     </div>
   );
 }

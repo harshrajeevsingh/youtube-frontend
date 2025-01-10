@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Button } from "@nextui-org/react";
-import { LoginModal } from "../loginModal";
+import { useState } from 'react';
+import { Button } from '@nextui-org/react';
+import { LoginModal } from '../loginModal';
 
-import { useSubscribeToCreator } from "../../../api/subscribeApi";
-import { useUserStoreSelectors } from "../../../store/userSlice";
+import { useSubscribeToCreator } from '../../../api/subscribeApi';
+import { useUserStoreSelectors } from '../../../store/userSlice';
 
 /*
 export const SubscribeBtn = ({ data }) => {
@@ -78,10 +78,10 @@ export const SubscribeBtn = ({
         onClick={handleSubscribe}
         isLoading={isLoading}
         className={`font-semibold px-7 lg:ml-5 ml-auto ${
-          isSubscribed ? "bg-default-100 text-foreground/65" : ""
+          isSubscribed ? 'bg-default-100 text-foreground/65' : ''
         }`}
       >
-        {isSubscribed ? "Unsubscribe" : "Subscribe"}
+        {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
       </Button>
       <LoginModal
         isOpen={isLoginModalOpen}

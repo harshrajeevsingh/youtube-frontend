@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axiosInstance from "../helpers/axios";
-import Cookies from "js-cookie";
-import useUserStore from "../store/userSlice";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axiosInstance from '../helpers/axios';
+import Cookies from 'js-cookie';
+import useUserStore from '../store/userSlice';
 // import useUserStore from "../store/userSlice";
 
 // Register User Mutation
@@ -9,14 +9,14 @@ export const useRegisterUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (formData) => {
-      const { data } = await axiosInstance.post("/users/register", formData);
+      const { data } = await axiosInstance.post('/users/register', formData);
       return data;
     },
     onError: (error) => {
-      console.error("Error during signup", error);
+      console.error('Error during signup', error);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("user");
+      queryClient.invalidateQueries('user');
     },
   });
 };
@@ -26,14 +26,14 @@ export const useLoginUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (loginData) => {
-      const { data } = await axiosInstance.post("/users/login", loginData);
+      const { data } = await axiosInstance.post('/users/login', loginData);
       return data;
     },
     onError: (error) => {
-      console.error("Error during login", error);
+      console.error('Error during login', error);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("user");
+      queryClient.invalidateQueries('user');
     },
   });
 };
@@ -45,17 +45,17 @@ export const useLogoutUser = () => {
 
   return useMutation({
     mutationFn: async () => {
-      const { data } = await axiosInstance.post("/users/logout");
+      const { data } = await axiosInstance.post('/users/logout');
       return data;
     },
     onSuccess: () => {
       clearUser();
-      Cookies.remove("accessToken");
-      Cookies.remove("refreshToken");
-      queryClient.invalidateQueries("user");
+      Cookies.remove('accessToken');
+      Cookies.remove('refreshToken');
+      queryClient.invalidateQueries('user');
     },
     onError: (error) => {
-      console.error("Error during logout", error);
+      console.error('Error during logout', error);
     },
   });
 };

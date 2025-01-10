@@ -1,59 +1,59 @@
-import Body from "./components/Body";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainContainer from "./components/MainContainer";
-import WatchPage from "./pages/WatchPage";
-import SignUpPage from "./pages/SignUpPage";
-import Layout from "./components/Layout";
-import "./timeAgoConfig";
-import VideoUploadPage from "./pages/VideoUploadPage";
-import LoginPage from "./pages/LoginPage";
-import LikedVideosPage from "./pages/LikedVideosPage";
-import PrivateRoute from "./components/PrivateRoute";
-import SubscriptionPage from "./pages/SubscriptionPage";
-import HistoryPage from "./pages/HistoryPage";
-import ProfilePage from "./pages/ProfilePage";
+import Body from './components/Body';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import MainContainer from './components/MainContainer';
+import WatchPage from './pages/WatchPage';
+import SignUpPage from './pages/SignUpPage';
+import Layout from './components/Layout';
+import './timeAgoConfig';
+import VideoUploadPage from './pages/VideoUploadPage';
+import LoginPage from './pages/LoginPage';
+import LikedVideosPage from './pages/LikedVideosPage';
+import PrivateRoute from './components/PrivateRoute';
+import SubscriptionPage from './pages/SubscriptionPage';
+import HistoryPage from './pages/HistoryPage';
+import ProfilePage from './pages/ProfilePage';
 
 if (
-  localStorage.theme === "dark" ||
-  (!("theme" in localStorage) &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches)
+  localStorage.theme === 'dark' ||
+  (!('theme' in localStorage) &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches)
 ) {
-  document.documentElement.classList.add("dark");
+  document.documentElement.classList.add('dark');
 } else {
-  document.documentElement.classList.remove("dark");
+  document.documentElement.classList.remove('dark');
 }
 export default function App() {
   const appRouter = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Layout />,
       children: [
         {
-          path: "/",
+          path: '/',
           element: <Body />,
           children: [
             {
-              path: "/",
+              path: '/',
               element: <MainContainer />,
             },
             {
-              path: "watch",
+              path: 'watch',
               element: <WatchPage />,
             },
             {
-              path: "videoupload",
+              path: 'videoupload',
               element: <VideoUploadPage />,
             },
             {
-              path: "c/:profileId",
+              path: 'c/:profileId',
               element: <ProfilePage />,
             },
             {
-              path: "c/:profileId/posts",
+              path: 'c/:profileId/posts',
               element: <ProfilePage />,
             },
             {
-              path: "likedVideo",
+              path: 'likedVideo',
               element: (
                 <PrivateRoute>
                   <LikedVideosPage />
@@ -61,7 +61,7 @@ export default function App() {
               ),
             },
             {
-              path: "subscription",
+              path: 'subscription',
               element: (
                 <PrivateRoute>
                   <SubscriptionPage />
@@ -69,7 +69,7 @@ export default function App() {
               ),
             },
             {
-              path: "history",
+              path: 'history',
               element: (
                 <PrivateRoute>
                   <HistoryPage />
@@ -77,7 +77,7 @@ export default function App() {
               ),
             },
             {
-              path: "login",
+              path: 'login',
               element: <LoginPage />,
             },
           ],
@@ -85,7 +85,7 @@ export default function App() {
       ],
     },
     {
-      path: "/signup",
+      path: '/signup',
       element: <SignUpPage />,
     },
   ]);

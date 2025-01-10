@@ -1,7 +1,7 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback } from 'react';
 
 export const useVideoBackground = () => {
-  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const canvasRef = useRef();
   const videoRef = useRef();
 
@@ -14,9 +14,9 @@ export const useVideoBackground = () => {
       return;
     }
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
 
-    ctx.filter = "blur(2px)";
+    ctx.filter = 'blur(2px)';
 
     const draw = () => {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -33,19 +33,19 @@ export const useVideoBackground = () => {
     };
 
     // Initialize
-    video.addEventListener("loadeddata", draw, false);
-    video.addEventListener("seeked", draw, false);
-    video.addEventListener("play", drawLoop, false);
-    video.addEventListener("pause", drawPause, false);
-    video.addEventListener("ended", drawPause, false);
+    video.addEventListener('loadeddata', draw, false);
+    video.addEventListener('seeked', draw, false);
+    video.addEventListener('play', drawLoop, false);
+    video.addEventListener('pause', drawPause, false);
+    video.addEventListener('ended', drawPause, false);
 
     // Run cleanup on unmount event
     return () => {
-      video.removeEventListener("loadeddata", draw);
-      video.removeEventListener("seeked", draw);
-      video.removeEventListener("play", drawLoop);
-      video.removeEventListener("pause", drawPause);
-      video.removeEventListener("ended", drawPause);
+      video.removeEventListener('loadeddata', draw);
+      video.removeEventListener('seeked', draw);
+      video.removeEventListener('play', drawLoop);
+      video.removeEventListener('pause', drawPause);
+      video.removeEventListener('ended', drawPause);
     };
   }, [mediaQuery]);
 

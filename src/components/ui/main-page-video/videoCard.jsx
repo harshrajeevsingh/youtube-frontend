@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { Card, CardBody, Avatar, CardHeader, Image } from "@nextui-org/react";
-import ReactTimeAgo from "react-time-ago";
-import { Volume2, VolumeX } from "lucide-react";
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Card, CardBody, Avatar, CardHeader, Image } from '@nextui-org/react';
+import ReactTimeAgo from 'react-time-ago';
+import { Volume2, VolumeX } from 'lucide-react';
 
-import { useMuteSelectors } from "../../../store/muteSlice";
-import { formatDuration } from "../../../helpers/formatVideoDuration";
+import { useMuteSelectors } from '../../../store/muteSlice';
+import { formatDuration } from '../../../helpers/formatVideoDuration';
 
-const VideoCard = ({ video, layout = "mainPage" }) => {
+const VideoCard = ({ video, layout = 'mainPage' }) => {
   const [hover, setHover] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -64,7 +64,7 @@ const VideoCard = ({ video, layout = "mainPage" }) => {
     <Card
       // className="w-full bg-transparent"
       className={`w-full bg-transparent ${
-        layout === "channelPage" ? "flex flex-row md:flex-col gap-1" : ""
+        layout === 'channelPage' ? 'flex flex-row md:flex-col gap-1' : ''
       }`}
       shadow="none"
       radius="none"
@@ -76,7 +76,7 @@ const VideoCard = ({ video, layout = "mainPage" }) => {
       <CardHeader
         // className="relative w-full aspect-video rounded-xl z-0 p-0 "
         className={`relative  ${
-          layout === "channelPage" ? "w-2/6 md:w-full" : "w-full"
+          layout === 'channelPage' ? 'w-2/6 md:w-full' : 'w-full'
         } aspect-video rounded-xl z-0 p-0`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -89,14 +89,14 @@ const VideoCard = ({ video, layout = "mainPage" }) => {
           onLoadedData={handleVideoReady}
           onTimeUpdate={handleTimeUpdate}
           className={`${
-            hover && videoReady ? "block" : "hidden"
+            hover && videoReady ? 'block' : 'hidden'
           } aspect-video w-full rounded-lg object-cover`}
         />
         <Image
           src={video?.thumbnail?.url}
           alt={video?.title}
           className={`${
-            hover && videoReady ? "hidden" : "block"
+            hover && videoReady ? 'hidden' : 'block'
           } aspect-video w-full rounded-lg object-cover`}
         />
         <div
@@ -109,7 +109,7 @@ const VideoCard = ({ video, layout = "mainPage" }) => {
         {hover && videoReady && (
           <div
             role="button"
-            aria-label={isMuted ? "Unmute" : "Mute"}
+            aria-label={isMuted ? 'Unmute' : 'Mute'}
             tabIndex={0}
             onClick={(e) => {
               e.preventDefault();
@@ -117,7 +117,7 @@ const VideoCard = ({ video, layout = "mainPage" }) => {
               toggleMute();
             }}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
+              if (e.key === 'Enter' || e.key === ' ') {
                 toggleMute();
               }
             }}
@@ -132,7 +132,7 @@ const VideoCard = ({ video, layout = "mainPage" }) => {
         )}
       </CardHeader>
       <CardBody className="flex flex-row items-start px-1 py-2 gap-3">
-        {layout === "mainPage" && (
+        {layout === 'mainPage' && (
           <Link to={`/c/${video?.ownerDetails?.username}`}>
             <Avatar
               radius="full"
@@ -155,7 +155,7 @@ const VideoCard = ({ video, layout = "mainPage" }) => {
             <span className="lg:hidden block text-sm text-default-500">•</span>
             <h5 className="text-sm text-default-500 flex items-center gap-1">
               <span className="truncate">
-                {video?.views} {video?.views > 1 ? "views" : "view"}
+                {video?.views} {video?.views > 1 ? 'views' : 'view'}
               </span>
               <span>•</span>
               <ReactTimeAgo date={new Date(video?.createdAt)} locale="en-US" />

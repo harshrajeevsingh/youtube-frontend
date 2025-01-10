@@ -8,18 +8,18 @@ import {
   DropdownItem,
   DropdownTrigger,
   Button,
-} from "@nextui-org/react";
-import { EllipsisVertical, HeartIcon } from "lucide-react";
-import ReactTimeAgo from "react-time-ago";
+} from '@nextui-org/react';
+import { EllipsisVertical, HeartIcon } from 'lucide-react';
+import ReactTimeAgo from 'react-time-ago';
 
-import { useUserStoreSelectors } from "../../../store/userSlice";
+import { useUserStoreSelectors } from '../../../store/userSlice';
 
 export const PostCard = ({ post }) => {
   const user = useUserStoreSelectors.use.user();
   return (
     <Card
       shadow="none"
-      className="w-full md:w-2/3 bg-transparent border  border-gray-500 mb-4"
+      className="w-full md:w-2/3 bg-transparent border  border-gray-700 mb-4"
     >
       <CardBody className="pt-5 pl-5">
         <div className="flex justify-between items-start">
@@ -56,7 +56,7 @@ export const PostCard = ({ post }) => {
         </div>
         <p className="py-2">{post?.content}</p>
       </CardBody>
-      <CardFooter>
+      {/* <CardFooter>
         <Button
           isIconOnly
           //   color="primary"
@@ -67,7 +67,7 @@ export const PostCard = ({ post }) => {
           <HeartIcon className={post?.isLiked ? "fill-current" : ""} />
         </Button>
         <p className="font-semibold">{post?.likesCount}</p>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 };

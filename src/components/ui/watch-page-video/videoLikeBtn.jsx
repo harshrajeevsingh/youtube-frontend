@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Button } from "@nextui-org/react";
+import { useState } from 'react';
+import { Button } from '@nextui-org/react';
 
-import { LoginModal } from "../loginModal";
-import { Heart } from "lucide-react";
-import { useVideoLike } from "../../../api/videosApi";
-import { useUserStoreSelectors } from "../../../store/userSlice";
+import { LoginModal } from '../loginModal';
+import { Heart } from 'lucide-react';
+import { useVideoLike } from '../../../api/videosApi';
+import { useUserStoreSelectors } from '../../../store/userSlice';
 
 export const VideoLikeBtn = ({ data: video }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -32,7 +32,7 @@ export const VideoLikeBtn = ({ data: video }) => {
         className="bg-default-100 text-default-700 "
         startContent={
           <Heart
-            fill={video?.isLiked ? "currentColor" : "none"}
+            fill={video?.isLiked ? 'currentColor' : 'none'}
             strokeWidth={1}
           />
         }

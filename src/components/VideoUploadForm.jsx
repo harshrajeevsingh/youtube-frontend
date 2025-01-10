@@ -1,10 +1,10 @@
-import { useState, useRef } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { Upload, Camera } from "lucide-react";
-import { Button, Textarea, Input } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
+import { useState, useRef } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { Upload, Camera } from 'lucide-react';
+import { Button, Textarea, Input } from '@nextui-org/react';
+import { useNavigate } from 'react-router-dom';
 
-import { usePublishVideo } from "../api/videosApi";
+import { usePublishVideo } from '../api/videosApi';
 
 const VideoUploadForm = () => {
   const {
@@ -14,8 +14,8 @@ const VideoUploadForm = () => {
     register,
   } = useForm({
     defaultValues: {
-      title: "",
-      description: "",
+      title: '',
+      description: '',
     },
   });
   const navigate = useNavigate();
@@ -30,31 +30,31 @@ const VideoUploadForm = () => {
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("videoFile", data.videoFile[0]);
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+    formData.append('videoFile', data.videoFile[0]);
 
     // Check which thumbnail is selected (uploaded or generated)
     if (selectedThumbnail === generatedThumbnail) {
       const thumbnailFile = base64ToFile(
         generatedThumbnail,
-        "generated-thumbnail.jpg"
+        'generated-thumbnail.jpg'
       );
-      formData.append("thumbnail", thumbnailFile);
+      formData.append('thumbnail', thumbnailFile);
     } else if (uploadedThumbnailFile) {
-      formData.append("thumbnail", uploadedThumbnailFile);
+      formData.append('thumbnail', uploadedThumbnailFile);
     }
 
     // Handle form submission logic
     publishMutation.mutate(formData, {
       onSuccess: () => {
-        navigate("/");
+        navigate('/');
       },
     });
   };
 
   const base64ToFile = (base64String, filename) => {
-    const arr = base64String.split(",");
+    const arr = base64String.split(',');
     const mime = arr[0].match(/:(.*?);/)[1];
     const bstr = atob(arr[1]);
     let n = bstr.length;
@@ -75,15 +75,15 @@ const VideoUploadForm = () => {
   };
 
   const generateThumbnail = (file) => {
-    const video = document.createElement("video");
+    const video = document.createElement('video');
     video.src = URL.createObjectURL(file);
 
-    video.addEventListener("loadedmetadata", () => {
+    video.addEventListener('loadedmetadata', () => {
       const duration = video.duration;
       const captureTime = duration / 2;
 
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
       canvas.width = 320;
       canvas.height = 180;
 
@@ -97,7 +97,7 @@ const VideoUploadForm = () => {
     });
 
     video.onerror = (e) => {
-      console.error("Error loading video:", e);
+      console.error('Error loading video:', e);
     };
   };
 
@@ -127,7 +127,7 @@ const VideoUploadForm = () => {
             <Controller
               name="title"
               control={control}
-              rules={{ required: "Title is required" }}
+              rules={{ required: 'Title is required' }}
               render={({ field }) => (
                 <Input
                   {...field}
@@ -146,7 +146,7 @@ const VideoUploadForm = () => {
             <Controller
               name="description"
               control={control}
-              rules={{ required: "Description is required" }}
+              rules={{ required: 'Description is required' }}
               render={({ field }) => (
                 <Textarea
                   {...field}
@@ -174,7 +174,7 @@ const VideoUploadForm = () => {
                 type="file"
                 id="videoFile"
                 accept="video/*"
-                {...register("videoFile", { required: "Video is required" })}
+                {...register('videoFile', { required: 'Video is required' })}
                 onChange={handleVideoChange}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
@@ -214,8 +214,8 @@ const VideoUploadForm = () => {
             <div
               className={`relative cursor-pointer ${
                 selectedThumbnail === generatedThumbnail
-                  ? "ring-2 ring-blue-500"
-                  : ""
+                  ? 'ring-2 ring-blue-500'
+                  : ''
               }`}
               onClick={() => setSelectedThumbnail(generatedThumbnail)}
             >
@@ -231,8 +231,8 @@ const VideoUploadForm = () => {
             <div
               className={`relative cursor-pointer ${
                 selectedThumbnail === uploadedThumbnailPreview
-                  ? "ring-2 ring-blue-500"
-                  : ""
+                  ? 'ring-2 ring-blue-500'
+                  : ''
               }`}
               onClick={() => setSelectedThumbnail(uploadedThumbnailPreview)}
             >
@@ -268,7 +268,7 @@ const VideoUploadForm = () => {
           type="submit"
           isLoading={publishMutation.isPending}
         >
-          {publishMutation.isPending ? "Uploading" : "Upload Video"}
+          {publishMutation.isPending ? 'Uploading' : 'Upload Video'}
         </Button>
       </div>
     </form>

@@ -1,7 +1,7 @@
-import { useFetchPostsByUserId } from "../../../api/postTweetApi";
-import { Spinner } from "@nextui-org/react";
+import { useFetchPostsByUserId } from '../../../api/postTweetApi';
+import { Spinner } from '@nextui-org/react';
 
-import { PostCard } from "./postCard";
+import { PostCard } from './postCard';
 
 const PostsList = ({ userId }) => {
   const { data: postData, isLoading, error } = useFetchPostsByUserId(userId);

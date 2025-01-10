@@ -74,10 +74,10 @@ export default axiosInstance;
 */
 
 // axiosInstance.js
-import axios from "axios";
-import Cookies from "js-cookie";
-import { BASE_URL } from "../constants";
-import useUserStore from "../store/userSlice";
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { BASE_URL } from '../constants';
+import useUserStore from '../store/userSlice';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -101,7 +101,7 @@ const processQueue = (error, token) => {
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = Cookies.get("accessToken");
+    const accessToken = Cookies.get('accessToken');
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -117,9 +117,9 @@ axiosInstance.interceptors.response.use(
 
     // Exclude refresh token logic for certain endpoints
     const excludedEndpoints = [
-      "/users/login",
-      "/users/register",
-      "/users/refresh-token",
+      '/users/login',
+      '/users/register',
+      '/users/refresh-token',
     ];
     const isExcludedEndpoint = excludedEndpoints.includes(originalRequest.url);
 
@@ -133,7 +133,7 @@ axiosInstance.interceptors.response.use(
           failedQueue.push({ resolve, reject });
         })
           .then((token) => {
-            originalRequest.headers["Authorization"] = "Bearer " + token;
+            originalRequest.headers['Authorization'] = 'Bearer ' + token;
             return axiosInstance(originalRequest);
           })
           .catch((err) => Promise.reject(err));
@@ -144,15 +144,14 @@ axiosInstance.interceptors.response.use(
 
       try {
         // const { setTokens } = useUserStore.getState();
-        const response = await axiosInstance.post("/users/refresh-token");
+        const response = await axiosInstance.post('/users/refresh-token');
         const { accessToken, refreshToken } = response.data;
-        Cookies.set("accessToken", accessToken);
-        Cookies.set("refreshToken", refreshToken);
+        Cookies.set('accessToken', accessToken);
+        Cookies.set('refreshToken', refreshToken);
         // setTokens(accessToken, refreshToken);
-        axiosInstance.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${accessToken}`;
-        originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+        axiosInstance.defaults.headers.common['Authorization'] =
+          `Bearer ${accessToken}`;
+        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
         processQueue(null, accessToken);
         return axiosInstance(originalRequest);
       } catch (refreshError) {
