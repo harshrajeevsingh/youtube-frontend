@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
-import { createSelectors } from "./create-selectors";
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
+import { createSelectors } from './create-selectors';
 
 const useUserStore = create(
   devtools(
@@ -13,7 +13,7 @@ const useUserStore = create(
         clearUser: () => set({ user: null }),
       }),
       {
-        name: "user-store",
+        name: 'user-store',
       }
     )
   )

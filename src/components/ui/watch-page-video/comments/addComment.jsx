@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Avatar, Input, Button } from "@nextui-org/react";
-import { useForm } from "react-hook-form";
+import { useState } from 'react';
+import { Avatar, Input, Button } from '@nextui-org/react';
+import { useForm } from 'react-hook-form';
 
-import { useUserStoreSelectors } from "../../../../store/userSlice";
-import { useAddComment } from "../../../../api/commentApi";
-import { LoginModal } from "../../loginModal";
+import { useUserStoreSelectors } from '../../../../store/userSlice';
+import { useAddComment } from '../../../../api/commentApi';
+import { LoginModal } from '../../loginModal';
 
 const AddComment = ({ videoId }) => {
   const user = useUserStoreSelectors.use.user();
@@ -12,11 +12,11 @@ const AddComment = ({ videoId }) => {
   const { mutate: submitComment, isPending, error } = useAddComment(videoId);
   const { handleSubmit, reset, register } = useForm({
     defaultValues: {
-      content: "",
+      content: '',
     },
   });
 
-  const [contentText, setContentText] = useState("");
+  const [contentText, setContentText] = useState('');
 
   const handleContentChange = (e) => {
     setContentText(e.target.value);
@@ -29,7 +29,7 @@ const AddComment = ({ videoId }) => {
       setIsLoginModalOpen(true);
     }
     reset();
-    setContentText("");
+    setContentText('');
   };
 
   return (
@@ -43,7 +43,7 @@ const AddComment = ({ videoId }) => {
         </div>
         <div className="flex-grow flex items-center">
           <Input
-            {...register("content", { required: true })}
+            {...register('content', { required: true })}
             isClearable
             type="text"
             variant="underlined"
@@ -51,7 +51,7 @@ const AddComment = ({ videoId }) => {
             className="flex-grow"
             onClear={() => {
               reset();
-              setContentText("");
+              setContentText('');
             }}
             onChange={handleContentChange}
           />

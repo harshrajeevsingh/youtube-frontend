@@ -1,5 +1,5 @@
-import axiosInstance from "../helpers/axios";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import axiosInstance from '../helpers/axios';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const fetchUserById = async (username) => {
   const response = await axiosInstance.get(`/users/c/${username}`);
@@ -8,7 +8,7 @@ const fetchUserById = async (username) => {
 
 export const useUserById = (username) => {
   return useQuery({
-    queryKey: ["userById", { username }],
+    queryKey: ['userById', { username }],
     queryFn: () => fetchUserById(username),
     enabled: !!username,
   });

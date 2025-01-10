@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import ReactTimeAgo from "react-time-ago";
-import { Avatar } from "@nextui-org/react";
+import { Link } from 'react-router-dom';
+import ReactTimeAgo from 'react-time-ago';
+import { Avatar } from '@nextui-org/react';
 
 const CommentCard = ({ comment }) => {
   return (

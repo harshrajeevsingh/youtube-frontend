@@ -1,7 +1,7 @@
-import { Image } from "@nextui-org/react";
-import ReactTimeAgo from "react-time-ago";
+import { Image } from '@nextui-org/react';
+import ReactTimeAgo from 'react-time-ago';
 
-import { formatDuration } from "../../../helpers/formatVideoDuration";
+import { formatDuration } from '../../../helpers/formatVideoDuration';
 
 const WatchHistoryCard = ({ data }) => {
   return (
@@ -20,9 +20,9 @@ const WatchHistoryCard = ({ data }) => {
         </p>
         <p className="text-sm text-default-500 font-semibold">
           {data?.owner?.username}
-          {" • "}
+          {' • '}
           {data?.views} views
-          {" • "}
+          {' • '}
           <ReactTimeAgo date={new Date(data?.createdAt)} locale="en-US" />
         </p>
       </div>

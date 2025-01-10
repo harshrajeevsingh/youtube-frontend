@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
-import { createSelectors } from "./create-selectors";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { createSelectors } from './create-selectors';
 
 const useMuteStore = create(
   devtools((set) => ({

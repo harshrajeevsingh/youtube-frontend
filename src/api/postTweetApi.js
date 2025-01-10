@@ -1,5 +1,5 @@
-import axiosInstance from "../helpers/axios";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import axiosInstance from '../helpers/axios';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const fetchPostsById = async (userId) => {
   const response = await axiosInstance.get(`/tweets/user/${userId}`);
@@ -8,7 +8,7 @@ const fetchPostsById = async (userId) => {
 
 export const useFetchPostsByUserId = (userId) => {
   return useQuery({
-    queryKey: ["userById", { userId }],
+    queryKey: ['userById', { userId }],
     queryFn: () => fetchPostsById(userId),
   });
 };

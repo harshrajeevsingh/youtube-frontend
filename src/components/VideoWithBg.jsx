@@ -1,16 +1,16 @@
-import { useVideoBackground } from "../hooks/UseVideoBg";
+import { useVideoBackground } from '../hooks/UseVideoBg';
 
 export const VideoWithBackground = ({ src }) => {
   const { videoRef, canvasRef } = useVideoBackground();
 
   return (
     <>
-      {" "}
+      {' '}
       <video
         ref={videoRef}
         controls
         autoPlay={true}
-        className="sticky lg:static w-full xl:w-4/6 top-16 aspect-video lg:rounded-xl lg:mt-4  z-20"
+        className="video-container sticky lg:static w-full xl:w-4/6 top-16 aspect-video lg:rounded-xl lg:mt-4  z-20"
         src={src}
       />
       <canvas

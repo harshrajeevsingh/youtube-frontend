@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useInView } from "react-intersection-observer";
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
 
-import { fetchVideos } from "../../../api/videosApi";
-import { SkeletonVideoCard } from "../main-page-video/skeletonVideoCard";
-import VideoCard from "../main-page-video/videoCard";
-import SideCard from "./sideCard";
+import { fetchVideos } from '../../../api/videosApi';
+import { SkeletonVideoCard } from '../main-page-video/skeletonVideoCard';
+import VideoCard from '../main-page-video/videoCard';
+import SideCard from './sideCard';
 
 const RecommendVideo = ({ excludeVideoId }) => {
   const { ref, inView } = useInView();
@@ -19,7 +19,7 @@ const RecommendVideo = ({ excludeVideoId }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["videos"],
+    queryKey: ['videos'],
     queryFn: ({ pageParam }) => fetchVideos({ pageParam }),
     getNextPageParam: (lastPage) =>
       lastPage.data.hasNextPage ? lastPage.data.nextPage : undefined,
@@ -53,11 +53,11 @@ const RecommendVideo = ({ excludeVideoId }) => {
   return (
     //   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-7 mx-5">
     <div className="w-full">
-      {status === "pending" && renderSkeletons()}
-      {status === "error" && (
+      {status === 'pending' && renderSkeletons()}
+      {status === 'error' && (
         <p className="text-red-500">Error: {error.message}</p>
       )}
-      {status === "success" && (
+      {status === 'success' && (
         <>
           {renderVideoCards()}
           {isFetchingNextPage && renderSkeletons()}

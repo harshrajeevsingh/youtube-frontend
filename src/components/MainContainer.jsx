@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react";
 // import axiosInstance from "../helpers/axios";
 // import { SkeletonVideoCard } from "./ui/skeletonVideoCard";
-import VideoListMain from "./VideoListMain";
+import VideoListMain from './VideoListMain';
 
 // export const MainContainer = () => {
 //   const [data, setData] = useState(null);

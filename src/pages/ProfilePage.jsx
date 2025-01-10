@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
-import { Image, Spinner, Tabs, Tab } from "@nextui-org/react";
+import { useState, useEffect } from 'react';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { Image, Spinner, Tabs, Tab } from '@nextui-org/react';
 
-import { useUserById } from "../api/userApi";
-import { useUserStoreSelectors } from "../store/userSlice";
+import { useUserById } from '../api/userApi';
+import { useUserStoreSelectors } from '../store/userSlice';
 
-import VideoTab from "../components/ui/profile-channel/videoTab";
-import { SubscribeBtn } from "../components/ui/watch-page-video/subscribeBtn";
-import CreatePost from "../components/ui/createPost";
-import PostsList from "../components/ui/profile-channel/postList";
+import VideoTab from '../components/ui/profile-channel/videoTab';
+import { SubscribeBtn } from '../components/ui/watch-page-video/subscribeBtn';
+import CreatePost from '../components/ui/createPost';
+import PostsList from '../components/ui/profile-channel/postList';
 
 const ProfilePage = () => {
   const { profileId } = useParams();
@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const user = useUserStoreSelectors.use.user();
 
   const [activeTab, setActiveTab] = useState(() => {
-    return location.pathname.endsWith("/posts") ? "posts" : "videos";
+    return location.pathname.endsWith('/posts') ? 'posts' : 'videos';
   });
   const [shouldFocusInput, setShouldFocusInput] = useState(false);
 
@@ -25,7 +25,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (location.state?.createPost) {
-      setActiveTab("posts");
+      setActiveTab('posts');
       setShouldFocusInput(true);
       // Clear the createPost state from location
       navigate(location.pathname, { replace: true, state: {} });
@@ -35,8 +35,8 @@ const ProfilePage = () => {
   if (isLoading)
     return (
       <div className="w-full grid place-content-center">
-        {" "}
-        <Spinner />{" "}
+        {' '}
+        <Spinner />{' '}
       </div>
     );
   if (error)
@@ -51,7 +51,7 @@ const ProfilePage = () => {
 
   const handleTabChange = (key) => {
     setActiveTab(key);
-    navigate(`/c/${profileId}${key === "posts" ? "/posts" : ""}`, {
+    navigate(`/c/${profileId}${key === 'posts' ? '/posts' : ''}`, {
       replace: true,
     });
   };
@@ -85,10 +85,10 @@ const ProfilePage = () => {
             @{profileData?.data?.username}
           </p>
           <p className="text-sm md:text-base ">
-            {profileData?.data?.subscribersCount}{" "}
+            {profileData?.data?.subscribersCount}{' '}
             {profileData?.data?.subscribersCount > 1
-              ? "Subscribers"
-              : "Subscriber"}
+              ? 'Subscribers'
+              : 'Subscriber'}
           </p>
         </div>
         <div className="self-center">
@@ -120,7 +120,11 @@ const ProfilePage = () => {
                 onPostCreated={handlePostCreated}
               />
             )}
-            <PostsList userId={profileData?.data?._id} />
+            {user ? (
+              <PostsList userId={profileData?.data?._id} />
+            ) : (
+              <p>Please login to view posts</p>
+            )}
           </Tab>
         </Tabs>
       </div>

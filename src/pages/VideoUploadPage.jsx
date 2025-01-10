@@ -1,4 +1,4 @@
-import VideoUploadForm from "../components/VideoUploadForm";
+import VideoUploadForm from '../components/VideoUploadForm';
 
 const VideoUploadPage = () => {
   return (

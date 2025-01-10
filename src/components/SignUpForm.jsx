@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { Button } from "@nextui-org/react";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { Button } from '@nextui-org/react';
 
-import { useUserStoreSelectors } from "../store/userSlice";
-import { Camera } from "lucide-react";
-import { useLoginUser, useRegisterUser } from "../api/authApi";
+import { useUserStoreSelectors } from '../store/userSlice';
+import { Camera } from 'lucide-react';
+import { useLoginUser, useRegisterUser } from '../api/authApi';
 
 const SignupForm = () => {
   const {
@@ -29,13 +29,13 @@ const SignupForm = () => {
   }
   const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append("avatar", data.avatar[0]);
-    formData.append("username", data.username);
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-    formData.append("fullName", data.fullName);
+    formData.append('avatar', data.avatar[0]);
+    formData.append('username', data.username);
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+    formData.append('fullName', data.fullName);
     if (data.coverImg) {
-      formData.append("coverImg", data.coverImg[0]);
+      formData.append('coverImg', data.coverImg[0]);
     }
 
     signupMutation.mutate(formData, {
@@ -46,12 +46,12 @@ const SignupForm = () => {
         };
         try {
           const loginResponse = await loginMutation.mutateAsync(loginData);
-          console.log("Login Response", loginResponse);
+          console.log('Login Response', loginResponse);
           setUser(loginResponse?.data?.user);
-          queryClient.invalidateQueries("user");
-          navigate("/");
+          queryClient.invalidateQueries('user');
+          navigate('/');
         } catch (error) {
-          console.error("Error during login:", error);
+          console.error('Error during login:', error);
         }
       },
     });
@@ -87,7 +87,7 @@ const SignupForm = () => {
           </label>
           <input
             type="file"
-            {...register("coverImg")}
+            {...register('coverImg')}
             onChange={(e) => handleFileChange(e, setCoverPreview)}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             id="cover-upload-input"
@@ -112,7 +112,7 @@ const SignupForm = () => {
           </label>
           <input
             type="file"
-            {...register("avatar", { required: "Avatar image is required" })}
+            {...register('avatar', { required: 'Avatar image is required' })}
             onChange={(e) => handleFileChange(e, setAvatarPreview)}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             id="avatar-upload-input"
@@ -130,7 +130,7 @@ const SignupForm = () => {
           Name
         </label>
         <input
-          {...register("fullName", { required: "Name is required" })}
+          {...register('fullName', { required: 'Name is required' })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
         />
         {errors.fullName && (
@@ -143,15 +143,15 @@ const SignupForm = () => {
           Username
         </label>
         <input
-          {...register("username", {
-            required: "Username is required",
+          {...register('username', {
+            required: 'Username is required',
             minLength: {
               value: 3,
-              message: "Username must be at least 3 characters long",
+              message: 'Username must be at least 3 characters long',
             },
             maxLength: {
               value: 20,
-              message: "Username must not be 20 characters long",
+              message: 'Username must not be 20 characters long',
             },
           })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
@@ -167,15 +167,15 @@ const SignupForm = () => {
         </label>
         <input
           type="password"
-          {...register("password", {
-            required: "Password is required",
+          {...register('password', {
+            required: 'Password is required',
             minLength: {
               value: 8,
-              message: "Password must be at least 8 characters long",
+              message: 'Password must be at least 8 characters long',
             },
             maxLength: {
               value: 15,
-              message: "Password should be no longer than 15 characters long",
+              message: 'Password should be no longer than 15 characters long',
             },
           })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
@@ -191,11 +191,11 @@ const SignupForm = () => {
         </label>
         <input
           type="email"
-          {...register("email", {
-            required: "Email is required",
+          {...register('email', {
+            required: 'Email is required',
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: "Please enter a valid email address",
+              message: 'Please enter a valid email address',
             },
           })}
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"

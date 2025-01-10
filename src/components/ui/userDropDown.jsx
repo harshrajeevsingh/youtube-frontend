@@ -6,11 +6,11 @@ import {
   DropdownMenu,
   Avatar,
   Button,
-} from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
-import { Upload, MonitorUp, PencilLine } from "lucide-react";
-import { useLogoutUser } from "../../api/authApi";
-import { useUserStoreSelectors } from "../../store/userSlice";
+} from '@nextui-org/react';
+import { useNavigate } from 'react-router-dom';
+import { Upload, MonitorUp, PencilLine } from 'lucide-react';
+import { useLogoutUser } from '../../api/authApi';
+import { useUserStoreSelectors } from '../../store/userSlice';
 
 const UserDropDown = () => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const UserDropDown = () => {
       });
     } else {
       // Handle the case when the user is not logged in
-      console.log("User must be logged in to create a post");
+      console.log('User must be logged in to create a post');
     }
   };
 

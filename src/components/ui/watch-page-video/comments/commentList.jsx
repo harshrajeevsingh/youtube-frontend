@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useInView } from "react-intersection-observer";
-import { Spinner } from "@nextui-org/react";
+import { useEffect } from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+import { Spinner } from '@nextui-org/react';
 
-import { fetchCommentByVideoId } from "../../../../api/commentApi";
-import CommentCard from "./commentCard";
+import { fetchCommentByVideoId } from '../../../../api/commentApi';
+import CommentCard from './commentCard';
 
 const CommentList = ({ videoId }) => {
   const { ref, inView } = useInView();
@@ -16,7 +16,7 @@ const CommentList = ({ videoId }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["comments", videoId],
+    queryKey: ['comments', videoId],
     queryFn: ({ pageParam }) => fetchCommentByVideoId({ pageParam, videoId }),
     getNextPageParam: (lastPage) =>
       lastPage.data.hasNextPage ? lastPage.data.nextPage : undefined,
@@ -29,7 +29,7 @@ const CommentList = ({ videoId }) => {
   }, [inView, fetchNextPage, hasNextPage]);
 
   useEffect(() => {
-    console.log("CommentList is rendered");
+    console.log('CommentList is rendered');
   });
   const renderCommentCards = () => {
     if (!data) return null;
@@ -43,11 +43,11 @@ const CommentList = ({ videoId }) => {
   return (
     //   <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-7 px-3">
     <div className="w-full flex flex-col">
-      {status === "pending" && <Spinner label="Loading Comments..." />}
-      {status === "error" && (
+      {status === 'pending' && <Spinner label="Loading Comments..." />}
+      {status === 'error' && (
         <p className="text-red-500">Error: {error.message}</p>
       )}
-      {status === "success" && (
+      {status === 'success' && (
         <>
           {renderCommentCards()}
           {isFetchingNextPage && <Spinner label="Loading more comments..." />}
