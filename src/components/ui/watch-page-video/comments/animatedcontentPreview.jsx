@@ -19,7 +19,9 @@ const AnimatedCommentPreview = ({ comments }) => {
         <div
           key={comment._id}
           className={`absolute inset-0 transition-transform duration-500 ease-in-out ${
-            index === currentIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+            index === currentIndex
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-full opacity-0'
           }`}
           style={{ willChange: 'transform, opacity' }}
         >
@@ -27,7 +29,7 @@ const AnimatedCommentPreview = ({ comments }) => {
             <Avatar
               src={comment.owner.avatar.url}
               alt={comment.owner.username}
-              className='w-7 h-7'
+              className="w-7 h-7"
             />
             <p className="text-sm truncate max-w-xs">{comment.content}</p>
           </div>

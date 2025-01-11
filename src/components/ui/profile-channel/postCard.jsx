@@ -19,14 +19,15 @@ export const PostCard = ({ post }) => {
   return (
     <Card
       shadow="none"
-      className="w-full md:w-2/3 bg-transparent border  border-gray-700 mb-4"
+      className="bg-transparent border  border-gray-700 mb-4"
+      fullWidth={true}
     >
       <CardBody className="pt-5 pl-5">
         <div className="flex justify-between items-start">
           <div className="flex gap-3">
             <Avatar
               src={post?.ownerDetails?.avatar?.url}
-              size="md"
+              size="sm"
               className="self-center"
             />
             <div className="flex flex-col gap-1 items-start justify-center">

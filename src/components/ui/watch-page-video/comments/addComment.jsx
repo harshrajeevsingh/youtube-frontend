@@ -39,7 +39,7 @@ const AddComment = ({ videoId }) => {
         className="w-full flex gap-3 mb-5"
       >
         <div>
-          <Avatar showFallback src={user?.avatar?.url} size='sm'/>
+          <Avatar showFallback src={user?.avatar?.url} size="sm" />
         </div>
         <div className="flex-grow flex items-center">
           <Input
@@ -61,12 +61,12 @@ const AddComment = ({ videoId }) => {
               isIconOnly
               type="submit"
               color="default"
-              variant='light'
+              variant="light"
               className="ml-2"
-              size='sm'
+              size="sm"
               isDisabled={isPending}
             >
-              <SendHorizonal/>
+              <SendHorizonal />
             </Button>
           )}
         </div>

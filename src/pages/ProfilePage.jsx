@@ -19,15 +19,12 @@ const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState(() => {
     return location.pathname.endsWith('/posts') ? 'posts' : 'videos';
   });
-  const [shouldFocusInput, setShouldFocusInput] = useState(false);
 
   const { data: profileData, isLoading, error } = useUserById(profileId);
 
   useEffect(() => {
     if (location.state?.createPost) {
       setActiveTab('posts');
-      setShouldFocusInput(true);
-      // Clear the createPost state from location
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location.state, navigate, location.pathname]);
@@ -54,11 +51,6 @@ const ProfilePage = () => {
     navigate(`/c/${profileId}${key === 'posts' ? '/posts' : ''}`, {
       replace: true,
     });
-  };
-
-  const handlePostCreated = () => {
-    setShouldFocusInput(false);
-    // Optionally, you could refresh the posts list here
   };
 
   return (
@@ -113,13 +105,7 @@ const ProfilePage = () => {
             <VideoTab userId={profileData?.data?._id} />
           </Tab>
           <Tab key="posts" title="Posts">
-            {isOwnProfile && (
-              <CreatePost
-                userId={profileData?.data?._id}
-                autoFocus={shouldFocusInput}
-                onPostCreated={handlePostCreated}
-              />
-            )}
+            {isOwnProfile && <CreatePost />}
             {user ? (
               <PostsList userId={profileData?.data?._id} />
             ) : (
