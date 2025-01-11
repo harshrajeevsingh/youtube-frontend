@@ -17,7 +17,7 @@ const CommentList = ({ videoId }) => {
     status,
   } = useInfiniteQuery({
     queryKey: ['comments', videoId],
-    queryFn: ({ pageParam }) => fetchCommentByVideoId({ pageParam, videoId }),
+    queryFn: ({ pageParam }) => fetchCommentByVideoId({ pageParam, videoId, limit: 10, }),
     getNextPageParam: (lastPage) =>
       lastPage.data.hasNextPage ? lastPage.data.nextPage : undefined,
   });
@@ -41,7 +41,6 @@ const CommentList = ({ videoId }) => {
   };
 
   return (
-    //   <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-7 px-3">
     <div className="w-full flex flex-col">
       {status === 'pending' && <Spinner label="Loading Comments..." />}
       {status === 'error' && (
