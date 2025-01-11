@@ -105,10 +105,7 @@ const ProfilePage = () => {
             <VideoTab userId={profileData?.data?._id} />
           </Tab>
           <Tab key="posts" title="Posts">
-            {isOwnProfile && (
-              <CreatePost
-              />
-            )}
+            {isOwnProfile && <CreatePost />}
             {user ? (
               <PostsList userId={profileData?.data?._id} />
             ) : (

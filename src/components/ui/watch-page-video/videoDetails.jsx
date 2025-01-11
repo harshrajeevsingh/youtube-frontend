@@ -41,7 +41,10 @@ function VideoDetails({ video }) {
               </p>
             </Link>
             <p className="text-sm text-default-700">
-              {video?.ownerDetails?.subscribersCount} {video?.ownerDetails?.subscribersCount > 1 ? 'subscribers' : 'subscriber'}
+              {video?.ownerDetails?.subscribersCount}{' '}
+              {video?.ownerDetails?.subscribersCount > 1
+                ? 'subscribers'
+                : 'subscriber'}
             </p>
           </div>
           <SubscribeBtn
@@ -60,7 +63,7 @@ function VideoDetails({ video }) {
               radius="full"
               variant="solid"
               className="bg-primary-background text-default-700 flex-shrink-0 whitespace-nowrap"
-              startContent={<Forward size={20} strokeWidth={1.5}/>}
+              startContent={<Forward size={20} strokeWidth={1.5} />}
             >
               Share
             </Button>
@@ -68,7 +71,7 @@ function VideoDetails({ video }) {
               radius="full"
               variant="solid"
               className="bg-primary-background text-default-700 flex-shrink-0 whitespace-nowrap"
-              startContent={<ArrowDownToLine size={20} strokeWidth={1.5}/>}
+              startContent={<ArrowDownToLine size={20} strokeWidth={1.5} />}
             >
               Download
             </Button>
@@ -77,7 +80,7 @@ function VideoDetails({ video }) {
               variant="solid"
               color="primary"
               className="bg-primary-background text-default-700 flex-shrink-0 whitespace-nowrap"
-              startContent={<Bookmark size={20} strokeWidth={1.5}/>}
+              startContent={<Bookmark size={20} strokeWidth={1.5} />}
             >
               Save
             </Button>

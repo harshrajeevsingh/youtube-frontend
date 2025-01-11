@@ -17,10 +17,7 @@ export const useAddPost = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (content) => {
-      const { data } = await axiosInstance.post(
-        `/tweets/`,
-        content
-      );
+      const { data } = await axiosInstance.post(`/tweets/`, content);
       return data;
     },
     onError: (error) => {

@@ -17,7 +17,8 @@ const CommentList = ({ videoId }) => {
     status,
   } = useInfiniteQuery({
     queryKey: ['comments', videoId],
-    queryFn: ({ pageParam }) => fetchCommentByVideoId({ pageParam, videoId, limit: 10, }),
+    queryFn: ({ pageParam }) =>
+      fetchCommentByVideoId({ pageParam, videoId, limit: 10 }),
     getNextPageParam: (lastPage) =>
       lastPage.data.hasNextPage ? lastPage.data.nextPage : undefined,
   });

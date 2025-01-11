@@ -14,7 +14,7 @@ const CommentSection = ({ videoId }) => {
           <CommentList videoId={videoId} />
         </>
       ) : (
-          <DrawerCommentBox videoId={videoId} />
+        <DrawerCommentBox videoId={videoId} />
       )}
     </div>
   );

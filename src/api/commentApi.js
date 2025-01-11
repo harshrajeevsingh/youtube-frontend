@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 export const fetchCommentByVideoId = async ({
   pageParam = 1,
   videoId,
-  limit = 10, 
+  limit = 10,
   sortBy = 'createdAt',
   sortType = 'desc',
 }) => {

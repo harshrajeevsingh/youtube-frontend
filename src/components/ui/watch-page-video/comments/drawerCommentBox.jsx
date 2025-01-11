@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Drawer } from 'vaul';
 import { Divider } from '@nextui-org/divider';
@@ -11,10 +11,9 @@ import AnimatedCommentPreview from './animatedcontentPreview';
 import CommentList from './commentList';
 import AddComment from './addComment';
 
-const DrawerCommentBox = ({videoId}) => {
+const DrawerCommentBox = ({ videoId }) => {
   const [open, setOpen] = useState(false);
   const [totalOffset, setTotalOffset] = useState(0);
-
 
   const { data, status } = useQuery({
     queryKey: ['initialComments', videoId],
@@ -45,22 +44,22 @@ const DrawerCommentBox = ({videoId}) => {
 
   return (
     <Drawer.Root open={open} onOpenChange={setOpen} modal={false}>
-      <Drawer.Trigger className='px-2 pb-3 w-full'>
-        <div className='bg-primary-background w-full h-20 p-2 flex flex-col rounded-lg'>
-            <h5 className='text-left text-sm font-medium'>Comments</h5>
-            <div className="flex-grow mt-2">
-              {status === 'loading' ? (
-                <p className="text-sm">Loading comments...</p>
-              ) : status === 'error' ? (
-                <p className="text-sm text-red-500">Failed to load comments</p>
-              ) : data?.data?.docs?.length > 0 ? (
-                <AnimatedCommentPreview
-                  comments={data?.data?.docs?.slice(0, 2)}
-                />
-              ) : (
-                <p className="text-sm">Be the first to comment.</p>
-              )}
-            </div>
+      <Drawer.Trigger className="px-2 pb-3 w-full">
+        <div className="bg-primary-background w-full h-20 p-2 flex flex-col rounded-lg">
+          <h5 className="text-left text-sm font-medium">Comments</h5>
+          <div className="flex-grow mt-2">
+            {status === 'loading' ? (
+              <p className="text-sm">Loading comments...</p>
+            ) : status === 'error' ? (
+              <p className="text-sm text-red-500">Failed to load comments</p>
+            ) : data?.data?.docs?.length > 0 ? (
+              <AnimatedCommentPreview
+                comments={data?.data?.docs?.slice(0, 2)}
+              />
+            ) : (
+              <p className="text-sm">Be the first to comment.</p>
+            )}
+          </div>
         </div>
       </Drawer.Trigger>
       <Drawer.Portal>
@@ -96,8 +95,8 @@ const DrawerCommentBox = ({videoId}) => {
             <div className="flex-1 px-3 pb-10 overflow-y-auto">
               <CommentList videoId={videoId} />
             </div>
-            <div className='relative bg-primary-background px-3 pt-3'>
-            <div className="absolute bottom-[71px] left-0 w-full h-16 bg-gradient-to-t from-background to-transparent" />
+            <div className="relative bg-primary-background px-3 pt-3">
+              <div className="absolute bottom-[71px] left-0 w-full h-16 bg-gradient-to-t from-background to-transparent" />
               <AddComment videoId={videoId} />
             </div>
           </div>
@@ -105,6 +104,6 @@ const DrawerCommentBox = ({videoId}) => {
       </Drawer.Portal>
     </Drawer.Root>
   );
-}
+};
 
 export default DrawerCommentBox;
