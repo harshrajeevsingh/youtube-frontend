@@ -21,7 +21,7 @@ const PostsList = ({ userId }) => {
     );
 
   return (
-    <div className="w-full">
+    <div className="w-full md:w-1/2">
       {postData?.data?.map((post) => (
         <PostCard key={post?._id} post={post} />
       ))}

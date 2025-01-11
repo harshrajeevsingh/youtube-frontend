@@ -1,5 +1,5 @@
 import axiosInstance from '../helpers/axios';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const fetchCommentByVideoId = async ({
   pageParam = 1,
@@ -22,10 +22,10 @@ export const fetchCommentByVideoId = async ({
 export const useAddComment = (videoId) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (loginData) => {
+    mutationFn: async (content) => {
       const { data } = await axiosInstance.post(
         `/comments/${videoId}`,
-        loginData
+        content
       );
       return data;
     },
