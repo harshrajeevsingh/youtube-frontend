@@ -25,11 +25,11 @@ export const VideoLikeBtn = ({ data: video }) => {
     <>
       <Button
         radius="full"
-        variant="faded"
+        variant="solid"
         onClick={handleSubscribe}
         isLoading={isLoading}
         disableRipple
-        className="bg-default-100 text-default-700 "
+        className="bg-primary-background text-default-700 whitespace-nowrap "
         startContent={
           <Heart
             fill={video?.isLiked ? 'currentColor' : 'none'}

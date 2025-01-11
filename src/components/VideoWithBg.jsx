@@ -17,7 +17,7 @@ export const VideoWithBackground = ({ src }) => {
         width="10"
         height="6"
         aria-hidden="true"
-        className="absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-11/12 w-full h-[900px]  dark:opacity-20 opacity-15"
+        className="absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-11/12 w-full h-[900px]  dark:opacity-10 opacity-15"
         ref={canvasRef}
       />
       <div className="pointer-events-none absolute -top-16 lg:-left-4 left-0 -z-30 lg:w-11/12 w-full h-[900px]">

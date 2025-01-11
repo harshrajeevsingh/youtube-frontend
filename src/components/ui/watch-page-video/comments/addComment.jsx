@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useUserStoreSelectors } from '../../../../store/userSlice';
 import { useAddComment } from '../../../../api/commentApi';
 import { LoginModal } from '../../loginModal';
-
+import { SendHorizonal } from 'lucide-react';
 const AddComment = ({ videoId }) => {
   const user = useUserStoreSelectors.use.user();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -39,7 +39,7 @@ const AddComment = ({ videoId }) => {
         className="w-full flex gap-3 mb-5"
       >
         <div>
-          <Avatar showFallback src={user?.avatar?.url} />
+          <Avatar showFallback src={user?.avatar?.url} size='sm'/>
         </div>
         <div className="flex-grow flex items-center">
           <Input
@@ -58,14 +58,15 @@ const AddComment = ({ videoId }) => {
 
           {contentText && (
             <Button
+              isIconOnly
               type="submit"
-              color="primary"
-              size="sm"
+              color="default"
+              variant='light'
               className="ml-2"
+              size='sm'
               isDisabled={isPending}
-              radius="full"
             >
-              Comment
+              <SendHorizonal/>
             </Button>
           )}
         </div>

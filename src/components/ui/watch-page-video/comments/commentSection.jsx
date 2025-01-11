@@ -1,15 +1,21 @@
 import CommentList from './commentList';
 import AddComment from './addComment';
-import { useEffect } from 'react';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
+import DrawerCommentBox from './drawerCommentBox';
 
 const CommentSection = ({ videoId }) => {
-  useEffect(() => {
-    console.log('CommentSection is rendered');
-  });
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+
   return (
     <div className="w-full mt-2 md:mt-10">
-      <AddComment videoId={videoId} />
-      <CommentList videoId={videoId} />
+      {isDesktop ? (
+        <>
+          <AddComment videoId={videoId} />
+          <CommentList videoId={videoId} />
+        </>
+      ) : (
+          <DrawerCommentBox videoId={videoId} />
+      )}
     </div>
   );
 };

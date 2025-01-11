@@ -1,14 +1,25 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react'
+import { useQuery } from '@tanstack/react-query';
 import { Drawer } from 'vaul';
 import { Divider } from '@nextui-org/divider';
-import ReactTimeAgo from 'react-time-ago';
 import { X } from 'lucide-react';
-import useScrollLock from '../../../hooks/useScrollLock';
 
-const DrawerDescriptionBox = ({ data }) => {
-  const { title, description, createdAt, views } = data;
+import useScrollLock from '../../../../hooks/useScrollLock';
+import { fetchCommentByVideoId } from '../../../../api/commentApi';
+
+import AnimatedCommentPreview from './animatedcontentPreview';
+import CommentList from './commentList';
+import AddComment from './addComment';
+
+const DrawerCommentBox = ({videoId}) => {
   const [open, setOpen] = useState(false);
   const [totalOffset, setTotalOffset] = useState(0);
+
+
+  const { data, status } = useQuery({
+    queryKey: ['initialComments', videoId],
+    queryFn: () => fetchCommentByVideoId({ videoId, limit: 2 }),
+  });
 
   useEffect(() => {
     const updateOffset = () => {
@@ -30,22 +41,30 @@ const DrawerDescriptionBox = ({ data }) => {
   }, []);
 
   useScrollLock(open);
-
   console.log(data);
+
   return (
     <Drawer.Root open={open} onOpenChange={setOpen} modal={false}>
-      <Drawer.Trigger>
-        <h3 className="text-xl text-left text-default-700 font-semibold line-clamp-2 px-2 md:px-0">
-          {title}
-        </h3>
-        <div className="flex gap-1 px-2 text-default-700 text-sm font-light mt-1">
-          <span>{views} views</span>
-          <span>•</span>
-          <ReactTimeAgo date={new Date(createdAt)} locale="en-US" />
+      <Drawer.Trigger className='px-2 pb-3 w-full'>
+        <div className='bg-primary-background w-full h-20 p-2 flex flex-col rounded-lg'>
+            <h5 className='text-left text-sm font-medium'>Comments</h5>
+            <div className="flex-grow mt-2">
+              {status === 'loading' ? (
+                <p className="text-sm">Loading comments...</p>
+              ) : status === 'error' ? (
+                <p className="text-sm text-red-500">Failed to load comments</p>
+              ) : data?.data?.docs?.length > 0 ? (
+                <AnimatedCommentPreview
+                  comments={data?.data?.docs?.slice(0, 2)}
+                />
+              ) : (
+                <p className="text-sm">Be the first to comment.</p>
+              )}
+            </div>
         </div>
       </Drawer.Trigger>
       <Drawer.Portal>
-        <Drawer.Overlay className="fixed inset-0 bg-black/40 z-40" />
+        <Drawer.Overlay className="fixed inset-0 z-40" />
         <Drawer.Content
           className=" z-50 flex flex-col rounded-t-[10px] fixed bottom-0 left-0 right-0 outline-none"
           style={{
@@ -53,7 +72,7 @@ const DrawerDescriptionBox = ({ data }) => {
             height: `calc(100vh - ${totalOffset}px)`,
           }}
         >
-          <div className="bg-background flex flex-col h-full">
+          <div className="dark:bg-background flex flex-col h-full">
             {/* Fixed Header */}
             <div className="px-3 py-2">
               <div className="max-w-md mx-auto">
@@ -74,21 +93,18 @@ const DrawerDescriptionBox = ({ data }) => {
             <Divider />
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto">
-              <div className="max-w-md mx-auto px-3 pb-3 space-y-4">
-                <h3 className="mt-3 text-xl text-default-700 font-semibold line-clamp-none">
-                  {title}
-                </h3>
-                <p className="dark:bg-neutral-800 bg-neutral-100 text-base p-2 rounded-md">
-                  {description}
-                </p>
-              </div>
+            <div className="flex-1 px-3 pb-10 overflow-y-auto">
+              <CommentList videoId={videoId} />
+            </div>
+            <div className='relative bg-primary-background px-3 pt-3'>
+            <div className="absolute bottom-[71px] left-0 w-full h-16 bg-gradient-to-t from-background to-transparent" />
+              <AddComment videoId={videoId} />
             </div>
           </div>
         </Drawer.Content>
       </Drawer.Portal>
     </Drawer.Root>
   );
-};
+}
 
-export default DrawerDescriptionBox;
+export default DrawerCommentBox;

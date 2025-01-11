@@ -9,6 +9,7 @@ const CommentCard = ({ comment }) => {
         <Avatar
           src={comment?.owner?.avatar?.url}
           name={comment?.owner?.fullName}
+          size='sm'
         />
       </Link>
       <div className="space-y-2">

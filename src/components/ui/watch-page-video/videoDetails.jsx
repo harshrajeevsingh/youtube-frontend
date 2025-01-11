@@ -36,12 +36,12 @@ function VideoDetails({ video }) {
           </Link>
           <div className="flex flex-col">
             <Link to={`/c/${video?.ownerDetails?.username}`}>
-              <p className="text-lg text-default-700">
+              <p className="text-base text-default-700">
                 @{video?.ownerDetails?.username}
               </p>
             </Link>
             <p className="text-sm text-default-700">
-              {video?.ownerDetails?.subscribersCount} {'subscribers'}
+              {video?.ownerDetails?.subscribersCount} {video?.ownerDetails?.subscribersCount > 1 ? 'subscribers' : 'subscriber'}
             </p>
           </div>
           <SubscribeBtn
@@ -58,26 +58,26 @@ function VideoDetails({ video }) {
             </div>
             <Button
               radius="full"
-              variant="faded"
-              className="bg-default-100 text-default-700 flex-shrink-0 whitespace-nowrap"
-              startContent={<Forward size={20} />}
+              variant="solid"
+              className="bg-primary-background text-default-700 flex-shrink-0 whitespace-nowrap"
+              startContent={<Forward size={20} strokeWidth={1.5}/>}
             >
               Share
             </Button>
             <Button
               radius="full"
-              variant="faded"
-              className="bg-default-100 text-default-700 flex-shrink-0 whitespace-nowrap"
-              startContent={<ArrowDownToLine size={20} />}
+              variant="solid"
+              className="bg-primary-background text-default-700 flex-shrink-0 whitespace-nowrap"
+              startContent={<ArrowDownToLine size={20} strokeWidth={1.5}/>}
             >
               Download
             </Button>
             <Button
               radius="full"
-              variant="faded"
+              variant="solid"
               color="primary"
-              className="bg-default-100 text-default-700 flex-shrink-0 whitespace-nowrap"
-              startContent={<Bookmark size={20} />}
+              className="bg-primary-background text-default-700 flex-shrink-0 whitespace-nowrap"
+              startContent={<Bookmark size={20} strokeWidth={1.5}/>}
             >
               Save
             </Button>
