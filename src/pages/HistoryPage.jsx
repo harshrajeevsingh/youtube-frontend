@@ -8,7 +8,7 @@ import { useUserStoreSelectors } from '../store/userSlice';
 const HistoryPage = () => {
   const { data, isLoading, error } = useFetchWatchHistory();
   const user = useUserStoreSelectors.use.user();
-  console.log(data);
+
   if (isLoading)
     return (
       <div className="w-full grid place-content-center">

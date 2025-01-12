@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, Button } from '@nextui-org/react';
-import { Bookmark, ArrowDownToLine, Forward } from 'lucide-react';
+import { Bookmark, Forward } from 'lucide-react';
 
 import useMediaQuery from '../../../hooks/useMediaQuery';
 
@@ -9,6 +8,7 @@ import DescriptionBox from './descriptionBox';
 import { SubscribeBtn } from './subscribeBtn';
 import { VideoLikeBtn } from './videoLikeBtn';
 import DrawerDescriptionBox from './drawerDescriptionBox';
+import VideoDownloadManager from '../download-offline/videoDownloadManager';
 
 function VideoDetails({ video }) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
@@ -67,14 +67,9 @@ function VideoDetails({ video }) {
             >
               Share
             </Button>
-            <Button
-              radius="full"
-              variant="solid"
-              className="bg-primary-background text-default-700 flex-shrink-0 whitespace-nowrap"
-              startContent={<ArrowDownToLine size={20} strokeWidth={1.5} />}
-            >
-              Download
-            </Button>
+
+            <VideoDownloadManager videoData={video} />
+
             <Button
               radius="full"
               variant="solid"
