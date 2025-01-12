@@ -12,6 +12,8 @@ import PrivateRoute from './components/PrivateRoute';
 import SubscriptionPage from './pages/SubscriptionPage';
 import HistoryPage from './pages/HistoryPage';
 import ProfilePage from './pages/ProfilePage';
+import OfflineVideoPlayer from './components/ui/download-offline/offlineVideoPlayer';
+import DownloadsPage from './pages/DownloadsPage';
 
 if (
   localStorage.theme === 'dark' ||
@@ -73,6 +75,22 @@ export default function App() {
               element: (
                 <PrivateRoute>
                   <HistoryPage />
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: 'downloads',
+              element: (
+                <PrivateRoute>
+                  <DownloadsPage />
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: '/watch/offline/:videoId',
+              element: (
+                <PrivateRoute>
+                  <OfflineVideoPlayer />
                 </PrivateRoute>
               ),
             },

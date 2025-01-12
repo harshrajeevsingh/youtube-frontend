@@ -1,6 +1,6 @@
 import { Tabs, Tab } from '@nextui-org/react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, ThumbsUp, Podcast, History } from 'lucide-react';
+import { Home, ThumbsUp, Podcast, History, Download } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export const Sidebar = () => {
@@ -64,6 +64,18 @@ export const Sidebar = () => {
             >
               <Podcast />
               <span className="hidden sm:block">Subscription</span>
+            </Link>
+          }
+        />
+        <Tab
+          key="/downloads"
+          title={
+            <Link
+              to="/downloads"
+              className="flex justify-center md:justify-normal md:text-base sm:gap-3 md:w-32 w-full "
+            >
+              <Download />
+              <span className="hidden sm:block">Downloads</span>
             </Link>
           }
         />

@@ -21,7 +21,6 @@ export const WatchPage = () => {
   return (
     <div className="relative flex flex-wrap w-full min-h-svh md:mb-10 mb-0">
       {/* This will contain video */}
-
       {!video && (
         <div className="sticky lg:static w-full xl:w-4/6 top-16 grid place-content-center aspect-video">
           {isLoading && <Spinner size="lg" />}
@@ -36,17 +35,11 @@ export const WatchPage = () => {
       <div className="w-full xl:w-4/6 z-10">
         {video && <VideoDetails video={video?.data} />}
         {video && <CommentSection videoId={video?.data?._id} />}
-        {/* <div className="bg-transparent border-5 border-red-400 w-full h-96"></div> */}
-        {/* <div className="bg-transparent border-5 border-red-400 w-full h-96"></div> */}
       </div>
 
       {/* This will contain recommended videos*/}
       <div className="static xl:absolute top-0 right-0 w-full xl:w-2/6 lg:mt-4  ">
         {video && <RecommendVideo excludeVideoId={videoId} />}
-        {/* <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div> */}
-        {/* <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div> */}
-        {/* <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div> */}
-        {/* <div className="bg-transparent border-5 border-yellow-400 w-full h-96"></div> */}
       </div>
     </div>
   );

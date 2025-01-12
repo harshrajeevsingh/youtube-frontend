@@ -43,7 +43,7 @@ export const PostCard = ({ post }) => {
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
-                  <EllipsisVertical />
+                  <EllipsisVertical absoluteStrokeWidth={true} />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Tweet actions">
