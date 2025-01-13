@@ -14,11 +14,11 @@ const LikedVideoCard = ({ data }) => {
           {formatDuration(data?.duration)}
         </div>
       </div>
-      <div className="space-y-2">
-        <p className="md:text-xl text-lg font-semibold leading-tight line-clamp-2">
+      <div className="md:w-9/12 w-7/12">
+        <p className="text-large font-medium leading-snug text-default-600 line-clamp-2">
           {data?.title}
         </p>
-        <p className="text-sm text-default-500 font-semibold">
+        <p className="text-sm text-default-500 line-clamp-2 pt-1">
           {data?.ownerDetails?.username}
           {' • '}
           {data?.views} views
