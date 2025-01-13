@@ -9,9 +9,13 @@ import { SubscribeBtn } from './subscribeBtn';
 import { VideoLikeBtn } from './videoLikeBtn';
 import DrawerDescriptionBox from './drawerDescriptionBox';
 import VideoDownloadManager from '../download-offline/videoDownloadManager';
+import ShareVideo from '../shareVideo';
 
 function VideoDetails({ video }) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
+
+  const videoUrl = `${window.location.origin}/watch?v=${video?._id}`;
+  const videoTitle = video?.title;
 
   const Title = ({ title }) => {
     return (
@@ -59,17 +63,8 @@ function VideoDetails({ video }) {
             <div className="flex-shrink-0">
               <VideoLikeBtn data={video} />
             </div>
-            <Button
-              radius="full"
-              variant="solid"
-              className="bg-primary-background text-default-700 flex-shrink-0 whitespace-nowrap"
-              startContent={<Forward size={20} strokeWidth={1.5} />}
-            >
-              Share
-            </Button>
-
+            <ShareVideo videoUrl={videoUrl} videoTitle={videoTitle} />
             <VideoDownloadManager videoData={video} />
-
             <Button
               radius="full"
               variant="solid"

@@ -49,7 +49,7 @@ const AddComment = ({ videoId }) => {
             variant="underlined"
             placeholder="Add a comment..."
             className="flex-grow"
-            autoComplete='off'
+            autoComplete="off"
             onClear={() => {
               reset();
               setContentText('');

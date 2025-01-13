@@ -39,7 +39,7 @@ const CreatePost = () => {
         placeholder="What's on your mind?"
         minRows={5}
         isClearable
-        autoComplete='off'
+        autoComplete="off"
         onClear={() => reset()}
         onChange={handleContentChange}
       />
