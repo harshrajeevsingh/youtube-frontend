@@ -46,7 +46,6 @@ const SignupForm = () => {
         };
         try {
           const loginResponse = await loginMutation.mutateAsync(loginData);
-          console.log('Login Response', loginResponse);
           setUser(loginResponse?.data?.user);
           queryClient.invalidateQueries('user');
           navigate('/');

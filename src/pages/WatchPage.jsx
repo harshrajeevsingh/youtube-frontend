@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Spinner } from '@nextui-org/spinner';
 
@@ -13,10 +12,6 @@ export const WatchPage = () => {
   const videoId = searchParams.get('v');
 
   const { data: video, isLoading, error } = useVideoById(videoId);
-
-  useEffect(() => {
-    console.log('Watch Page rendered');
-  }, []);
 
   return (
     <div className="relative flex flex-wrap w-full min-h-svh md:mb-10 mb-0">

@@ -38,18 +38,18 @@ export default function Login() {
       },
     });
   };
+
   return (
     <>
       <Button
-        onPress={onOpen}
+        onClick={onOpen}
         color="primary"
         radius="full"
         className="min-w-10 md:min-w-20"
-        onClick={console.log('clicked logi9n btn')}
       >
         Login
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
         <ModalContent>
           {(onClose) => (
             <form onSubmit={handleSubmit(onSubmit)}>
