@@ -12,9 +12,11 @@ const InfoPanel = ({ title, user, itemCount, thumbnail }) => {
           className="absolute -bottom-9 blur-xl"
         />
       </div>
-      <h3 className="text-2xl font-semibold md:mb-5 mb-2">{title}</h3>
-      <p className="text-lg font-semibold mb-1">{user}</p>
-      <p className="text-sm text-default-600 font-semibold">
+      <h3 className="text-white text-2xl font-semibold md:mb-5 mb-2">
+        {title}
+      </h3>
+      <p className="text-white text-lg font-semibold mb-1">{user}</p>
+      <p className="text-sm dark:text-default-600 text-slate-300 font-semibold">
         {itemCount} videos
       </p>
     </div>

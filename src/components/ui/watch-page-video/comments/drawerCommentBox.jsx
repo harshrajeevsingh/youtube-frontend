@@ -62,7 +62,7 @@ const DrawerCommentBox = ({ videoId }) => {
         </div>
       </Drawer.Trigger>
       <Drawer.Portal>
-        <Drawer.Overlay className="fixed inset-0 z-40" />
+        <Drawer.Overlay className="fixed inset-0 bg-black/40 z-40" />
         <Drawer.Content
           className=" z-50 flex flex-col rounded-t-[10px] fixed bottom-0 left-0 right-0 outline-none"
           style={{
@@ -70,7 +70,7 @@ const DrawerCommentBox = ({ videoId }) => {
             height: `calc(100vh - ${totalOffset}px)`,
           }}
         >
-          <div className="dark:bg-background flex flex-col h-full">
+          <div className="bg-background flex flex-col h-full">
             {/* Fixed Header */}
             <div className="px-3 py-2">
               <div className="max-w-md mx-auto">
