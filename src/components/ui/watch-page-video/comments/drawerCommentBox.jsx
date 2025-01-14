@@ -40,7 +40,6 @@ const DrawerCommentBox = ({ videoId }) => {
   }, []);
 
   useScrollLock(open);
-  console.log(data);
 
   return (
     <Drawer.Root open={open} onOpenChange={setOpen} modal={false}>
@@ -77,7 +76,7 @@ const DrawerCommentBox = ({ videoId }) => {
               <div className="max-w-md mx-auto">
                 <div className="flex justify-between content-center">
                   <Drawer.Title className="font-bold text-lg self-center">
-                    Description
+                    Comments
                   </Drawer.Title>
                   <button
                     className="inline-flex p-3"

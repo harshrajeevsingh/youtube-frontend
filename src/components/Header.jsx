@@ -2,8 +2,10 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
+  NavbarItem,
   Input,
   Button,
+  Link,
 } from '@nextui-org/react';
 import { NavLink } from 'react-router-dom';
 import { Search } from 'lucide-react';
@@ -55,12 +57,21 @@ export default function Header() {
         <UserDropDown />
       ) : (
         <NavbarContent justify="end" className="md:px-10 md:gap-4 gap-2">
-          <NavLink to="/signup" className="hidden sm:block">
-            <Button radius="full" variant="faded" className="px-0 md:px-4">
+          <NavbarItem>
+            <Button
+              as={Link}
+              href="/signup"
+              radius="full"
+              variant="faded"
+              className="px-0 md:px-4"
+            >
               Register
             </Button>
-          </NavLink>
-          <Login />
+          </NavbarItem>
+          <NavbarItem>
+            {' '}
+            <Login />
+          </NavbarItem>
         </NavbarContent>
       )}
     </Navbar>

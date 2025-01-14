@@ -29,9 +29,6 @@ const CommentList = ({ videoId }) => {
     }
   }, [inView, fetchNextPage, hasNextPage]);
 
-  useEffect(() => {
-    console.log('CommentList is rendered');
-  });
   const renderCommentCards = () => {
     if (!data) return null;
     return data.pages.flatMap((page) =>

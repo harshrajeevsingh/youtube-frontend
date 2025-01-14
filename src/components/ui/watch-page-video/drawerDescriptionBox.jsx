@@ -31,7 +31,6 @@ const DrawerDescriptionBox = ({ data }) => {
 
   useScrollLock(open);
 
-  console.log(data);
   return (
     <Drawer.Root open={open} onOpenChange={setOpen} modal={false}>
       <Drawer.Trigger>

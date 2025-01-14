@@ -11,7 +11,7 @@ const VideoDownloadManager = ({ videoData }) => {
   const user = useUserStoreSelectors.use.user();
   const [downloadStatus, setDownloadStatus] = useState('none'); // none, downloading, downloaded
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  console.log(user);
+
   const checkDownloadStatus = useCallback(async () => {
     const downloadedVideo = await db.videos.get(videoData._id);
     setDownloadStatus(downloadedVideo ? 'downloaded' : 'none');

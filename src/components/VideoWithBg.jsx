@@ -9,6 +9,7 @@ export const VideoWithBackground = ({ src }) => {
       <video
         ref={videoRef}
         controls
+        controlsList="nodownload"
         autoPlay={true}
         className="video-container sticky lg:static w-full xl:w-4/6 top-16 aspect-video lg:rounded-xl lg:mt-4  z-20"
         src={src}
