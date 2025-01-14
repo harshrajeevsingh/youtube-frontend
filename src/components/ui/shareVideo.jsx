@@ -19,6 +19,7 @@ import {
   Link,
   Input,
 } from '@nextui-org/react';
+import { toast } from 'sonner';
 
 const ShareVideo = ({ videoUrl, videoTitle }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -27,7 +28,7 @@ const ShareVideo = ({ videoUrl, videoTitle }) => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-    alert('Link copied to clipboard!');
+    toast.success('Link copied to clipboard!');
   };
 
   const shareLinks = {
@@ -59,7 +60,7 @@ const ShareVideo = ({ videoUrl, videoTitle }) => {
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1">Share</ModalHeader>
           <ModalBody>
-            <div className="flex gap-2 justify-between">
+            <div className="flex justify-between">
               <Link
                 href={shareLinks.facebook}
                 target="_blank"
@@ -124,7 +125,7 @@ const ShareVideo = ({ videoUrl, videoTitle }) => {
               size="sm"
               auto
               color="primary"
-              onClick={copyToClipboard}
+              onClick={() => copyToClipboard(videoUrl)}
               className="rounded-lg"
             >
               <Copy size={18} />

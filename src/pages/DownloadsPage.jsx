@@ -1,6 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import db from '../helpers/db';
 import { useUserStoreSelectors } from '../store/userSlice';
+import { toast } from 'sonner';
 
 import DownloadedVideoCard from '../components/ui/download-offline/downloadedVideoCard';
 import CenteredMessage from '../components/ui/centeredMessage';
@@ -13,8 +14,10 @@ const DownloadsPage = () => {
   const deleteVideo = async (videoId) => {
     try {
       await db.videos.delete(videoId);
+      toast.info('Video deleted from downloads!');
     } catch (error) {
       console.error('Failed to delete video:', error);
+      toast.error('Failed to delete video');
     }
   };
 

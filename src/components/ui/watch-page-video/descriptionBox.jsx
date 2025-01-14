@@ -33,13 +33,13 @@ const DescriptionBox = ({ data }) => {
 
   return (
     <div className=" w-full mt-3 p-3 rounded-xl dark:bg-neutral-800 bg-neutral-100">
-      <div className="flex gap-2 text-default-700 text-base font-semibold">
+      <div className="flex gap-2 text-default-700 text-sm font-medium">
         <span>{views} views</span>
         <ReactTimeAgo date={new Date(createdAt)} locale="en-US" />
       </div>
       <p
         ref={textRef}
-        className={`font-medium text-base text-default-700 tracking-tight my-2 ${
+        className={`text-default-700 tracking-tight my-2 ${
           isExpanded ? '' : 'line-clamp-3'
         }`}
       >
