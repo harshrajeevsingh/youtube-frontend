@@ -64,10 +64,34 @@ const SignupForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-20 md:w-2/4 lg:w-1/4 w-full mx-20 flex flex-col"
+      className="w-full flex flex-col gap-3"
     >
       {/* Div for the avatar & cover input */}
-      <div className="mb-5 relative">
+      <div className="flex flex-col gap-2">
+        {/* Avatar image */}
+        <div className="relative w-24 h-24 rounded-full overflow-hidden flex items-center justify-center dark:bg-gray-700 bg-white cursor-pointer border-4 border-primary-background z-10">
+          <label
+            htmlFor="avatar-upload-input"
+            className="flex items-center justify-center w-full h-full"
+          >
+            {avatarPreview ? (
+              <img
+                src={avatarPreview}
+                alt="Avatar Preview"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <Camera />
+            )}
+          </label>
+          <input
+            type="file"
+            {...register('avatar')}
+            onChange={(e) => handleFileChange(e, setAvatarPreview)}
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            id="avatar-upload-input"
+          />
+        </div>
         {/* Cover Image */}
         <div className="relative w-full h-36 rounded-lg overflow-hidden flex items-center justify-center dark:bg-gray-700 bg-white cursor-pointer">
           <label
@@ -93,38 +117,13 @@ const SignupForm = () => {
           />
         </div>
 
-        {/* Avatar image */}
-        <div className="absolute top-1/4  transform -translate-x-1/2 -translate-y-2/3 w-24 h-24 rounded-full overflow-hidden flex items-center justify-center dark:bg-gray-700 bg-white cursor-pointer border-4 border-primary-background z-10">
-          <label
-            htmlFor="avatar-upload-input"
-            className="flex items-center justify-center w-full h-full"
-          >
-            {avatarPreview ? (
-              <img
-                src={avatarPreview}
-                alt="Avatar Preview"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <Camera />
-            )}
-          </label>
-          <input
-            type="file"
-            {...register('avatar', { required: 'Avatar image is required' })}
-            onChange={(e) => handleFileChange(e, setAvatarPreview)}
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-            id="avatar-upload-input"
-          />
-        </div>
-
         {errors.avatar && (
           <p className="text-red-500 text-sm mt-1">{errors.avatar.message}</p>
         )}
       </div>
 
       {/* Regular string form inputs */}
-      <div className="mb-3">
+      <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Name
         </label>
@@ -137,7 +136,7 @@ const SignupForm = () => {
         )}
       </div>
 
-      <div className="mb-3">
+      <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Username
         </label>
@@ -160,7 +159,7 @@ const SignupForm = () => {
         )}
       </div>
 
-      <div className="mb-3">
+      <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Password
         </label>
@@ -184,7 +183,7 @@ const SignupForm = () => {
         )}
       </div>
 
-      <div className="mb-3">
+      <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Email
         </label>
