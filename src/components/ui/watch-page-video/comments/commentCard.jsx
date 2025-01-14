@@ -12,21 +12,21 @@ const CommentCard = ({ comment }) => {
           size="sm"
         />
       </Link>
-      <div className="space-y-2">
+      <div className="space-y-1">
         <div className="flex items-baseline gap-2">
           <Link
             to={`/c/${comment?.owner?.username}`}
-            className="text-sm font-medium"
+            className="text-sm font-normal"
           >
             @{comment?.owner?.username}
           </Link>
           <ReactTimeAgo
             date={new Date(comment?.createdAt)}
             locale="en-US"
-            className="text-xs font-semibold text-default-500"
+            className="text-xs font-medium text-default-500"
           />
         </div>
-        <p className="text-sm font-medium">{comment?.content}</p>
+        <p className="text-sm font-normal">{comment?.content}</p>
       </div>
     </div>
   );

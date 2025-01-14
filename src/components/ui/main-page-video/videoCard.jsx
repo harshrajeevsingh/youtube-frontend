@@ -62,7 +62,6 @@ const VideoCard = ({ video, layout = 'mainPage' }) => {
 
   return (
     <Card
-      // className="w-full bg-transparent"
       className={`w-full bg-transparent ${
         layout === 'channelPage' ? 'flex flex-row md:flex-col gap-1' : ''
       }`}
@@ -74,7 +73,6 @@ const VideoCard = ({ video, layout = 'mainPage' }) => {
       disableAnimation
     >
       <CardHeader
-        // className="relative w-full aspect-video rounded-xl z-0 p-0 "
         className={`relative  ${
           layout === 'channelPage' ? 'w-2/6 md:w-full' : 'w-full'
         } aspect-video rounded-xl z-0 p-0`}
@@ -131,7 +129,9 @@ const VideoCard = ({ video, layout = 'mainPage' }) => {
           </div>
         )}
       </CardHeader>
-      <CardBody className="flex flex-row items-start px-1 py-2 gap-3">
+      <CardBody
+        className={`${layout === 'channelPage' ? 'py-0' : 'py-2'} flex flex-row items-start px-1 gap-3`}
+      >
         {layout === 'mainPage' && (
           <Link to={`/c/${video?.ownerDetails?.username}`}>
             <Avatar
@@ -143,7 +143,11 @@ const VideoCard = ({ video, layout = 'mainPage' }) => {
           </Link>
         )}
         <div className="flex flex-col w-full min-w-0">
-          <h4 className="text-large font-semibold text-default-600 line-clamp-2 mt-1">
+          <h4
+            className={`${
+              layout === 'channelPage' ? 'mt-0' : 'mt-1'
+            } text-large font-semibold text-default-600 line-clamp-2`}
+          >
             {video?.title}
           </h4>
           <div className="flex lg:flex-col gap-1">

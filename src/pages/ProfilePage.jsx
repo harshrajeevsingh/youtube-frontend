@@ -5,6 +5,7 @@ import { Image, Spinner, Tabs, Tab } from '@nextui-org/react';
 import { useUserById } from '../api/userApi';
 import { useUserStoreSelectors } from '../store/userSlice';
 
+import CenteredMessage from '../components/ui/centeredMessage';
 import VideoTab from '../components/ui/profile-channel/videoTab';
 import { SubscribeBtn } from '../components/ui/watch-page-video/subscribeBtn';
 import CreatePost from '../components/ui/createPost';
@@ -29,19 +30,10 @@ const ProfilePage = () => {
     }
   }, [location.state, navigate, location.pathname]);
 
-  if (isLoading)
-    return (
-      <div className="w-full grid place-content-center">
-        {' '}
-        <Spinner />{' '}
-      </div>
-    );
+  if (isLoading) return <CenteredMessage status="loading" />;
+
   if (error)
-    return (
-      <div className="w-full grid place-content-center">
-        <p className="text-red-500">Error loading profile</p>
-      </div>
-    );
+    return <CenteredMessage message={error.message} className="text-red-500" />;
 
   // Check if the logged-in user matches the profile being viewed
   const isOwnProfile = user && user.username === profileData.data.username;

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Button } from '@nextui-org/react';
-
-import { LoginModal } from '../loginModal';
+import { toast } from 'sonner';
 import { Heart } from 'lucide-react';
-import { useVideoLike } from '../../../api/videosApi';
+
 import { useUserStoreSelectors } from '../../../store/userSlice';
+import { LoginModal } from '../loginModal';
+import { useVideoLike } from '../../../api/videosApi';
 
 export const VideoLikeBtn = ({ data: video }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -17,6 +18,7 @@ export const VideoLikeBtn = ({ data: video }) => {
     if (user) {
       toggleVideoLike(video.ownerDetails._id);
     } else {
+      toast.info('Please Login first');
       setIsLoginModalOpen(true);
     }
   };
@@ -29,7 +31,7 @@ export const VideoLikeBtn = ({ data: video }) => {
         onClick={handleSubscribe}
         isLoading={isLoading}
         disableRipple
-        className="bg-primary-background text-default-700 whitespace-nowrap "
+        className="bg-primary-background text-default-700 flex-shrink-0  whitespace-nowrap "
         startContent={
           <Heart
             fill={video?.isLiked ? 'currentColor' : 'none'}

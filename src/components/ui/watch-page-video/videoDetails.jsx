@@ -19,7 +19,7 @@ function VideoDetails({ video }) {
 
   const Title = ({ title }) => {
     return (
-      <h3 className="text-2xl text-default-700 font-semibold line-clamp-2 px-2 md:px-0">
+      <h3 className="text-xl text-default-700 font-semibold line-clamp-2 px-2 md:px-0">
         {title}
       </h3>
     );
@@ -60,9 +60,7 @@ function VideoDetails({ video }) {
         {/* Other Buttons */}
         <div className="relative w-full lg:w-auto pl-2 md:pl-0">
           <div className="flex items-center md:gap-2 gap-1 md:mt-0 mt-3 overflow-x-auto scrollbar-hide pb-2 lg:pb-0">
-            <div className="flex-shrink-0">
-              <VideoLikeBtn data={video} />
-            </div>
+            <VideoLikeBtn data={video} />
             <ShareVideo videoUrl={videoUrl} videoTitle={videoTitle} />
             <VideoDownloadManager videoData={video} />
             <Button

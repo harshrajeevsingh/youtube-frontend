@@ -1,14 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ArrowDownToLine, Check, Loader } from 'lucide-react';
 import { Button, useDisclosure } from '@nextui-org/react';
+import { toast } from 'sonner';
 
+import { useUserStoreSelectors } from '../../../store/userSlice';
 import db from '../../../helpers/db';
 import CustomModal from '../modal';
 
 const VideoDownloadManager = ({ videoData }) => {
+  const user = useUserStoreSelectors.use.user();
   const [downloadStatus, setDownloadStatus] = useState('none'); // none, downloading, downloaded
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+  console.log(user);
   const checkDownloadStatus = useCallback(async () => {
     const downloadedVideo = await db.videos.get(videoData._id);
     setDownloadStatus(downloadedVideo ? 'downloaded' : 'none');
@@ -82,8 +85,10 @@ const VideoDownloadManager = ({ videoData }) => {
       });
 
       setDownloadStatus('downloaded');
+      toast.success('Download completed!');
     } catch (error) {
       console.error('Download failed:', error);
+      toast.error('Download failed :(');
       setDownloadStatus('none');
     }
   };
@@ -92,8 +97,10 @@ const VideoDownloadManager = ({ videoData }) => {
     try {
       await db.videos.delete(videoData._id);
       setDownloadStatus('none');
+      toast.info('Video deleted from downloads!');
     } catch (error) {
       console.error('Delete failed:', error);
+      toast.error('Failed to delete video');
     }
   };
 
@@ -102,6 +109,7 @@ const VideoDownloadManager = ({ videoData }) => {
       case 'none':
         return (
           <Button
+            isDisabled={user !== null ? false : true}
             onClick={downloadVideo}
             radius="full"
             variant="solid"

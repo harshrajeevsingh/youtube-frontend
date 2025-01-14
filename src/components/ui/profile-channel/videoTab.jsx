@@ -49,7 +49,6 @@ const VideoTab = ({ userId }) => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-2 mx-1">
-      {/* <div className="w-full"> */}
       {status === 'pending' && renderSkeletons()}
       {status === 'error' && (
         <p className="text-red-500">Error: {error.message}</p>

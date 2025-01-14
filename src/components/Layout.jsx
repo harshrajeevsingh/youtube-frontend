@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
+import { Toaster } from 'sonner';
 
 const Layout = () => {
   const location = useLocation();
@@ -9,6 +10,7 @@ const Layout = () => {
 
   return (
     <div>
+      <Toaster richColors position="top-center" />
       {/* Conditionally render Header */}
       {!noHeaderPaths.includes(location.pathname) && <Header />}
       <Outlet />

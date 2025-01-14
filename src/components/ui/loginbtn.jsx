@@ -45,6 +45,7 @@ export default function Login() {
         color="primary"
         radius="full"
         className="min-w-10 md:min-w-20"
+        onClick={console.log('clicked logi9n btn')}
       >
         Login
       </Button>

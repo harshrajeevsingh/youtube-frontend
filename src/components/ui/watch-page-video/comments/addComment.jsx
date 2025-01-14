@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Avatar, Input, Button } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { SendHorizonal } from 'lucide-react';
 
 import { useUserStoreSelectors } from '../../../../store/userSlice';
 import { useAddComment } from '../../../../api/commentApi';
 import { LoginModal } from '../../loginModal';
-import { SendHorizonal } from 'lucide-react';
+
 const AddComment = ({ videoId }) => {
   const user = useUserStoreSelectors.use.user();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -26,6 +28,7 @@ const AddComment = ({ videoId }) => {
     if (user) {
       submitComment(data);
     } else {
+      toast.info('Please Login first');
       setIsLoginModalOpen(true);
     }
     reset();
