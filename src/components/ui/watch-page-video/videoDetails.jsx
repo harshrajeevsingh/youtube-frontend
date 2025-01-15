@@ -48,15 +48,11 @@ function VideoDetails({ video }) {
           </Link>
           <div className="flex flex-col">
             <Link to={`/c/${ownerUsername}`}>
-              <p className="text-base text-default-700">
-                @{ownerUsername}
-              </p>
+              <p className="text-base text-default-700">@{ownerUsername}</p>
             </Link>
             <p className="text-sm text-default-700">
               {subscribersCount}{' '}
-              {subscribersCount> 1
-                ? 'subscribers'
-                : 'subscriber'}
+              {subscribersCount > 1 ? 'subscribers' : 'subscriber'}
             </p>
           </div>
           <SubscribeBtn

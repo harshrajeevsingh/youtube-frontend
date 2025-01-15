@@ -57,7 +57,7 @@ export default function Header() {
         <UserDropDown />
       ) : (
         <NavbarContent justify="end" className="md:px-10 md:gap-4 gap-2">
-          <NavbarItem className='hidden sm:block'>
+          <NavbarItem className="hidden sm:block">
             <Button
               as={Link}
               href="/signup"

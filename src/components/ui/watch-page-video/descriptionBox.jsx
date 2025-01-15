@@ -32,7 +32,10 @@ const DescriptionBox = ({ data }) => {
   };
 
   return (
-    <div className={`${!isExpanded ? 'cursor-pointer' : 'cursor-auto' } w-full mt-3 p-3 rounded-xl dark:bg-neutral-800 bg-neutral-100`} onClick={() => !isExpanded ? setIsExpanded(true) : null} >
+    <div
+      className={`${!isExpanded ? 'cursor-pointer' : 'cursor-auto'} w-full mt-3 p-3 rounded-xl dark:bg-neutral-800 bg-neutral-100`}
+      onClick={() => (!isExpanded ? setIsExpanded(true) : null)}
+    >
       <div className="flex gap-2 text-default-700 text-sm font-medium">
         <span>{views} views</span>
         <ReactTimeAgo date={new Date(createdAt)} locale="en-US" />
@@ -53,7 +56,7 @@ const DescriptionBox = ({ data }) => {
           {isExpanded ? 'Show less' : '...more'}
         </button>
       )}
-    </div>  
+    </div>
   );
 };
 

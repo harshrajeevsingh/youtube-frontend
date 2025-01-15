@@ -42,8 +42,8 @@ const LoginPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="h-full md:w-2/6 w-4/5 flex flex-col justify-center content-center gap-5"
       >
-        <h2 className='text-2xl'>Log in</h2>
-        <div className='flex flex-col gap-4'>
+        <h2 className="text-2xl">Log in</h2>
+        <div className="flex flex-col gap-4">
           <Input
             type="email"
             {...register('email', { required: true })}
@@ -85,13 +85,13 @@ const LoginPage = () => {
             ''
           )}
         </div>
-          <Button
-            color="primary"
-            type="submit"
-            isLoading={loginMutation.isPending}
-          >
-            Sign in
-          </Button>
+        <Button
+          color="primary"
+          type="submit"
+          isLoading={loginMutation.isPending}
+        >
+          Sign in
+        </Button>
       </form>
     </div>
   );
