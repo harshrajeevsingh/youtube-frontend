@@ -10,7 +10,7 @@ const SignUpPage = () => {
             👋
           </span>
         </p>
-        <p className='text-xl font-medium'>Start your journey on Streamify!</p>
+        <p className="text-xl font-medium">Start your journey on Streamify!</p>
       </div>
       <div className="w-5/6 md:w-1/3 ">
         <SignupForm />

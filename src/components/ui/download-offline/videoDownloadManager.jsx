@@ -20,37 +20,7 @@ const VideoDownloadManager = ({ videoData }) => {
   useEffect(() => {
     checkDownloadStatus();
   }, [checkDownloadStatus]);
-  /*
-  const downloadVideo = async () => {
-    try {
-      setDownloadStatus('downloading');
 
-      // Download video file
-      const videoResponse = await fetch(videoData.videoFile.url);
-      const videoBlob = await videoResponse.blob();
-
-      // Download thumbnail
-      const thumbnailResponse = await fetch(videoData.thumbnail.url);
-      const thumbnailBlob = await thumbnailResponse.blob();
-
-      // Store in IndexedDB
-      await db.videos.put({
-        _id: videoData._id,
-        videoFile: videoBlob,
-        thumbnail: thumbnailBlob,
-        title: videoData.title,
-        description: videoData.description,
-        duration: videoData.duration,
-        ownerDetails: videoData.ownerDetails,
-      });
-
-      setDownloadStatus('downloaded');
-    } catch (error) {
-      console.error('Download failed:', error);
-      setDownloadStatus('none');
-    }
-  };
-*/
   const downloadVideo = async () => {
     try {
       setDownloadStatus('downloading');

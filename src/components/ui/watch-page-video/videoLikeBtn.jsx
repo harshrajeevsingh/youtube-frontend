@@ -31,7 +31,7 @@ export const VideoLikeBtn = ({ data: video }) => {
         onClick={handleSubscribe}
         isLoading={isLoading}
         disableRipple
-        className="bg-primary-background text-default-700 flex-shrink-0  whitespace-nowrap "
+        className="bg-primary-background text-default-700 flex-shrink-0  whitespace-nowrap ml-2 md:ml-0"
         startContent={
           <Heart
             fill={video?.isLiked ? 'currentColor' : 'none'}
