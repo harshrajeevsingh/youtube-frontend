@@ -11,8 +11,7 @@ const CenteredMessage = ({ message, className = '', status }) => {
           src={'/lottie/polar-bear.json'}
           autoplay
           loop
-          style={{ height: '400px', width: '400px' }}
-          className="mb-4"
+          className="mb-4 h-72 w-72"
         />
       )}
       {status === 'loading' && <Spinner />}
