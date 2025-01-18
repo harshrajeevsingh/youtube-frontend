@@ -21,12 +21,23 @@ const VideoDownloadManager = ({ videoData }) => {
     checkDownloadStatus();
   }, [checkDownloadStatus]);
 
+  const ensureHttpsUrl = (url) => {
+    return url.replace(/^http:\/\//i, 'https://');
+  };
+
   const downloadVideo = async () => {
     try {
       setDownloadStatus('downloading');
 
+      // Ensure HTTPS URLs
+      const secureVideoUrl = ensureHttpsUrl(videoData.videoFile.url);
+      const secureThumbnailUrl = ensureHttpsUrl(videoData.thumbnail.url);
+
       // Download video file
-      const videoResponse = await fetch(videoData.videoFile.url);
+      const videoResponse = await fetch(secureVideoUrl);
+      if (!videoResponse.ok) {
+        throw new Error(`HTTP error! status: ${videoResponse.status}`);
+      }
       const videoBlob = await videoResponse.blob();
 
       // Validate download
@@ -40,7 +51,10 @@ const VideoDownloadManager = ({ videoData }) => {
       }
 
       // Download thumbnail
-      const thumbnailResponse = await fetch(videoData.thumbnail.url);
+      const thumbnailResponse = await fetch(secureThumbnailUrl);
+      if (!thumbnailResponse.ok) {
+        throw new Error(`HTTP error! status: ${thumbnailResponse.status}`);
+      }
       const thumbnailBlob = await thumbnailResponse.blob();
 
       // Store in IndexedDB
