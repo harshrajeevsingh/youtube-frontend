@@ -49,7 +49,7 @@ const DrawerDescriptionBox = ({ data }) => {
           className=" z-50 flex flex-col rounded-t-[10px] fixed bottom-0 left-0 right-0 outline-none"
           style={{
             top: `${totalOffset}px`,
-            height: `calc(100vh - ${totalOffset}px)`,
+            height: `calc(100svh - ${totalOffset}px)`,
           }}
         >
           <div className="bg-background flex flex-col h-full">
