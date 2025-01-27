@@ -82,7 +82,7 @@ import useUserStore from '../store/userSlice';
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
-  timeout: 10000,
+  // timeout: 10000,
 });
 
 let isRefreshing = false;
